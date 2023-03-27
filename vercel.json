@@ -1,0 +1,22 @@
+{
+  "github": {
+    "silent": true
+  },
+  "headers": [
+    {
+      "source": "/avatar/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/avatar/(.*)",
+      "destination": "https://www.gravatar.com/avatar/$1"
+    }
+  ]
+}
