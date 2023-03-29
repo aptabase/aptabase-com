@@ -1,66 +1,82 @@
-<div class="isolate bg-white">
-  <div
-    class="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
+<div class="relative isolate overflow-hidden bg-white">
+  <svg
+    class="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
+    aria-hidden="true"
   >
-    <svg
-      class="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]"
-      viewBox="0 0 1155 678"
-    >
-      <path
-        fill="url(#45de2b6b-92d5-4d68-a6a0-9b9b2abad533)"
-        fill-opacity=".3"
-        d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
-      ></path>
-      <defs>
-        <linearGradient
-          id="45de2b6b-92d5-4d68-a6a0-9b9b2abad533"
-          x1="1155.49"
-          x2="-78.208"
-          y1=".177"
-          y2="474.645"
-          gradientUnits="userSpaceOnUse"
+    <defs>
+      <pattern
+        id="0787a7c5-978c-4f66-83c7-11c213f99cb7"
+        width="200"
+        height="200"
+        x="50%"
+        y="-1"
+        patternUnits="userSpaceOnUse"
+      >
+        <path d="M.5 200V.5H200" fill="none"></path>
+      </pattern>
+    </defs>
+    <rect
+      width="100%"
+      height="100%"
+      stroke-width="0"
+      fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)"></rect>
+  </svg>
+  <div
+    class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40"
+  >
+    <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-8">
+      <svg
+        class="h-14 text-blue-600"
+        viewBox="0 0 1200 1200"
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        xml:space="preserve"
+      >
+        <path
+          fill="currentColor"
+          d="m454.38167,829.85001l-2.3,0c-43.1,0 -70,-46.5 -48.4,-83.9l143.4,-248.5c21.5,-37.3 75.4,-37.3 96.9,0l208.7,361.5c10.1,17.4 28.5,28 48.4,28l96.9,0l-344,-596c-25.9,-44.8 -90.6,-44.8 -116.5,0l-327.9,567.8c-21.5,37.3 5.4,83.9 48.4,83.9l480.3,0c13.9,0 22.6,-15.1 15.6,-27.1l-142,-246.1c-7.3,-12.5 -25.2,-12.5 -32.5,0l-76.6,132.7c-10,17.2 -28.4,27.7 -48.4,27.7z"
+        ></path>
+      </svg>
+      <span
+        class="inline-block select-none px-2 mt-10 text-xs font-semibold leading-6 tracking-tight bg-blue-50 rounded-lg text-blue-600"
+        >Public Beta</span
+      >
+      <h1 class="mt-2 text-4xl font-title font-bold tracking-tight sm:text-6xl">
+        Build better apps with <br />data-driven analytics
+      </h1>
+      <p class="mt-6 text-lg leading-8 text-gray-600">
+        Aptabase is a complete analytics suite purposefully built for desktop
+        and mobile apps. Unlock rich insights into how your app is used and how
+        to improve it!
+      </p>
+      <div class="mt-10 flex items-center gap-x-6">
+        <a
+          href="https://us.aptabase.com/auth/register"
+          class="rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          >Sign up</a
         >
-          <stop stop-color="#9089FC"></stop>
-          <stop offset="1" stop-color="#FF80B5"></stop>
-        </linearGradient>
-      </defs>
-    </svg>
-  </div>
-  <div class="px-6 pt-6 lg:px-8">
-    <nav class="flex items-center justify-between" aria-label="Global">
-      <!-- <div class="flex lg:flex-1">
-        <a href="#" class="-m-1.5 p-1.5">
-          <span class="sr-only">Aptahub</span>
-          <img
-            class="h-8"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Aptahub"
-          />
-        </a>
+        <a
+          href="https://us.aptabase.com/"
+          class="text-sm font-semibold rounded-md leading-6 focus-visible:outline-black p-2 hover:bg-gray-100"
+          >Sign in <span aria-hidden="true">→</span></a
+        >
       </div>
-      <div class="flex gap-x-12 flex-1 justify-end">
-        <a href="#" class="text-sm font-semibold leading-6 text-gray-900"
-          >Pricing</a
+    </div>
+    <div
+      class="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32"
+    >
+      <div class="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
+        <div
+          class="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-2"
         >
-        <a href="#" class="text-sm font-semibold leading-6 text-gray-900"
-          >Features</a
-        >
-      </div> -->
-    </nav>
-  </div>
-  <div class="relative px-6 lg:px-8">
-    <div class="mx-auto max-w-3xl py-32">
-      <div class="text-center">
-        <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-          Build better apps with <br />data-driven analytics
-        </h1>
-        <p
-          class="mt-6 text-base max-w-3xl mx-auto text-left text-gray-600 sm:text-xl sm:text-center"
-        >
-          Aptabase is a complete analytics suite purposefully built for desktop
-          and mobile apps. Unlock rich insights into how your app is used and
-          how to improve it!
-        </p>
+          <img
+            src="https://tailwindui.com/img/component-images/project-app-screenshot.png"
+            alt="App screenshot"
+            width="2432"
+            height="1442"
+            class="w-[76rem] rounded-xl shadow-2xl ring-1 ring-gray-900/10"
+          />
+        </div>
       </div>
     </div>
   </div>
