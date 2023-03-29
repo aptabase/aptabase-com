@@ -1,11 +1,14 @@
 import { defineConfig } from "astro/config";
 
-// https://astro.build/config
 import tailwind from "@astrojs/tailwind";
 import image from "@astrojs/image";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), image()],
-  server: { port: 4000 },
+  site: "https://aptabase.com",
+  integrations: [tailwind(), image(), sitemap()],
+  server: {
+    port: 4000,
+  },
 });

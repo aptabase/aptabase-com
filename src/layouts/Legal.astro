@@ -1,0 +1,39 @@
+---
+import Logo from "../components/Logo.astro";
+import BaseLayout from "./BaseLayout.astro";
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout title={frontmatter.title}>
+  <div class="px-6 py-32 lg:px-8">
+    <div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">
+      <div class="flex justify-center">
+        <Logo />
+      </div>
+      <a
+        class="my-6 h-6 inline-flex flex-row space-x-1 items-center rounded-md px-2 text-sm font-medium text-black hover:bg-gray-100 hover:text-gray-700"
+        data-testid="vertical-tab-Back"
+        href="/"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="w-4 h-4"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"></path>
+        </svg>
+
+        <span>Back</span>
+      </a>
+      <div class="prose prose-h1:font-title">
+        <slot />
+      </div>
+    </div>
+  </div>
+</BaseLayout>
