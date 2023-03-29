@@ -1,42 +1,16 @@
+---
+import HeroBackground from "./HeroBackground.astro";
+import Logo from "./Logo.astro";
+import WorksWith from "./WorksWith.astro";
+---
+
 <div class="relative isolate overflow-hidden bg-white">
-  <svg
-    class="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
-    aria-hidden="true"
-  >
-    <defs>
-      <pattern
-        id="0787a7c5-978c-4f66-83c7-11c213f99cb7"
-        width="200"
-        height="200"
-        x="50%"
-        y="-1"
-        patternUnits="userSpaceOnUse"
-      >
-        <path d="M.5 200V.5H200" fill="none"></path>
-      </pattern>
-    </defs>
-    <rect
-      width="100%"
-      height="100%"
-      stroke-width="0"
-      fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)"></rect>
-  </svg>
+  <HeroBackground />
   <div
     class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40"
   >
     <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-8">
-      <svg
-        class="h-14 text-blue-600"
-        viewBox="0 0 1200 1200"
-        xmlns="http://www.w3.org/2000/svg"
-        version="1.1"
-        xml:space="preserve"
-      >
-        <path
-          fill="currentColor"
-          d="m454.38167,829.85001l-2.3,0c-43.1,0 -70,-46.5 -48.4,-83.9l143.4,-248.5c21.5,-37.3 75.4,-37.3 96.9,0l208.7,361.5c10.1,17.4 28.5,28 48.4,28l96.9,0l-344,-596c-25.9,-44.8 -90.6,-44.8 -116.5,0l-327.9,567.8c-21.5,37.3 5.4,83.9 48.4,83.9l480.3,0c13.9,0 22.6,-15.1 15.6,-27.1l-142,-246.1c-7.3,-12.5 -25.2,-12.5 -32.5,0l-76.6,132.7c-10,17.2 -28.4,27.7 -48.4,27.7z"
-        ></path>
-      </svg>
+      <Logo />
       <span
         class="inline-block select-none px-2 mt-10 text-xs font-semibold leading-6 tracking-tight bg-blue-50 rounded-lg text-blue-600"
         >Public Beta</span
@@ -44,23 +18,24 @@
       <h1 class="mt-2 text-4xl font-title font-bold tracking-tight sm:text-6xl">
         Build better apps with <br />data-driven analytics
       </h1>
-      <p class="mt-6 text-lg leading-8 text-gray-600">
-        Aptabase is a complete analytics suite purposefully built for desktop
-        and mobile apps. Unlock rich insights into how your app is used and how
-        to improve it!
+      <p class="mt-6 text-xl leading-8 text-gray-500">
+        Aptabase is a <span class="text-gray-900">privacy-first</span>
+        and <span class="text-gray-900">simple</span> analytics for Mobile, Desktop
+        and Web apps.
       </p>
       <div class="mt-10 flex items-center gap-x-6">
         <a
           href="https://us.aptabase.com/auth/register"
-          class="rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          class="rounded-md bg-black px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
           >Sign up</a
         >
         <a
           href="https://us.aptabase.com/"
-          class="text-sm font-semibold rounded-md leading-6 focus-visible:outline-black p-2 hover:bg-gray-100"
+          class="text-sm font-semibold rounded-md leading-6 px-4 focus-visible:outline-black p-2 hover:bg-gray-100"
           >Sign in <span aria-hidden="true">→</span></a
         >
       </div>
+      <WorksWith />
     </div>
     <div
       class="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32"

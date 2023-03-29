@@ -1,0 +1,91 @@
+---
+const tools = [
+  {
+    name: "Tauri",
+    image: "/tools/tauri.svg",
+    repository: "https://github.com/aptabase/tauri-plugin-aptabase",
+    sdk: true,
+  },
+  {
+    name: "Flutter",
+    image: "/tools/flutter.svg",
+    repository: "https://github.com/aptabase/aptabase_flutter",
+    sdk: true,
+  },
+  {
+    name: "Native Android (Kotlin)",
+    image: "/tools/android.svg",
+    repository: "https://github.com/aptabase/aptabase/issues/4",
+  },
+  {
+    name: "Native iOS (Swift)",
+    image: "/tools/apple.svg",
+    repository: "https://github.com/aptabase/aptabase/issues/5",
+  },
+  {
+    name: "Capacitor",
+    image: "/tools/capacitor-js.svg",
+    repository: "https://github.com/aptabase/aptabase/issues/6",
+  },
+  {
+    name: "Electron",
+    image: "/tools/electron.svg",
+    repository: "https://github.com/aptabase/aptabase/issues/3",
+  },
+  {
+    name: "React Native",
+    image: "/tools/react-native.svg",
+    repository: "https://github.com/aptabase/aptabase/issues/2",
+  },
+  {
+    name: ".NET MAUI",
+    image: "/tools/dotnet.png",
+    repository: "https://github.com/aptabase/aptabase/issues/7",
+  },
+];
+
+const worksWith = tools.filter((x) => x.sdk);
+const comingSoon = tools.filter((x) => !x.sdk);
+---
+
+<div class="mt-10 md:mt-20">
+  <div>
+    <p class="tracking-tighter font-semibold text-sm text-gray-700 mb-2">
+      <span>Works with</span>
+      <strong class="pl-1 inline-block animate-bounce">↓</strong>
+    </p>
+    <div class="flex space-x-2">
+      {
+        worksWith.map((tool) => (
+          <a
+            target="_blank"
+            href={tool.repository}
+            class="p-1 rounded border border-transparent hover:border-gray-100 hover:bg-gray-50"
+          >
+            <img class="h-12 w-12" src={tool.image} alt={tool.name} />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <p class="tracking-tighter font-semibold text-sm text-gray-700 mb-2">
+      <span>More to come soon...</span>
+    </p>
+    <div class="flex space-x-4">
+      {
+        comingSoon.map((tool) => (
+          <a target="_blank" href={tool.repository}>
+            <img
+              class="h-8 w-8 drop-shadow-2xl grayscale hover:grayscale-0"
+              src={tool.image}
+              alt={tool.name}
+            />
+          </a>
+        ))
+      }
+    </div>
+    <div></div>
+  </div>
+</div>
