@@ -2,6 +2,8 @@
 import HeroBackground from "./HeroBackground.astro";
 import Logo from "./Logo.astro";
 import WorksWith from "./WorksWith.astro";
+import { Image } from "@astrojs/image/components";
+import heroImage from "./hero.png";
 ---
 
 <div class="relative isolate overflow-hidden bg-white">
@@ -44,11 +46,11 @@ import WorksWith from "./WorksWith.astro";
         <div
           class="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-2"
         >
-          <img
-            src="/hero.png"
+          <Image
+            src={heroImage}
             alt="Aptabase Dashboard Screenshot"
-            width="2432"
-            height="1442"
+            width={1300}
+            height={911}
             class="w-[76rem] rounded-xl shadow-2xl ring-1 ring-gray-900/10"
           />
         </div>
