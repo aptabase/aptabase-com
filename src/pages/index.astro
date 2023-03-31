@@ -2,14 +2,18 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import Footer from "../components/Footer.astro";
+import PrivacyFirst from "../components/features/PrivacyFirst.astro";
+import Simple from "../components/features/Simple.astro";
+import CTA from "../components/CTA.astro";
 ---
 
 <BaseLayout
   title="Aptabase - Privacy-first and simple analytics for Mobile, Desktop and Web apps"
-  description=""
+  description="Aptabase offers privacy-focused analytics for Mobile, Desktop, and Web apps. Get simple and actionable insights without compromising user privacy. Try it now!"
 >
-  <div class="flex min-h-screen flex-col">
-    <Hero />
-    <Footer />
-  </div>
+  <Hero />
+  <PrivacyFirst />
+  <Simple />
+  <CTA />
+  <Footer />
 </BaseLayout>

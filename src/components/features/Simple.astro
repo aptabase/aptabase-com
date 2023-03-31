@@ -1,0 +1,53 @@
+---
+import Feature from "./Feature.astro";
+import FeatureItem from "./FeatureItem.astro";
+
+const color = "text-green-600";
+---
+
+<Feature
+  title="Forget about complex and time consuming solutions"
+  description="Aptabase is built with simplicity in mind, from integration to usage. Instrument your app in minutes, not days."
+  category="Simple"
+  color={color}
+>
+  <FeatureItem
+    title="SDK for your favorite frameworks"
+    description="Our SDKs are lightweight and easy to use, it's currently available for Tauri and Flutter, with more coming soon. "
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class={`w-10 h-10 ${color}`}
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"
+      ></path>
+    </svg>
+  </FeatureItem>
+
+  <FeatureItem
+    title="Built-in Dashboard"
+    description="A dashboard you'll love to use, with zero effort. Dive into your data and get insights in seconds."
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class={`w-10 h-10 ${color}`}
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"
+      ></path>
+    </svg>
+  </FeatureItem>
+</Feature>
