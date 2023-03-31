@@ -1,11 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <BaseLayout
   title="Aptabase - Privacy-first and simple analytics for Mobile, Desktop and Web apps"
   description=""
 >
-  <Hero />
+  <div class="flex min-h-screen flex-col">
+    <Hero />
+    <Footer />
+  </div>
 </BaseLayout>
