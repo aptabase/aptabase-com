@@ -7,7 +7,7 @@ export interface Props {
   description: string;
 }
 
-const { title, description, url } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -21,8 +21,8 @@ const { title, description, url } = Astro.props;
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <link rel="canonical" href={url} />
-    <meta property="og:url" content={url} />
+    <link rel="canonical" href={Astro.url.toString()} />
+    <meta property="og:url" content={Astro.url.toString()} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
