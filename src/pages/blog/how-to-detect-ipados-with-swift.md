@@ -31,4 +31,6 @@ if #available(iOS 13.0, *) {
 
 ### What about the `UIDevice.current.systemName`?
 
-You may have seen that there is a `systemName` property on the `UIDevice` class. This property returns the name of the operating system, which as of 2023, it actually correctly returns `iPadOS` for iPad devices running iPadOS. But this was not always the case, up until iPadOS 15, this property would return `iOS`.
+This property returns the name of the operating system. As of 2023, this property correctly returns `iPadOS` for iPad devices running iPadOS. But this was not always the case, up until iPadOS 15 this property would return `iOS`.
+
+If you're targeting iOS 15 or later you can use this property to detect iPadOS. But if you're targeting iOS 14 or earlier you should use the method described above.
