@@ -6,6 +6,7 @@ publishedDate: "2023-04-03T00:00:00.000Z"
 layout: ../../layouts/BlogPostLayout.astro
 category: Tips
 tags: ["Swift", "iOS"]
+cta: "for-swift"
 ---
 
 The iPadOS was first introduced in 2019 and it is an operating system based on iOS. In some cases you might want to add some extra functionality to your app when running on iPadOS, or maybe you want to show a different UI. This short post will show you how to detect iPadOS with Swift.

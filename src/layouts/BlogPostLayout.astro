@@ -1,13 +1,16 @@
 ---
+import CTA from "../components/CTA.astro";
 import ContentLayout from "../layouts/ContentLayout.astro";
 const { frontmatter } = Astro.props;
 ---
 
 <ContentLayout
-  title={`${frontmatter.title} - AptabaseBlog`}
+  title={`${frontmatter.title} - Blog - Aptabase`}
   description={frontmatter.description}
 >
-  <div class="mx-auto mb-12 flex w-full flex-col space-y-4">
+  <div
+    class="mx-auto max-w-5xl px-6 lg:px-8 mb-12 flex w-full flex-col space-y-4"
+  >
     <p class="space-x-2">
       <span class="font-medium text-blue-600">{frontmatter.category}</span>
       <span>·</span>
@@ -61,4 +64,5 @@ const { frontmatter } = Astro.props;
       <slot />
     </article>
   </div>
+  <CTA name="for-swift" />
 </ContentLayout>

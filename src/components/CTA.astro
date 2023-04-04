@@ -1,17 +1,63 @@
-<div class="bg-white">
-  <div class="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
-    <div class="mx-auto max-w-2xl text-center">
-      <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-        Building a Mobile or Desktop app?<br />Get your dashboard now!
-      </h2>
-      <p class="text-xs mt-4">Free during public beta! 😉</p>
-      <div class="mt-10 flex items-center justify-center gap-x-6">
+---
+import heroImage from "../images/hero.png";
+import { Image } from "@astrojs/image/components";
+
+const { name } = Astro.props;
+
+const options: {
+  [key: string]: {
+    title: string;
+    title2: string;
+    description: string;
+    url: string;
+  };
+} = {
+  "for-swift": {
+    title: "Analytics for Swift apps",
+    title2: "Without compromising on privacy",
+    description:
+      "Aptabase is a privacy-first analytics platform for Swift apps. Get insights into your app's usage in minutes.",
+    url: "/for-swift",
+  },
+};
+
+const settings = options[name];
+if (!settings) {
+  throw new Error(`No settings found for ${name}`);
+}
+---
+
+<section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-20">
+  <div
+    class="overflow-hidden rounded-lg bg-gradient-to-tl from-cyan-500 to-blue-600 shadow-xl lg:grid lg:grid-cols-2 lg:gap-2"
+  >
+    <div
+      class="px-6 pb-12 pt-10 sm:px-16 sm:pt-16 lg:py-16 lg:pr-0 xl:px-20 xl:py-20"
+    >
+      <div class="lg:self-center">
+        <p class="text-3xl font-title text-white sm:text-4xl">
+          <span class="block">{settings.title}</span>
+          <span class="block text-2xl">{settings.title2}</span>
+        </p>
+        <p class="mt-4 text-lg leading-6 text-gray-100">
+          {settings.description}
+        </p>
         <a
-          href="https://us.aptabase.com/auth/register"
-          class="rounded-md bg-black px-6 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-          >Sign up</a
+          href={settings.url}
+          class="mt-8 inline-flex items-center rounded-md border border-transparent bg-white px-5 py-3 text-base font-medium text-blue-600 shadow hover:bg-indigo-50"
         >
+          Learn more
+        </a>
       </div>
     </div>
+    <div class="aspect-h-3 aspect-w-5 -mt-6 md:aspect-h-1 md:aspect-w-2">
+      <Image
+        src={heroImage}
+        alt="Aptabase Dashboard Screenshot"
+        width={1300}
+        height={911}
+        class="translate-x-6 translate-y-6 transform rounded-md object-cover object-left-top sm:translate-x-16 lg:translate-y-20"
+      />
+    </div>
   </div>
-</div>
+</section>
