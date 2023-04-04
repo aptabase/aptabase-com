@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/Footer.astro";
+import HeroFor from "../components/HeroFor.astro";
+---
+
+<BaseLayout
+  title="Privacy-first and simple analytics for Tauri Apps - Aptabase"
+  description="Aptabase is a privacy-focused analytics for Tauri Apps. Get simple and actionable insights without compromising user privacy. Try it now!"
+>
+  <HeroFor
+    name="Tauri Apps"
+    image="/tools/tauri.svg"
+    sdkName="tauri-plugin-aptabase"
+    sdkUrl="https://github.com/aptabase/tauri-plugin-aptabase"
+  />
+  <Footer />
+</BaseLayout>

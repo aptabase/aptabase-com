@@ -1,0 +1,101 @@
+---
+import HeroBackground from "./HeroBackground.astro";
+import Logo from "./Logo.astro";
+import { Image } from "astro:assets";
+import heroImage from "../assets/hero.png";
+
+const { name, image, sdkName, sdkUrl } = Astro.props;
+---
+
+<div class="relative isolate overflow-hidden">
+  <HeroBackground />
+  <div
+    class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-20"
+  >
+    <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-8">
+      <p class="flex items-center space-x-2">
+        <Logo />
+        <span class="font-bold text-xl">+</span>
+        <img src={image} alt={name} class="pl-2 h-8" />
+      </p>
+      <span
+        class="inline-block select-none px-2 mt-10 text-xs font-semibold leading-6 tracking-tight bg-blue-50 rounded-lg text-blue-600"
+      >
+        Public Beta
+      </span>
+      <h1 class="mt-2 text-4xl font-title font-bold tracking-tight sm:text-5xl">
+        Analytics for {name}
+      </h1>
+      <p class="mt-6 text-xl leading-8 text-gray-500 max-w-md">
+        Aptabase is a <span class="text-gray-900">privacy-first</span>
+        and <span class="text-gray-900">simple</span> analytics built for {
+          name
+        }.
+      </p>
+      <div class="mt-20 space-y-10 max-w-sm">
+        <div>
+          <div class="font-title text-xl text-gray-800">
+            <span class="text-blue-600">1.</span> Register
+          </div>
+          <p class="mt-1 text-gray-600">Signing up takes less than a minute.</p>
+          <div class="mt-4 flex items-center gap-x-4">
+            <a
+              href="https://us.aptabase.com/auth/register"
+              class="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            >
+              Sign up
+            </a>
+            <a
+              href="https://us.aptabase.com/"
+              class="text-sm font-semibold rounded-md leading-6 px-4 focus-visible:outline-black py-2 hover:bg-gray-50"
+            >
+              Sign in <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+        <div>
+          <div class="font-title text-xl text-gray-800">
+            <span class="text-blue-600">2.</span> Instrument
+          </div>
+          <p class="mt-1 text-gray-600">
+            Use the
+            <a
+              class="text-blue-600 hover:underline"
+              target="_blank"
+              href={sdkUrl}
+            >
+              {sdkName}
+            </a> to instrument your app. You're in total control of what events to
+            track.
+          </p>
+        </div>
+        <div>
+          <div class="font-title text-xl text-gray-800">
+            <span class="text-blue-600">3.</span> Explore
+          </div>
+          <p class="mt-1 text-gray-600">
+            That's it! You're now see all the data on your dashboard as the
+            events come through from your app
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32"
+    >
+      <div class="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
+        <div
+          class="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-2"
+        >
+          <Image
+            src={heroImage}
+            alt="Aptabase Dashboard Screenshot"
+            width={1300}
+            height={911}
+            class="w-[76rem] rounded-xl shadow-2xl ring-1 ring-gray-900/10"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
