@@ -11,7 +11,7 @@ cta: "for-swift"
 
 The iPadOS was first introduced in 2019 and it is an operating system based on iOS. In some cases you might want to add some extra functionality to your app when running on iPadOS, or maybe you want to show a different UI. This short post will show you how to detect iPadOS with Swift.
 
-The `UIUserInterfaceIdiom` enum is what you want to use to detect the user interface idiom, which can be accessed via the `userInterfaceIdiom` property on the `UIDevice` class. The `UIUserInterfaceIdiom` enum has a `pad` case which you can use to detect if the device is an iPad.
+The `UIUserInterfaceIdiom` enum is what you want to use to detect the user interface idiom, which can be accessed via the `userInterfaceIdiom` property on the `UIDevice` class. The `UIUserInterfaceIdiom` enum has a `pad` option which you can use to detect if the device is an iPad.
 
 ```swift
 if UIDevice.current.userInterfaceIdiom == .pad {
