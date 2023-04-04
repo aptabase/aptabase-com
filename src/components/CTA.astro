@@ -1,6 +1,6 @@
 ---
-import heroImage from "../images/hero.png";
-import { Image } from "@astrojs/image/components";
+import heroImage from "../assets/hero.png";
+import { Image } from "astro:assets";
 
 const { name } = Astro.props;
 
@@ -18,6 +18,13 @@ const options: {
     description:
       "Aptabase is a privacy-first analytics platform for Swift apps. Get insights into your app's usage in minutes.",
     url: "https://github.com/aptabase/aptabase-swift",
+  },
+  "for-tauri": {
+    title: "Analytics for Tauri apps",
+    title2: "Without compromising on privacy",
+    description:
+      "Aptabase is a privacy-first analytics platform for Tauri apps. Get insights into your app's usage in minutes.",
+    url: "https://github.com/aptabase/tauri-plugin-aptabase",
   },
 };
 

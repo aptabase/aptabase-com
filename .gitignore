@@ -1,6 +1,8 @@
 # build output
 dist/
 
+public/blogcover/*.drawio.bkp
+
 # generated types
 .astro/
 

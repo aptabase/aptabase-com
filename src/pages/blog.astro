@@ -43,7 +43,6 @@ const posts = await Astro.glob("./blog/*.md");
                     {new Intl.DateTimeFormat("en", {
                       year: "numeric",
                       month: "long",
-                      day: "numeric",
                     }).format(new Date(post.frontmatter.publishedDate))}
                   </time>
                   <span>·</span>
