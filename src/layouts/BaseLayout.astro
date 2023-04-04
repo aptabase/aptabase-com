@@ -5,9 +5,10 @@ import "@fontsource/inter";
 export interface Props {
   title: string;
   description: string;
+  og?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, og } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -26,11 +27,14 @@ const { title, description } = Astro.props;
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="https://aptabase.com/og.png" />
+    <meta property="og:image" content={og ?? "https://aptabase.com/og.png"} />
     <meta name="twitter:site" content="@aptabase" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://aptabase.com/twitter3.png" />
+    <meta
+      name="twitter:image"
+      content={og ?? "https://aptabase.com/twitter3.png"}
+    />
   </head>
   <body>
     <slot />
