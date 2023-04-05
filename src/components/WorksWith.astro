@@ -64,11 +64,7 @@ const comingSoon = tools.filter((x) => !x.sdk);
     <div class="flex space-x-2">
       {
         worksWith.map((tool) => (
-          <a
-            target="_blank"
-            href={tool.repository}
-            class="p-1 rounded hover:bg-gray-50"
-          >
+          <a href={tool.repository} class="p-1 rounded hover:bg-gray-50">
             <img class="h-12 w-12" src={tool.image} alt={tool.name} />
           </a>
         ))
