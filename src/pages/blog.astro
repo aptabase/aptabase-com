@@ -1,6 +1,11 @@
 ---
 import ContentLayout from "../layouts/ContentLayout.astro";
 const posts = await Astro.glob("./blog/*.md");
+const sorted = posts.sort(
+  (a, b) =>
+    new Date(b.frontmatter.publishedDate).getTime() -
+    new Date(a.frontmatter.publishedDate).getTime()
+);
 ---
 
 <ContentLayout
@@ -20,7 +25,7 @@ const posts = await Astro.glob("./blog/*.md");
       class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2"
     >
       {
-        posts.map((post) => (
+        sorted.map((post) => (
           <article class="flex flex-col items-start justify-between">
             <a href={post.url} class="relative w-full">
               <img
