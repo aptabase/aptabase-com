@@ -6,6 +6,7 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
   site: "https://aptabase.com",
+  trailingSlash: "never",
   integrations: [tailwind(), sitemap()],
   server: {
     port: 4000,
