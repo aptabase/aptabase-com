@@ -11,9 +11,6 @@ export default defineConfig({
   server: {
     port: 4000,
   },
-  build: {
-    format: "file",
-  },
   experimental: {
     assets: true,
   },
