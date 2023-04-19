@@ -55,4 +55,4 @@ builder.Services.AddSingleton<MainPage>();
 
 If I had dozens or hundreds of page, I'd probably abstract that in a `builder.Services.AddContentPages` extension method, but for now, I'm fine with that.
 
-I hope this helps you save some time debugging your MAUI app!
+I hope this helps you save some time debugging your MAUI app! If you have any questions or suggestions, feel free to reach out to me on [Twitter](https://twitter.com/goenning), I'd love to hear from you!
