@@ -12,7 +12,7 @@ Thank you for using Aptabase! We're happy you're here.
 
 When we say ”company”, “we”, “our”, “us”, ”service” or ”services” in this document, we are referring to **Aptabase**, a service operated by **Sumbit Labs Limited**.
 
-These Terms of Service (“Terms”, “Terms of Service”) govern your use of our web pages located at https://aptabase.com and https://us.aptabase.com. Please read this Terms of Service agreement carefully before accessing or using Aptabase.
+These Terms of Service (“Terms”, “Terms of Service”) govern your use of our web pages located at https://aptabase.com, https://us.aptabase.com and https://eu.aptabase.com. Please read this Terms of Service agreement carefully before accessing or using Aptabase.
 
 Our Privacy Policy also governs your use of our Service and explains how we collect, safeguard and disclose information that results from your use of our web pages. Please read it here https://aptabase.com/legal/privacy.
 
