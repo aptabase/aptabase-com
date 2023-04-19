@@ -236,4 +236,6 @@ That's it, you now know how to log from Rust and JavaScript, as well as how to c
 
 If you're interested on gettings insights on how your users are using your app, you might want to check out [Aptabase](https://aptabase.com), a privacy-first analytics platform that respects your users' privacy.
 
+I hope this post was helpful. If you have any questions or suggestions, feel free to reach out to me on [Twitter](https://twitter.com/goenning), I'd love to hear from you!
+
 See you on the next article 👋
