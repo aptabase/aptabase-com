@@ -2,6 +2,9 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Footer from "../components/Footer.astro";
 import HeroFor from "../components/HeroFor.astro";
+import PrivacyFirst from "../components/features/PrivacyFirst.astro";
+import Simple from "../components/features/Simple.astro";
+import Pricing from "../components/Pricing.astro";
 ---
 
 <BaseLayout
@@ -14,5 +17,8 @@ import HeroFor from "../components/HeroFor.astro";
     sdkName="Flutter SDK for Aptabase"
     sdkUrl="https://github.com/aptabase/aptabase_flutter"
   />
+  <PrivacyFirst />
+  <Simple />
+  <Pricing />
   <Footer />
 </BaseLayout>

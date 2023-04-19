@@ -1,0 +1,87 @@
+<script is:inline>
+  document.addEventListener("alpine:init", () => {
+    Alpine.data("pricing", () => ({
+      tier: 1,
+      tiers: [
+        { events: "20.000", name: "20k", price: "Free" },
+        { events: "200.000", name: "200k", price: "$10" },
+        { events: "1.000.000", name: "1M", price: "$20" },
+        { events: "2.000.000", name: "2M", price: "$40" },
+        { events: "5.000.000", name: "5M", price: "$75" },
+        { events: "10.000.000", name: "10M", price: "$140" },
+        { events: "20.000.000", name: "20M", price: "$240" },
+        { events: "30.000.000", name: "30M", price: "$300" },
+        { events: "50.000.000", name: "50M", price: "$450" },
+        { events: "50.000.000+", name: "50M+", price: "Contact us" },
+      ],
+    }));
+  });
+</script>
+
+<div id="pricing" class="bg-white py-24 sm:py-32">
+  <div class="mx-auto max-w-4xl px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl text-center">
+      <p class="mt-2 text-4xl font-bold tracking-tight text-gray-900">
+        Pricing plans for apps of all sizes
+      </p>
+    </div>
+    <div x-data="pricing" class="grid grid-cols-2 gap-6 mt-12">
+      <div>
+        <span class="text-xl tracking-tight">How many events per month?</span>
+        <p class="text-5xl flex items-center space-x-1 mt-2">
+          <span x-text="tiers[tier].events"></span>
+        </p>
+        <input
+          type="range"
+          class="mt-8 w-full bg-gray-200 appearance-none h-1.5 rounded-full [&::-webkit-slider-thumb]:w-[20px] [&::-webkit-slider-thumb]:h-[20px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:appearance-none"
+          min="0"
+          max="9"
+          class="w-full"
+          step="1"
+          x-model="tier"
+        />
+        <p class="mt-2 text-sm text-stone-600">
+          You're in control of how many events to send from your apps. We
+          recommend sending at least one when app starts.
+        </p>
+      </div>
+      <div
+        class="px-4 rounded-xl bg-gray-400/5 ring-1 ring-inset ring-gray-200 py-4"
+      >
+        <p class="flex gap-x-2 items-center mx-4">
+          <span
+            class="text-5xl font-bold font-title tracking-tight text-gray-900"
+            x-text="tiers[tier].price"></span>
+          <span
+            x-show="tiers[tier].price.startsWith('$')"
+            class="text-sm text-gray-600">/month</span
+          >
+        </p>
+
+        <ul
+          role="list"
+          class="divide-gray-900/5 border-gray-900/5 text-gray-600 divide-y border-t text-sm leading-6 lg:border-t-0 my-4"
+        >
+          <li class="flex gap-x-3 py-2">
+            <span class="text-lg text-green-600">✓</span> Unlimited Apps
+          </li>
+          <li class="flex gap-x-3 py-2">
+            <span class="text-lg text-green-600">✓</span> EU or US data residency
+          </li>
+          <li class="flex gap-x-3 py-2">
+            <span class="text-lg text-green-600">✓</span> 100% Data Ownership
+          </li>
+          <li class="flex gap-x-3 py-2">
+            <span class="text-lg text-green-600">✓</span> SDKs for popular platforms
+          </li>
+        </ul>
+
+        <a
+          href="https://us.aptabase.com/auth/register"
+          class="rounded-md block bg-black px-6 py-2 text-center text-sm text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          >Get started for free!</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
