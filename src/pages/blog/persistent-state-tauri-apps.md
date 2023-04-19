@@ -2,7 +2,7 @@
 title: What you need to know about persistent state in Tauri apps
 description: There are many different ways to store data in a persistent way, in this post we'll a few options that are available to Tauri apps.
 slug: persistent-state-tauri-apps
-publishedDate: "2023-04-11T00:00:00.000Z"
+publishedDate: "2023-04-19T00:00:00.000Z"
 layout: ../../layouts/BlogPostLayout.astro
 category: Guide
 tags: ["Tauri", "State"]
