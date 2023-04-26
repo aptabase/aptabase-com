@@ -1,7 +1,7 @@
 <script is:inline>
   document.addEventListener("alpine:init", () => {
     Alpine.data("pricing", () => ({
-      tier: 1,
+      tier: 0,
       tiers: [
         { events: "20.000", name: "20k", price: "Free" },
         { events: "200.000", name: "200k", price: "$10" },
@@ -79,7 +79,7 @@
         <a
           href="https://eu.aptabase.com/auth/register"
           class="rounded-md block bg-black px-6 py-2 text-center text-sm text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-          >Get started for free!</a
+          >Try free now!</a
         >
       </div>
     </div>
