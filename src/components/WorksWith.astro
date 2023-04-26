@@ -3,52 +3,58 @@ const tools = [
   {
     name: "Tauri",
     image: "/tools/tauri.svg",
-    repository: "/for-tauri",
+    href: "/for-tauri",
     sdk: true,
   },
   {
     name: "Native iOS (Swift)",
     image: "/tools/apple.svg",
-    repository: "/for-swift",
+    href: "/for-swift",
     sdk: true,
   },
   {
     name: "Flutter",
     image: "/tools/flutter.svg",
-    repository: "/for-flutter",
+    href: "/for-flutter",
+    sdk: true,
+  },
+  {
+    name: "NativeScript",
+    image: "/tools/nativescript.svg",
+    href: "/for-nativescript",
     sdk: true,
   },
   {
     name: "Native Android (Kotlin)",
     image: "/tools/android.svg",
-    repository: "https://github.com/aptabase/aptabase/issues/4",
+    href: "https://github.com/aptabase/aptabase/issues/4",
   },
   {
     name: "Web App",
     image: "/tools/javascript.svg",
-    repository: "/for-webapps",
+    href: "/for-webapps",
     sdk: true,
   },
   {
     name: ".NET MAUI",
     image: "/tools/dotnet.png",
-    repository: "/for-maui",
+    href: "/for-maui",
     sdk: true,
   },
   {
     name: "Capacitor",
     image: "/tools/capacitor-js.svg",
-    repository: "https://github.com/aptabase/aptabase/issues/6",
+    href: "https://github.com/aptabase/aptabase/issues/6",
   },
   {
     name: "Electron",
     image: "/tools/electron.svg",
-    repository: "https://github.com/aptabase/aptabase/issues/3",
+    href: "https://github.com/aptabase/aptabase/issues/3",
   },
   {
     name: "React Native",
     image: "/tools/react-native.svg",
-    repository: "https://github.com/aptabase/aptabase/issues/2",
+    href: "https://github.com/aptabase/aptabase/issues/2",
   },
 ];
 
@@ -65,7 +71,7 @@ const comingSoon = tools.filter((x) => !x.sdk);
     <div class="flex space-x-2">
       {
         worksWith.map((tool) => (
-          <a href={tool.repository} class="p-1 rounded hover:bg-gray-50">
+          <a href={tool.href} class="p-1 rounded hover:bg-gray-50">
             <img class="h-12 w-12" src={tool.image} alt={tool.name} />
           </a>
         ))
@@ -75,12 +81,12 @@ const comingSoon = tools.filter((x) => !x.sdk);
 
   <div class="mt-4">
     <p class="tracking-tighter font-semibold text-sm text-gray-700 mb-2">
-      <span>More to come soon...</span>
+      <span>With more coming soon...</span>
     </p>
     <div class="flex space-x-4">
       {
         comingSoon.map((tool) => (
-          <a target="_blank" href={tool.repository}>
+          <a target="_blank" href={tool.href}>
             <img
               class="h-8 w-8 drop-shadow-2xl grayscale hover:grayscale-0"
               src={tool.image}

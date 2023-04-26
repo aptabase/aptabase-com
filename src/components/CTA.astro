@@ -4,13 +4,23 @@ import { Image } from "astro:assets";
 
 const { name } = Astro.props;
 
+type CTASettings = {
+  title: string;
+  title2: string;
+  description: string;
+  url: string;
+};
+
+const forApps: CTASettings = {
+  title: "Analytics for Apps",
+  title2: "Without compromising on privacy",
+  description:
+    "Aptabase is a privacy-first analytics platform for mobile, desktop and web apps. Get insights into your app's usage in minutes.",
+  url: "/for-maui",
+};
+
 const options: {
-  [key: string]: {
-    title: string;
-    title2: string;
-    description: string;
-    url: string;
-  };
+  [key: string | "for-apps"]: CTASettings;
 } = {
   "for-swift": {
     title: "Analytics for Swift apps",
@@ -42,10 +52,7 @@ const options: {
   },
 };
 
-const settings = options[name];
-if (!settings) {
-  throw new Error(`No settings found for ${name}`);
-}
+const settings = options[name] ?? forApps;
 ---
 
 <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-20">
