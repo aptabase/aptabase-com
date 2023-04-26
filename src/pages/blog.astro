@@ -1,4 +1,5 @@
 ---
+import BlogPostCard from "../components/blog/BlogPostCard.astro";
 import ContentLayout from "../layouts/ContentLayout.astro";
 const posts = await Astro.glob("./blog/*.md");
 const sorted = posts.sort(
@@ -24,55 +25,7 @@ const sorted = posts.sort(
     <div
       class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2"
     >
-      {
-        sorted.map((post) => (
-          <article class="flex flex-col items-start justify-between">
-            <a href={post.url} class="relative w-full">
-              <img
-                src={`/blogcover/${post.frontmatter.slug}.png`}
-                alt={post.frontmatter.title}
-                class="object-cover rounded-lg"
-              />
-            </a>
-            <div class="max-w-xl">
-              <div class="mt-4 flex items-center gap-x-4 text-xs">
-                <p class="space-x-2">
-                  <span class="font-medium text-blue-600">
-                    {post.frontmatter.category}
-                  </span>
-                  <span>·</span>
-                  <time
-                    class="text-gray-600"
-                    datetime="2023-02-21T12:00:00.000Z"
-                  >
-                    {new Intl.DateTimeFormat("en", {
-                      year: "numeric",
-                      month: "long",
-                    }).format(new Date(post.frontmatter.publishedDate))}
-                  </time>
-                  <span>·</span>
-                  {post.frontmatter.tags.map((tag: string) => (
-                    <span class="inline-flex items-center rounded bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800">
-                      {tag}
-                    </span>
-                  ))}
-                </p>
-              </div>
-              <div class="group relative">
-                <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                  <a href={post.url}>
-                    <span class="absolute inset-0" />
-                    {post.frontmatter.title}
-                  </a>
-                </h3>
-                <p class="mt-2 line-clamp-3 text-sm leading-6 text-gray-600">
-                  {post.frontmatter.description}
-                </p>
-              </div>
-            </div>
-          </article>
-        ))
-      }
+      {sorted.map((post) => <BlogPostCard post={post} />)}
     </div>
   </div>
 </ContentLayout>

@@ -1,5 +1,6 @@
 ---
 import CTA from "../components/CTA.astro";
+import RelatedPosts from "../components/blog/RelatedPosts.astro";
 import ContentLayout from "../layouts/ContentLayout.astro";
 const { frontmatter } = Astro.props;
 ---
@@ -65,4 +66,5 @@ const { frontmatter } = Astro.props;
     </article>
   </div>
   <CTA name={frontmatter.cta} />
+  <RelatedPosts slug={frontmatter.slug} cta={frontmatter.cta} />
 </ContentLayout>
