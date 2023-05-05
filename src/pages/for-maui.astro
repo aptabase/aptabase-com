@@ -16,6 +16,10 @@ import Pricing from "../components/Pricing.astro";
     image="/tools/dotnet.png"
     sdkName=".NET MAUI SDK for Aptabase"
     sdkUrl="https://github.com/aptabase/aptabase-maui"
+    code={`_aptabase.TrackEvent("play_music", new() {
+    { "name", "Here comes the sun" }
+});`}
+    lang="csharp"
   />
   <PrivacyFirst />
   <Simple />

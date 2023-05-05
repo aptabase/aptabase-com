@@ -16,6 +16,10 @@ import Pricing from "../components/Pricing.astro";
     image="/tools/android.svg"
     sdkName="Kotlin SDK for Aptabase"
     sdkUrl="https://github.com/aptabase/aptabase-kotlin"
+    code={`Aptabase.instance.trackEvent("play_music", mapOf<String, Any>(
+  "name" to "here_comes_the_sun"
+))`}
+    lang="kotlin"
   />
   <PrivacyFirst />
   <Simple />

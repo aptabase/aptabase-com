@@ -3,8 +3,9 @@ import HeroBackground from "./HeroBackground.astro";
 import Logo from "./Logo.astro";
 import { Image } from "astro:assets";
 import heroImage from "../assets/hero.png";
+import { Code } from "astro/components";
 
-const { name, image, sdkName, sdkUrl } = Astro.props;
+const { name, image, sdkName, sdkUrl, lang, code } = Astro.props;
 ---
 
 <div class="relative isolate overflow-hidden">
@@ -27,7 +28,7 @@ const { name, image, sdkName, sdkUrl } = Astro.props;
           name
         }.
       </p>
-      <div class="mt-20 space-y-10 max-w-sm">
+      <div class="mt-20 space-y-10">
         <div>
           <div class="font-title text-xl text-gray-800">
             <span class="text-blue-600">1.</span> Register
@@ -52,7 +53,7 @@ const { name, image, sdkName, sdkUrl } = Astro.props;
           <div class="font-title text-xl text-gray-800">
             <span class="text-blue-600">2.</span> Instrument
           </div>
-          <p class="mt-1 text-gray-600">
+          <p class="mt-1 text-gray-600 max-w-md">
             Use the
             <a
               class="text-blue-600 hover:underline"
@@ -63,12 +64,16 @@ const { name, image, sdkName, sdkUrl } = Astro.props;
             </a> to instrument your app. You're in total control of what events to
             track.
           </p>
+          <p class="mt-4 text-gray-600">Here's an example 👇</p>
+          <div class="prose mt-1">
+            <Code code={code} lang={lang} theme="dark-plus" />
+          </div>
         </div>
         <div>
           <div class="font-title text-xl text-gray-800">
             <span class="text-blue-600">3.</span> Explore
           </div>
-          <p class="mt-1 text-gray-600">
+          <p class="mt-1 text-gray-600 max-w-md">
             That's it! You'll now see some data on your dashboard as the events
             come through from your app.
           </p>
