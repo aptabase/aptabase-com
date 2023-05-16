@@ -5,7 +5,7 @@ import "@fontsource/inter";
 export interface Props {
   title: string;
   description: string;
-  og?: string;
+  og?: string | undefined;
 }
 
 const url = Astro.url.toString().replace(/\/+$/, "");
