@@ -1,0 +1,74 @@
+---
+const faqs = [
+  {
+    question: "What does “Data not linked to anyone” really mean?",
+    answers: [
+      `It means all data points sent by an App instrumented by Aptabase are disconnected in a way that prevents them from being associated with a specific individual. We do not apply any pseudonymisation, every datapoint 100% anonymised for that extra peace of mind and compliance.`,
+    ],
+  },
+  {
+    question: "But what's the difference between Pseudonymised and Anonymised?",
+    answers: [
+      "Based on the GDPR Article 4(5), the main difference between pseudonymisation and anonymisation is that pseudonymisation is a reversible process that allows the data subject to be re-identified using the additional information kept separately, whereas anonymisation is an irreversible process that results in data that cannot be linked back to a specific individual. Opt-in consent is required whenever Personal Data is collected, even when pseudonymisation is applied as it is can be reversed.",
+    ],
+  },
+  {
+    question: "This seems to good to be true. What's the catch?",
+    answers: [
+      `Anonymous analytics have a huge benefit in terms of end-user data privacy and significantly reduced compliance burden. However, it does come with a few limitations for app developers.`,
+
+      `Because data points collected by Aptabase do not have a unique user identifier, it's not possible to perform user-level analytics such as Daily/Weekly/Monthly Active Users (DAU/MAU/WAU) or user retention.`,
+
+      `While we've grown used to these metrics, have you asked yourself if they are really worth it? The alternative is to ask for consent, which also has its own limitations. We believe that the benefits of anonymous analytics far outweigh the limitations.`,
+    ],
+  },
+  {
+    question: "Why is Aptabase not free like Firebase and Google Analytics?",
+    answers: [
+      `You've likely heard this many times, but simply put — we don't sell your end-users data.`,
+
+      `Free analytics can sell your end-users data to third-parties (known as Data Brokers) which then use it to perform user profiling and targeted advertising. This is a huge privacy concern and is the reason why we have to charge a subscription fee.`,
+    ],
+  },
+  {
+    question: "What happens if I go over my plan's monthly limit?",
+    answers: [
+      `It's okay to exceed the limit occasionally, we will not charge you more for that. But if you consistently go over your plan's monthly limit for 2 months, we'll reach out to you to discuss upgrading to a higher plan.`,
+    ],
+  },
+];
+---
+
+<div class="bg-gray-900">
+  <div
+    class="mx-auto max-w-7xl divide-y divide-gray-900/10 px-6 py-24 sm:py-32 lg:px-8 lg:py-40"
+  >
+    <h2 class="text-2xl font-bold leading-10 tracking-tight text-white">
+      Frequently asked questions
+    </h2>
+    <p class="mt-6 max-w-2xl text-base leading-7 text-gray-300">
+      Can't find the answer you're looking for? <br />
+      <a
+        href="mailto:hi@aptabase.com"
+        class="font-semibold text-blue-400 hover:text-blue-300"
+        >Send us an email</a
+      > and we'll get back to you as soon as we can.
+    </p>
+    <dl class="mt-10 space-y-8 divide-y divide-gray-300/10">
+      {
+        faqs.map((faq) => (
+          <div class="pt-8 lg:grid lg:grid-cols-12 lg:gap-8">
+            <dt class="text-base font-semibold leading-7 text-white lg:col-span-5">
+              {faq.question}
+            </dt>
+            <dd class="mt-4 lg:col-span-7 lg:mt-0 space-y-6">
+              {faq.answers.map((answer) => (
+                <p class="text-base leading-7 text-gray-300">{answer}</p>
+              ))}
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</div>
