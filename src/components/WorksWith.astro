@@ -69,10 +69,10 @@ const comingSoon = tools.filter((x) => !x.sdk);
       <span>Works with</span>
       <strong class="pl-1 inline-block animate-bounce">↓</strong>
     </p>
-    <div class="flex space-x-2">
+    <div class="grid grid-cols-5 gap-4 md:flex">
       {
         worksWith.map((tool) => (
-          <a href={tool.href} class="p-1 rounded hover:bg-gray-50">
+          <a href={tool.href}>
             <img class="h-12 w-12" src={tool.image} alt={tool.name} />
           </a>
         ))
