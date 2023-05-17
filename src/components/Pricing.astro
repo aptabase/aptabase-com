@@ -27,11 +27,14 @@
     </div>
     <div x-data="pricing" class="grid md:grid-cols-2 gap-6 mt-12">
       <div>
-        <span class="text-xl tracking-tight">How many events per month?</span>
+        <label for="events" class="text-xl tracking-tight"
+          >How many events per month?</label
+        >
         <p class="text-5xl flex items-center space-x-1 mt-2">
           <span x-text="tiers[tier].events"></span>
         </p>
         <input
+          name="events"
           type="range"
           class="mt-8 w-full bg-gray-200 appearance-none h-1.5 rounded-full [&::-webkit-slider-thumb]:w-[20px] [&::-webkit-slider-thumb]:h-[20px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-600 [&::-webkit-slider-thumb]:appearance-none"
           min="0"
