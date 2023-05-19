@@ -71,11 +71,11 @@ But wait! Just because there is no limit doesn't mean you should store everythin
 
 ## 4. tauri-plugin-sql
 
-If you've worked with backend systems before you probably interacted with a SQL Database at some degree. [tauri-plugin-sql](https://github.com/tauri-apps/tauri-plugin-sql) is the official plugin for connecting to SQL databases in Tauri apps.
+If you've worked with backend systems before you probably interacted with a SQL Database at some degree. [tauri-plugin-sql](https://github.com/tauri-apps/tauri-plugin-sql) is the official plugin for connecting to any SQL database in Tauri apps.
 
-Unless you're building a SQL Client, you probably want to use SQLite. It's a simple, file-based database that is easy to use and doesn't require a server. It's perfectly suited for storing desktop and mobile apps.
+Unless you're building a SQL client, you probably want to use SQLite. It's a simple, file-based database that is easy to use and doesn't require a server. It's perfectly suited for storing data for desktop and mobile apps. While `tauri-plugin-sql` supports SQLite, you could also roll your own implementation using other Rust crates like explained in this article from Moonguard [How to use local SQLite database with tauri](https://blog.moonguard.dev/how-to-use-local-sqlite-database-with-tauri), which has the added benefit of being in total control of the implementation.
 
-You get all the benefits of a database, such as indexes, transactions, and more, right in your app. You can also also execute queries from both Rust and JavaScript, which is a huge benefit.
+By using SQLite you get all the benefits of an actual OLTP database, such as indexes, transactions, and more, right in your app. With the `tauri-plugin-sql` you can also also execute queries from both Rust and JavaScript, which is a huge benefit.
 
 In my opinion this is well suited for storing both User Data and App Preferences, although I'd probably recommend it more for User Data.
 
