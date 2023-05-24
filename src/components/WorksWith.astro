@@ -1,102 +1,60 @@
 ---
-const tools = [
+const sdks = [
   {
     name: "Native iOS (Swift)",
     image: "/tools/apple.svg",
     href: "/for-swift",
-    sdk: true,
   },
   {
     name: "Native Android (Kotlin)",
     image: "/tools/android.svg",
     href: "/for-android",
-    sdk: true,
   },
   {
     name: "Flutter",
     image: "/tools/flutter.svg",
     href: "/for-flutter",
-    sdk: true,
+  },
+  {
+    name: "Electron",
+    image: "/tools/electron.svg",
+    href: "/for-electron",
   },
   {
     name: "NativeScript",
     image: "/tools/nativescript.svg",
     href: "/for-nativescript",
-    sdk: true,
   },
   {
     name: "Tauri",
     image: "/tools/tauri.svg",
     href: "/for-tauri",
-    sdk: true,
   },
   {
     name: "Web App",
     image: "/tools/javascript.svg",
     href: "/for-webapps",
-    sdk: true,
   },
   {
     name: ".NET MAUI",
     image: "/tools/dotnet.png",
     href: "/for-maui",
-    sdk: true,
-  },
-  {
-    name: "Capacitor",
-    image: "/tools/capacitor-js.svg",
-    href: "https://github.com/aptabase/aptabase/issues/6",
-  },
-  {
-    name: "Electron",
-    image: "/tools/electron.svg",
-    href: "https://github.com/aptabase/aptabase/issues/3",
-  },
-  {
-    name: "React Native",
-    image: "/tools/react-native.svg",
-    href: "https://github.com/aptabase/aptabase/issues/2",
   },
 ];
-
-const worksWith = tools.filter((x) => x.sdk);
-const comingSoon = tools.filter((x) => !x.sdk);
 ---
 
-<div class="mt-10 md:mt-20">
-  <div>
-    <p class="tracking-tighter font-semibold text-sm text-gray-700 mb-2">
-      <span>Works with</span>
-      <strong class="pl-1 inline-block animate-bounce">↓</strong>
-    </p>
-    <div class="grid grid-cols-5 gap-4 md:flex">
-      {
-        worksWith.map((tool) => (
-          <a href={tool.href}>
-            <img class="h-12 w-12" src={tool.image} alt={tool.name} />
-          </a>
-        ))
-      }
-    </div>
-  </div>
-
-  <div class="mt-4">
-    <p class="tracking-tighter font-semibold text-sm text-gray-700 mb-2">
-      <span>With more coming soon...</span>
-    </p>
-    <div class="flex space-x-4">
-      {
-        comingSoon.map((tool) => (
-          <a target="_blank" href={tool.href}>
-            <img
-              class="h-8 w-8 drop-shadow-2xl grayscale hover:grayscale-0"
-              src={tool.image}
-              alt={tool.name}
-            />
-          </a>
-        ))
-      }
-    </div>
-    <div></div>
+<div class="mt-10 md:mt-20 max-w-sm">
+  <p class="tracking-tighter font-semibold text-sm text-gray-700 mb-2">
+    <span>Works with</span>
+    <strong class="pl-1 inline-block animate-bounce">↓</strong>
+  </p>
+  <div class="grid grid-cols-5 gap-6">
+    {
+      sdks.map((tool) => (
+        <a href={tool.href}>
+          <img class="h-14 w-14" src={tool.image} alt={tool.name} />
+        </a>
+      ))
+    }
   </div>
 </div>
