@@ -4,10 +4,15 @@ var buttonStyle = "rounded-md bg-black px-4 py-3 text-sm font-semibold text-whit
 
 <script is:inline>
     function authQuery() {
+        if (location.hostname !== "aptabase.com") {
+            return { authEU: false, authUS: false }
+        }
+
         return {
             authEU: false,
             authUS: false,
-            init: () => {
+            init() {
+
                 fetch("https://eu.aptabase.com/api/_auth/me", { credentials: "include" }).then(x => this.authEU = x.ok)
                 fetch("https://us.aptabase.com/api/_auth/me", { credentials: "include" }).then(x => this.authUS = x.ok)
             }
