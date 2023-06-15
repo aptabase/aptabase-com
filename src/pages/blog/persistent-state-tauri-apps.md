@@ -34,7 +34,7 @@ One of the biggest benefits of this option is the simplicity. Being synchronous 
 
 On the other hand, there are some downsides. The biggest one being that it's only available via JavaScript, you can't access it from Rust. The other negative aspect of it is the limitation of 3~5MB of storage (depends on the platform). This is a LOT of storage, but it's not unlimited. If you need to store a lot of data, this is not the tool for it.
 
-But wayt, is Local Storage truly persistent?
+Wait a minute, is Local Storage truly persistent?
 
 It is. The data is stored on the user's computer, and it's not lost when the app is closed. In the context of a Tauri app, it's also not deleted if the user decides to clear their browser cache. The app is in total control of what gets stored in local storage and when to delete it. It's possible for the user to go in there and delete the files manually, but the user would have to know what they're doing and the consequences of doing so.
 
