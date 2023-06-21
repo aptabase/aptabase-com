@@ -1,6 +1,4 @@
 ---
-import HeroBackground from "./HeroBackground.astro";
-import Logo from "./Logo.astro";
 import { Image } from "astro:assets";
 import heroImage from "../assets/hero.png";
 import { Code } from "astro/components";
@@ -9,18 +7,14 @@ const { name, image, sdkName, sdkUrl, lang, code } = Astro.props;
 ---
 
 <div class="relative isolate overflow-hidden">
-  <HeroBackground />
   <div
     class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-20"
   >
     <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-8">
-      <a href="/" class="flex items-center space-x-2">
-        <Logo />
-        <span class="font-bold text-xl">+</span>
-        <img src={image} alt={name} class="pl-2 h-8" />
-      </a>
+      <img src={image} alt={name} class="pl-2 h-12" />
       <h1 class="mt-2 text-4xl font-title font-bold tracking-tight sm:text-5xl">
-        Analytics for {name}
+        Analytics for
+        {name}
       </h1>
       <p class="mt-6 text-xl leading-8 text-gray-500 max-w-md">
         Aptabase is a <span class="text-gray-900">privacy-first</span>

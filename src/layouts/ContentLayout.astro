@@ -2,8 +2,6 @@
 import "cal-sans";
 import "@fontsource/inter";
 import BaseLayout from "./BaseLayout.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
 
 export interface Props {
   title: string;
@@ -15,9 +13,7 @@ const { title, description, og } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} og={og}>
-  <Header />
-  <main class="bg-white pt-12 pb-24">
+  <main class="py-24">
     <slot />
   </main>
-  <Footer />
 </BaseLayout>

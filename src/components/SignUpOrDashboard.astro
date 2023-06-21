@@ -1,38 +1,42 @@
 ---
-var buttonStyle = "rounded-md bg-black px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+var buttonStyle =
+    "rounded-md bg-black px-4 py-3 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black";
 ---
 
 <script is:inline>
-    function authQuery() {
-        if (location.hostname !== "aptabase.com") {
-            return { authEU: false, authUS: false }
-        }
-
-        return {
-            authEU: false,
-            authUS: false,
-            init() {
-
-                fetch("https://eu.aptabase.com/api/_auth/me", { credentials: "include" }).then(x => this.authEU = x.ok)
-                fetch("https://us.aptabase.com/api/_auth/me", { credentials: "include" }).then(x => this.authUS = x.ok)
-            }
-        }
+function authQuery() {
+    if (location.hostname !== "aptabase.com") {
+        return { authEU: false, authUS: false };
     }
-</script>  
+
+    return {
+        authEU: false,
+        authUS: false,
+        init() {
+            fetch("https://eu.aptabase.com/api/_auth/me", {
+                credentials: "include",
+            }).then((x) => (this.authEU = x.ok));
+            fetch("https://us.aptabase.com/api/_auth/me", {
+                credentials: "include",
+            }).then((x) => (this.authUS = x.ok));
+        },
+    };
+}
+</script>
 
 <div x-data="authQuery()">
-    <a x-show="!authUS && !authEU" href="https://eu.aptabase.com/auth/register" class={buttonStyle}>
-        Start for free →
-    </a>      
+    <a
+        x-show="!authUS && !authEU"
+        href="https://eu.aptabase.com/auth/register"
+        class={buttonStyle}
+    >
+        Get Started →
+    </a>
 
     <template x-if="authEU">
-        <a href="https://eu.aptabase.com" class={buttonStyle}>
-            Dashboard →
-        </a>  
+        <a href="https://eu.aptabase.com" class={buttonStyle}>Dashboard →</a>
     </template>
     <template x-if="authUS && !authEU">
-        <a href="https://us.aptabase.com" class={buttonStyle}>
-            Dashboard →
-        </a>  
+        <a href="https://us.aptabase.com" class={buttonStyle}>Dashboard →</a>
     </template>
 </div>
