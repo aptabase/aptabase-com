@@ -1,58 +1,60 @@
 ---
-import Feature from "./Feature.astro";
 import FeatureItem from "./FeatureItem.astro";
-
-const color = "text-sky-700";
 ---
 
-<Feature
-  title="Analytics without the legal headaches"
-  description="When it comes to tracking and privacy, Aptabase takes a radical approach to protect your users privacy."
-  category="Privacy-First"
-  color={color}
->
-  <FeatureItem
-    title="Track sessions, not users"
-    description="Sessions tracked by Aptabase are completely anonymous and untraceable."
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
-      class={`w-10 h-10 ${color}`}
+<div class="bg-white py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div
+      class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3"
     >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59"
-      ></path>
-    </svg>
-  </FeatureItem>
-
-  <FeatureItem
-    title="Data not linked to anyone"
-    description="Aptabase does not use any sort of fingerprinting, user identification or pseudonymisation. The data we collect is not linked to anyone."
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
-      class={`w-10 h-10 ${color}`}
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M7.864 4.243A7.5 7.5 0 0119.5 10.5c0 2.92-.556 5.709-1.568 8.268M5.742 6.364A7.465 7.465 0 004.5 10.5a7.464 7.464 0 01-1.15 3.993m1.989 3.559A11.209 11.209 0 008.25 10.5a3.75 3.75 0 117.5 0c0 .527-.021 1.049-.064 1.565M12 10.5a14.94 14.94 0 01-3.6 9.75m6.633-4.596a18.666 18.666 0 01-2.485 5.33"
-      ></path>
-      <path
-        stroke="red"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M6 18L18 6M6 6l12 12"></path>
-    </svg>
-  </FeatureItem>
-</Feature>
+      <div>
+        <h2 class="text-base font-semibold leading-7 text-sky-600">
+          Privacy front and center
+        </h2>
+        <p
+          class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+        >
+          Analytics without the legal headaches
+        </p>
+        <p class="mt-6 text-base leading-7 text-gray-600">
+          In the realms of user tracking and privacy, Aptabase employs a unique
+          strategy to secure the privacy of your users.
+        </p>
+      </div>
+      <dl
+        class="col-span-2 grid grid-cols-1 gap-x-8 gap-y-10 text-base leading-7 text-gray-600 sm:grid-cols-2 lg:gap-y-16"
+      >
+        <FeatureItem
+          color="text-sky-500"
+          title="Sessions, not users!"
+          description="Sessions tracked by Aptabase are completely anonymous and untraceable. We don't track users, we track sessions."
+        />
+        <FeatureItem
+          color="text-sky-500"
+          title="Goodbye fingerprinting!"
+          description="Aptabase does not use any sort of fingerprinting or user identification. The data we collect is not linked to any user."
+        />
+        <FeatureItem
+          color="text-sky-500"
+          title="Open Source"
+          description="Aptabase is 100% open source so you can inspect the code and make sure we're not doing anything shady :)"
+        />
+        <FeatureItem
+          color="text-sky-500"
+          title="100% Data Ownership"
+          description="It's your data, you own it. We don't sell it and we don't use it. It's yours and yours alone."
+        />
+        <FeatureItem
+          color="text-sky-500"
+          title="EU or US data residency, or bring your own"
+          description="You can decide where your data is stored. Choose between our EU or US data centers, or host your own servers!"
+        />
+        <FeatureItem
+          color="text-sky-500"
+          title="GDPR, CCPA and PECR compliant"
+          description="Aptabase does not collect any personal data to help you keelp your application compliant with the latest strict privacy regulations."
+        />
+      </dl>
+    </div>
+  </div>
+</div>

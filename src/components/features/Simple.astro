@@ -1,53 +1,53 @@
 ---
-import Feature from "./Feature.astro";
 import FeatureItem from "./FeatureItem.astro";
-
-const color = "text-green-600";
 ---
 
-<Feature
-  title="Forget about complex and time consuming solutions"
-  description="Aptabase is built with simplicity in mind, from integration to usage. Instrument your app in minutes, not days."
-  category="Simple"
-  color={color}
->
-  <FeatureItem
-    title="SDK for your favorite frameworks"
-    description="Our SDKs are lightweight and easy to use. It's currently available for Swift (Apple / iOS), Flutter, NativeScript, Tauri and JavaSript (Web Apps), with more coming soon!"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
-      class={`w-10 h-10 ${color}`}
+<div class="overflow-hidden bg-white py-24 sm:py-32">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div
+      class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2"
     >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"
-      ></path>
-    </svg>
-  </FeatureItem>
-
-  <FeatureItem
-    title="Built-in Dashboard"
-    description="A dashboard you'll love to use, with zero effort. Dive into your data and get insights in seconds."
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.5"
-      stroke="currentColor"
-      class={`w-10 h-10 ${color}`}
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"
-      ></path>
-    </svg>
-  </FeatureItem>
-</Feature>
+      <div class="lg:pr-8 lg:pt-4">
+        <div class="lg:max-w-lg">
+          <h2 class="text-base font-semibold leading-7 text-blue-600">
+            Get started in seconds
+          </h2>
+          <p
+            class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+          >
+            Better, simpler and faster
+          </p>
+          <p class="mt-6 text-lg leading-8 text-gray-600">
+            Aptabase is an easy to use and open source alternative to Google
+            Firebase Analytics for Mobile and Desktop applications.
+          </p>
+          <p class="mt-6 text-lg leading-8 text-gray-600">
+            With Aptabase you go from zero to a beautiful analytics dashboard in
+            seconds.
+          </p>
+          <dl
+            class="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none"
+          >
+            <FeatureItem
+              color="text-blue-500"
+              title="Real Time"
+              description="Data is updated in real time as users interact with your app. No need to way hours to see what's happening."
+            />
+            <FeatureItem
+              color="text-blue-500"
+              title="Event Tracking"
+              description="Measure anything that happens in your app. Track button clicks, feature usage, configuration changes, and more. You're in control of what to track and measure."
+            />
+          </dl>
+        </div>
+      </div>
+      <img
+        src="/images/events.jpeg"
+        alt="Analytics"
+        class="rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
+        width="2432"
+        height="1442"
+      />
+    </div>
+  </div>
+</div>
