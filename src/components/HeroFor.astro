@@ -3,25 +3,48 @@ import { Image } from "astro:assets";
 import heroImage from "../assets/hero.png";
 import { Code } from "astro/components";
 
-const { name, image, sdkName, sdkUrl, lang, code } = Astro.props;
+const {
+  name,
+  title,
+  image,
+  sdkName,
+  sdkUrl,
+  sdkCodeExample,
+  sdkLanguage,
+  textColor,
+} = Astro.props;
 ---
 
 <div class="relative isolate overflow-hidden">
   <div
     class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-20"
   >
-    <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-8">
-      <img src={image} alt={name} class="pl-2 h-12" />
-      <h1 class="mt-2 text-4xl font-title font-bold tracking-tight sm:text-5xl">
-        Analytics for
-        {name}
-      </h1>
-      <p class="mt-6 text-xl leading-8 text-gray-500 max-w-md">
-        Aptabase is a <span class="text-gray-900">privacy-first</span>
-        and <span class="text-gray-900">simple</span> analytics built for {
-          name
-        }.
-      </p>
+    <div class="mx-auto max-w-2xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0">
+      <div class="text-center sm:text-left">
+        <img src={image} alt={name} class="pl-2 h-12 mx-auto sm:mx-0" />
+        <h1
+          class="mt-2 text-4xl font-title font-bold tracking-tight sm:text-6xl"
+        >
+          Analytics for <br />
+
+          <span class={textColor}>
+            {title}
+          </span>
+        </h1>
+        <span
+          class="mt-2 block text-xl font-semibold tracking-tight text-gray-900"
+        >
+          Privacy-First. Simple. Real-Time.
+        </span>
+        <p
+          class="mt-6 mx-auto sm:mx-0 text-xl leading-8 text-gray-500 max-w-md"
+        >
+          Aptabase is an <span class="text-gray-900">Open Source</span> alternative
+          to Google Firebase Analytics for <span class="text-gray-900">
+            {title}
+          </span>
+        </p>
+      </div>
       <div class="mt-20 space-y-10">
         <div>
           <div class="font-title text-xl text-gray-800">
@@ -60,7 +83,7 @@ const { name, image, sdkName, sdkUrl, lang, code } = Astro.props;
           </p>
           <p class="mt-4 text-gray-600">Here's an example 👇</p>
           <div class="prose mt-1">
-            <Code code={code} lang={lang} theme="dark-plus" />
+            <Code code={sdkCodeExample} lang={sdkLanguage} theme="dark-plus" />
           </div>
         </div>
         <div>
@@ -68,7 +91,7 @@ const { name, image, sdkName, sdkUrl, lang, code } = Astro.props;
             <span class="text-blue-600">3.</span> Explore
           </div>
           <p class="mt-1 text-gray-600 max-w-md">
-            That's it! You'll now see some data on your dashboard as the events
+            That's it! You'll now see the data on your dashboard as the events
             come through from your app.
           </p>
         </div>

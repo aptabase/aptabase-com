@@ -1,0 +1,34 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroFor from "../components/HeroFor.astro";
+import PrivacyFirst from "../components/features/PrivacyFirst.astro";
+import Simple from "../components/features/Simple.astro";
+import Pricing from "../components/Pricing.astro";
+import FAQ from "../components/FAQ.astro";
+import Developers from "../components/features/Developers.astro";
+import frameworks from "../lib/frameworks";
+
+export function getStaticPaths() {
+    return frameworks.map((fw) => {
+        return { params: { slug: fw.slug } };
+    });
+}
+
+const { slug } = Astro.params;
+const fw = frameworks.find((x) => x.slug === slug);
+if (!fw) {
+    throw new Error(`Framework ${slug} not found`);
+}
+---
+
+<BaseLayout
+    title={`Analytics for ${fw.title} • Aptabase`}
+    description={`Open Source, Privacy-First Analytics for ${fw.title}. Get simple and actionable insights without compromising user privacy.`}
+>
+    <HeroFor {...fw} />
+    <PrivacyFirst />
+    <Simple />
+    <Developers />
+    <Pricing />
+    <FAQ />
+</BaseLayout>
