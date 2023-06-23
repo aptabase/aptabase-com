@@ -1,3 +1,10 @@
+import IconClick from "@tabler/icons/click.svg?raw";
+import IconLanguage from "@tabler/icons/language.svg?raw";
+import IconMobile from "@tabler/icons/device-mobile.svg?raw";
+import IconDesktop from "@tabler/icons/device-desktop.svg?raw";
+import IconGamePad2 from "@tabler/icons/device-gamepad-2.svg?raw";
+import IconChartHistogram from "@tabler/icons/chart-histogram.svg?raw";
+
 export default [
   {
     slug: "swift",
@@ -12,6 +19,26 @@ export default [
 ])`,
     sdkLanguage: "swift",
     textColor: "text-[#027AFF]",
+    useCases: [
+      {
+        icon: IconClick,
+        title: "Feature Usage",
+        description:
+          "Are you aware of the features in your app that users engage with most frequently? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your Swift app's user experience.",
+      },
+      {
+        icon: IconLanguage,
+        title: "Location and Language",
+        description:
+          "Understanding the geographical distribution of your user base can significantly inform the decision to localize your Swift app, thereby enhancing its global accessibility and visibility on the Apple App Store.",
+      },
+      {
+        icon: IconMobile,
+        title: "Which OS versions do my users have?",
+        description:
+          "Aptabase efficiently gathers data such as the names of operating systems such as iOS, iPadOS, macOS, etc., and their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used OS and versions.",
+      },
+    ],
   },
   {
     slug: "android",
@@ -26,6 +53,26 @@ export default [
 ))`,
     sdkLanguage: "kotlin",
     textColor: "text-[#3DDB85]",
+    useCases: [
+      {
+        icon: IconClick,
+        title: "Feature Usage",
+        description:
+          "Are you aware of the features in your app that users engage with most frequently? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your Android/Kotlin app's user experience.",
+      },
+      {
+        icon: IconLanguage,
+        title: "Location and Language",
+        description:
+          "Understanding the geographical distribution of your user base can significantly inform the decision to localize your Android/Kotlin app, thereby enhancing its global accessibility and visibility on the Google Play Store.",
+      },
+      {
+        icon: IconMobile,
+        title: "What Android versions are my users on?",
+        description:
+          "Aptabase proficiently collects data related to the various versions of Android utilized by your users. Such invaluable insights empower you to streamline your efforts in creating superior user experiences, meticulously customized to the most prevalent Android versions.",
+      },
+    ],
   },
   {
     slug: "flutter",
@@ -40,6 +87,26 @@ export default [
 });`,
     sdkLanguage: "dart",
     textColor: "text-[#42A5F5]",
+    useCases: [
+      {
+        icon: IconClick,
+        title: "Feature Usage",
+        description:
+          "Are you aware of the features in your app that users engage with most frequently? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your Flutter app's user experience.",
+      },
+      {
+        icon: IconLanguage,
+        title: "Location and Language",
+        description:
+          "Understanding the geographical distribution of your user base can significantly inform the decision to localize your Flutter app, thereby enhancing its global accessibility and visibility on the Apple App Store and Google Play Store.",
+      },
+      {
+        icon: IconMobile,
+        title: "Which OS versions do my users have?",
+        description:
+          "Aptabase efficiently gathers data such as the names of operating systems such as Android, iOS, iPadOS, macOS, etc., and their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used OS and versions.",
+      },
+    ],
   },
   {
     slug: "electron",
@@ -54,6 +121,26 @@ export default [
 });`,
     sdkLanguage: "typescript",
     textColor: "text-[#2DD0ED]",
+    useCases: [
+      {
+        icon: IconClick,
+        title: "Feature Usage",
+        description:
+          "Are you aware of the features in your app that users engage with most frequently? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your Electron app's user experience.",
+      },
+      {
+        icon: IconChartHistogram,
+        title: "Growth and Adoption",
+        description:
+          "Electron applications may lag in user updates due to the need for manual intervention during the update process. However, with Aptabase, you can swiftly determine the adoption rate of your app's newest version. This vital information aids you in making strategic decisions regarding the appropriate timing to phase out older versions.",
+      },
+      {
+        icon: IconDesktop,
+        title: "Which OS versions do my users have?",
+        description:
+          "Aptabase efficiently gathers data such as the names of operating systems such as Windows, macOS and various Linux distributions, alongside their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used OS and versions.",
+      },
+    ],
   },
   {
     slug: "nativescript",
@@ -69,6 +156,26 @@ export default [
 });`,
     sdkLanguage: "typescript",
     textColor: "text-[#65ADF1]",
+    useCases: [
+      {
+        icon: IconClick,
+        title: "Feature Usage",
+        description:
+          "Are you aware of the features in your app that users engage with most frequently? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your NativeScript app's user experience.",
+      },
+      {
+        icon: IconLanguage,
+        title: "Location and Language",
+        description:
+          "Understanding the geographical distribution of your user base can significantly inform the decision to localize your NativeScript app, thereby enhancing its global accessibility and visibility on the Apple App Store and Google Play Store.",
+      },
+      {
+        icon: IconMobile,
+        title: "Which OS versions do my users have?",
+        description:
+          "Aptabase efficiently gathers data such as the names of operating systems such as Android, iOS, iPadOS, macOS, etc., and their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used OS and versions.",
+      },
+    ],
   },
   {
     slug: "tauri",
@@ -83,6 +190,26 @@ export default [
 });`,
     sdkLanguage: "typescript",
     textColor: "text-[#FFC131]",
+    useCases: [
+      {
+        icon: IconClick,
+        title: "Feature Usage",
+        description:
+          "Are you aware of the features in your app that users engage with most frequently? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your Tauri app's user experience.",
+      },
+      {
+        icon: IconChartHistogram,
+        title: "Growth and Adoption",
+        description:
+          "Tauri apps may lag in user updates due to the need for manual intervention during the update process. However, with Aptabase, you can swiftly determine the adoption rate of your app's newest version. This vital information aids you in making strategic decisions regarding the appropriate timing to phase out older versions.",
+      },
+      {
+        icon: IconDesktop,
+        title: "Which OS versions do my users have?",
+        description:
+          "Aptabase efficiently gathers data such as the names of operating systems such ash Windows, macOS and various Linux distributions, alongside their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used OS and versions.",
+      },
+    ],
   },
   {
     slug: "react-native",
@@ -97,6 +224,26 @@ export default [
 });`,
     sdkLanguage: "typescript",
     textColor: "text-[#61DAFB]",
+    useCases: [
+      {
+        icon: IconClick,
+        title: "Feature Usage",
+        description:
+          "Are you aware of the features in your app that users engage with most frequently? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your React Native app's user experience.",
+      },
+      {
+        icon: IconLanguage,
+        title: "Location and Language",
+        description:
+          "Understanding the geographical distribution of your user base can significantly inform the decision to localize your React Native app, thereby enhancing its global accessibility and visibility on the Apple App Store and Google Play Store.",
+      },
+      {
+        icon: IconMobile,
+        title: "Which OS versions do my users have?",
+        description:
+          "Aptabase efficiently gathers data such as the names of operating systems such as Android, iOS, iPadOS, macOS, etc., and their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used OS and versions.",
+      },
+    ],
   },
   {
     slug: "webapps",
@@ -111,6 +258,26 @@ export default [
 });`,
     sdkLanguage: "typescript",
     textColor: "text-[#F7DF1E]",
+    useCases: [
+      {
+        icon: IconClick,
+        title: "Feature Usage",
+        description:
+          "Are you aware of the features in your app that users engage with most frequently? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your Web app's user experience.",
+      },
+      {
+        icon: IconLanguage,
+        title: "Location and Language",
+        description:
+          "Understanding the geographical distribution of your user base can significantly inform the decision to localize your Web app, thereby enhancing its global accessibility and visibility on that market.",
+      },
+      {
+        icon: IconDesktop,
+        title: "What browsers are my users on?",
+        description:
+          "Aptabase efficiently gathers data such as the names of Browsers, alongside their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used browsers.",
+      },
+    ],
   },
   {
     slug: "maui",
@@ -125,6 +292,26 @@ export default [
 });`,
     sdkLanguage: "csharp",
     textColor: "text-[#512BD4]",
+    useCases: [
+      {
+        icon: IconClick,
+        title: "Feature Usage",
+        description:
+          "Are you aware of the features in your app that users engage with most frequently? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your .NET MAUI app's user experience.",
+      },
+      {
+        icon: IconLanguage,
+        title: "Location and Language",
+        description:
+          "Understanding the geographical distribution of your user base can significantly inform the decision to localize your .NET MAUI app, thereby enhancing its global accessibility and visibility on the Apple App Store and Google Play Store.",
+      },
+      {
+        icon: IconMobile,
+        title: "Which OS versions do my users have?",
+        description:
+          "Aptabase efficiently gathers data such as the names of operating systems such as Windows, Android, iOS, iPadOS, macOS, etc., and their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used OS and versions.",
+      },
+    ],
   },
   {
     slug: "unreal",
@@ -139,5 +326,25 @@ export default [
   RecordEvent(TEXT("Game Started"), Attributes);`,
     sdkLanguage: "cpp",
     textColor: "text-[#2563EB]",
+    useCases: [
+      {
+        icon: IconClick,
+        title: "Game Interaction",
+        description:
+          "Are you aware of what users spend most of their time on your game? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your Unreal games user experience.",
+      },
+      {
+        icon: IconLanguage,
+        title: "Location and Language",
+        description:
+          "Understanding the geographical distribution of your user base can significantly inform the decision to localize your Unreal games, thereby enhancing its global accessibility and visibility on that market.",
+      },
+      {
+        icon: IconGamePad2,
+        title: "What devices and versions are my users on?",
+        description:
+          "Aptabase efficiently gathers data such as the names of operating systems such as Windows, PlayStation, Xbox, etc., and their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used OS and versions.",
+      },
+    ],
   },
 ];
