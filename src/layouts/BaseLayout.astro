@@ -34,6 +34,11 @@ const { title, description, og } = Astro.props;
     <meta name="twitter:site" content="@aptabase" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:card" content="summary_large_image" />
+    <style is:global>
+      :root {
+        color-scheme: light;
+      }
+    </style>
   </head>
   <body>
     <Header />
