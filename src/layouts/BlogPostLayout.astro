@@ -14,7 +14,7 @@ const { frontmatter } = Astro.props;
     class="mx-auto max-w-5xl px-6 lg:px-8 mb-12 flex w-full flex-col space-y-4"
   >
     <p class="space-x-2">
-      <span class="font-medium text-blue-600">{frontmatter.category}</span>
+      <span class="font-medium text-primary">{frontmatter.category}</span>
       <span>·</span>
       <time class="text-gray-600" datetime="2023-02-21T12:00:00.000Z">
         {
@@ -52,15 +52,17 @@ const { frontmatter } = Astro.props;
         <span class="font-medium text-slate-900">Guilherme Oenning</span>
         <a
           target="_blank"
-          class="text-blue-600 hover:text-blue-900"
-          href="https://twitter.com/goenning">@goenning</a
+          class="text-primary hover:text-blue-900"
+          href="https://twitter.com/goenning"
         >
+          @goenning
+        </a>
       </div>
     </div>
   </div>
   <div class="relative mx-auto mt-20 max-w-4xl px-4 sm:px-6 lg:px-8">
     <article
-      class="prose max-w-none prose-a:text-blue-500 prose-a:no-underline hover:prose-a:text-blue-600 prose-img:rounded-lg"
+      class="prose max-w-none prose-a:text-blue-500 prose-a:no-underline hover:prose-a:text-primary prose-img:rounded-lg"
     >
       <slot />
     </article>

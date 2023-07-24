@@ -8,6 +8,11 @@ module.exports = {
       title: ["Cal Sans", ...defaultTheme.fontFamily.sans],
       sans: ["Inter var", ...defaultTheme.fontFamily.sans],
     },
+    extend: {
+      colors: {
+        primary: "#1A61FF",
+      },
+    },
   },
   plugins: [require("@tailwindcss/typography")],
 };

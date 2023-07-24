@@ -1,6 +1,6 @@
 ---
 var buttonStyle =
-    "rounded-md bg-gradient-to-br from-sky-500 to-blue-500 px-4 py-3 text-sm font-semibold text-white shadow-sm hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black";
+  "rounded-md bg-gradient-to-br from-blue-400 to-primary px-4 py-3 text-sm font-semibold text-white shadow-sm hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black";
 ---
 
 <script is:inline>
@@ -25,18 +25,18 @@ function authQuery() {
 </script>
 
 <div x-data="authQuery()">
-    <a
-        x-show="!authUS && !authEU"
-        href="https://eu.aptabase.com/auth/register"
-        class={buttonStyle}
-    >
-        Get Started →
-    </a>
+  <a
+    x-show="!authUS && !authEU"
+    href="https://eu.aptabase.com/auth/register"
+    class={buttonStyle}
+  >
+    Get Started →
+  </a>
 
-    <template x-if="authEU">
-        <a href="https://eu.aptabase.com" class={buttonStyle}>Dashboard →</a>
-    </template>
-    <template x-if="authUS && !authEU">
-        <a href="https://us.aptabase.com" class={buttonStyle}>Dashboard →</a>
-    </template>
+  <template x-if="authEU">
+    <a href="https://eu.aptabase.com" class={buttonStyle}>Dashboard →</a>
+  </template>
+  <template x-if="authUS && !authEU">
+    <a href="https://us.aptabase.com" class={buttonStyle}>Dashboard →</a>
+  </template>
 </div>
