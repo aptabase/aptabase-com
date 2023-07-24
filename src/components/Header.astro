@@ -10,8 +10,9 @@ import SignUpOrDashboard from "./SignUpOrDashboard.astro";
     aria-label="Global"
   >
     <div class="flex items-center gap-x-12">
-      <a href="/" class="-m-1.5 p-1.5 flex items-end">
+      <a href="/" class="-m-1.5 p-1.5 flex items-center">
         <Logo />
+        <span class="sr-only">Aptabase</span>
       </a>
       <div class="hidden md:flex md:gap-x-6">
         <a
@@ -66,9 +67,7 @@ import SignUpOrDashboard from "./SignUpOrDashboard.astro";
       <div class="flex items-center justify-between">
         <a href="/" class="-m-1.5 p-1.5 flex items-center">
           <Logo />
-          <span class="font-title text-2xl font-semibold text-gray-900">
-            Aptabase
-          </span>
+          <span class="sr-only">Aptabase</span>
         </a>
         <button
           type="button"
