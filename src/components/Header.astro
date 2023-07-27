@@ -2,6 +2,8 @@
 import StarOnGitHub from "./StarOnGitHub.astro";
 import Logo from "./Logo.astro";
 import SignUpOrDashboard from "./SignUpOrDashboard.astro";
+import IconRss from "@tabler/icons/rss.svg?raw";
+import IconCoin from "@tabler/icons/coin.svg?raw";
 ---
 
 <header x-data="{ isOpen: false }">
@@ -19,13 +21,15 @@ import SignUpOrDashboard from "./SignUpOrDashboard.astro";
           href="/blog"
           class="flex items-center space-x-1 rounded-lg py-1 px-2 text-gray-700 hover:bg-gray-100 hover:text-black"
         >
-          Blog
+          <Fragment set:html={IconRss.replace('width="24"', 'width="20"')} />
+          <span>Blog</span>
         </a>
         <a
           href="/#pricing"
           class="flex items-center space-x-1 rounded-lg py-1 px-2 text-gray-700 hover:bg-gray-100 hover:text-black"
         >
-          Pricing
+          <Fragment set:html={IconCoin.replace('width="24"', 'width="20"')} />
+          <span>Pricing</span>
         </a>
       </div>
     </div>
@@ -98,16 +102,18 @@ import SignUpOrDashboard from "./SignUpOrDashboard.astro";
             <a
               href="/blog"
               @click="isOpen = false"
-              class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+              class="flex items-center space-x-2 -mx-3 text-lg rounded-lg px-3 py-2 leading-7 text-gray-900 hover:bg-gray-50"
             >
-              Blog
+              <Fragment set:html={IconRss} />
+              <span>Blog</span>
             </a>
             <a
               href="/#pricing"
               @click="isOpen = false"
-              class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+              class="flex items-center space-x-2 -mx-3 text-lg rounded-lg px-3 py-2 leading-7 text-gray-900 hover:bg-gray-50"
             >
-              Pricing
+              <Fragment set:html={IconCoin} />
+              <span>Pricing</span>
             </a>
           </div>
           <div class="py-6">
