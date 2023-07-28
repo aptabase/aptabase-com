@@ -1,7 +1,7 @@
 ---
 import BlogPostCard from "../components/blog/BlogPostCard.astro";
 import ContentLayout from "../layouts/ContentLayout.astro";
-const posts = await Astro.glob("./blog/*.md");
+const posts = await Astro.glob("./blog/*.mdx");
 const sorted = posts.sort(
   (a, b) =>
     new Date(b.frontmatter.publishedDate).getTime() -
