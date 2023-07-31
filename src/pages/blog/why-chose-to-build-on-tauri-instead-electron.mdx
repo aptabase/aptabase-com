@@ -12,6 +12,7 @@ cta: "for-tauri"
 import osAnalytics from "../../assets/blog/why-chose-to-build-on-tauri-instead-electron/os-analytics.png?url";
 import tauriHome from "../../assets/blog/why-chose-to-build-on-tauri-instead-electron/tauri-home.png?url";
 import rustStringMeme from "../../assets/blog/why-chose-to-build-on-tauri-instead-electron/rust-string-meme.jpg?url";
+import tauriWatchOS from "../../assets/blog/why-chose-to-build-on-tauri-instead-electron/tauri-watchos.jpg?url";
 
 About a year ago (July/2022) I decided to experiment with building a Desktop application.
 
@@ -189,6 +190,19 @@ But other than that, there's plenty in Tauri. Right out the box you get: notific
 This one came as a surprise to me. At the time I'm writing this, Tauri has experimental support for iOS and Android. It seems like it was always part of the plan, but I didn't know about it when I started my app. I'm not sure if I'll ever use it, but it's nice to know it's there.
 
 This is something that is not possible with Electron, and probably never will be. So if you're planning to build a cross-platform mobile and desktop app, Tauri may be the way to go as you'd likely be able to share a lot of code between them. Designing mobile-first interfaces with web technologies got a lot easier over the years, so building a single interface that could run as a desktop and mobile app is not as crazy as it sounds.
+
+I'll just drop this here to get you all excited about the future of Tauri.
+
+<figure>
+  <img
+    src={tauriWatchOS}
+    alt="Hello World Tauri on watchOS"
+    class="h-[30rem]"
+  />
+  <figcaption>Tauri on watchOS? 🤯</figcaption>
+</figure>
+
+As Jonas mentioned on his [his tweet](https://twitter.com/jonasKruckie/status/1668258236762292227), this is experimental and hacky, it might take a long time to be production ready, but it's still very exciting to see the innovation happening in this space!
 
 ## Conclusion
 
