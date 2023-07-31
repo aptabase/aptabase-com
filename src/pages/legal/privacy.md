@@ -22,7 +22,11 @@ Aptabase does not track usage across sessions, meaning that if you open an app t
 
 We only collect the bare minimum data required to provide our service. Your data may be shared with third parties to fulfill our contractual obligations to you, but we will never sell your data to third parties.
 
-**Your name and email address.** This information is provided by you when you sign up for an Aptabase account. This is required to sign in to your account and
+**Your name and email address** This information is provided by you when you sign up for an Aptabase account. This is required to sign in to your and operate your account.
+
+**GitHub and Google sign-in** You may choose to sign in to Aptabase using your GitHub or Google account. We only store your account ID and email address to facilitate the sign-in process. 
+
+None of the data above is shared with third parties.
 
 ### 4, Changes
 
@@ -37,4 +41,4 @@ Ireland
 
 Owner contact email: [support@aptabase.com](mailto:support@aptabase.com)
 
-_Last updated: March 31, 2023_
+_Last updated: July 31, 2023_
