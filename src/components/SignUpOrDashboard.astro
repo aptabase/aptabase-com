@@ -1,26 +1,26 @@
 ---
 var buttonStyle =
-  "rounded-md bg-gradient-to-br from-blue-400 to-primary px-4 py-3 text-sm font-semibold text-white shadow-sm hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black";
+  "rounded-md bg-primary px-4 py-3 text-sm font-semibold text-white shadow-sm hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black";
 ---
 
 <script is:inline>
 function authQuery() {
-    if (location.hostname !== "aptabase.com") {
-        return { authEU: false, authUS: false };
-    }
+  if (location.hostname !== "aptabase.com") {
+    return { authEU: false, authUS: false };
+  }
 
-    return {
-        authEU: false,
-        authUS: false,
-        init() {
-            fetch("https://eu.aptabase.com/api/_auth/me", {
-                credentials: "include",
-            }).then((x) => (this.authEU = x.ok));
-            fetch("https://us.aptabase.com/api/_auth/me", {
-                credentials: "include",
-            }).then((x) => (this.authUS = x.ok));
-        },
-    };
+  return {
+    authEU: false,
+    authUS: false,
+    init() {
+      fetch("https://eu.aptabase.com/api/_auth/me", {
+        credentials: "include",
+      }).then((x) => (this.authEU = x.ok));
+      fetch("https://us.aptabase.com/api/_auth/me", {
+        credentials: "include",
+      }).then((x) => (this.authUS = x.ok));
+    },
+  };
 }
 </script>
 
