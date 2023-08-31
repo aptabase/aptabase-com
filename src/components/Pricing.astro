@@ -1,21 +1,21 @@
 <script is:inline>
-document.addEventListener("alpine:init", () => {
-  Alpine.data("pricing", () => ({
-    tier: 0,
-    tiers: [
-      { events: "20,000", name: "20k", price: "Free" },
-      { events: "200,000", name: "200k", price: "$10" },
-      { events: "1,000,000", name: "1M", price: "$20" },
-      { events: "2,000,000", name: "2M", price: "$40" },
-      { events: "5,000,000", name: "5M", price: "$75" },
-      { events: "10,000,000", name: "10M", price: "$140" },
-      { events: "20,000,000", name: "20M", price: "$240" },
-      { events: "30,000,000", name: "30M", price: "$300" },
-      { events: "50,000,000", name: "50M", price: "$450" },
-      { events: "50,000,000+", name: "50M+", price: "Contact us" },
-    ],
-  }));
-});
+  document.addEventListener("alpine:init", () => {
+    Alpine.data("pricing", () => ({
+      tier: 0,
+      tiers: [
+        { events: "20,000", name: "20k", price: "Free" },
+        { events: "200,000", name: "200k", price: "$10" },
+        { events: "1,000,000", name: "1M", price: "$20" },
+        { events: "2,000,000", name: "2M", price: "$40" },
+        { events: "5,000,000", name: "5M", price: "$75" },
+        { events: "10,000,000", name: "10M", price: "$140" },
+        { events: "20,000,000", name: "20M", price: "$240" },
+        { events: "30,000,000", name: "30M", price: "$300" },
+        { events: "50,000,000", name: "50M", price: "$450" },
+        { events: "50,000,000+", name: "50M+", price: "Contact us" },
+      ],
+    }));
+  });
 </script>
 
 <div id="pricing" class="bg-white py-24 sm:py-32">
@@ -37,7 +37,7 @@ document.addEventListener("alpine:init", () => {
         <input
           name="events"
           type="range"
-          class="mt-8 w-full bg-gray-200 appearance-none h-1.5 rounded-full [&::-webkit-slider-thumb]:w-[20px] [&::-webkit-slider-thumb]:h-[20px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:appearance-none"
+          class="mt-8 w-full bg-gray-200 appearance-none h-1.5 rounded-full [&::-webkit-slider-thumb]:w-[20px] [&::-webkit-slider-thumb]:h-[20px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:cursor-grab [&::-webkit-slider-thumb]:active:cursor-grabbing"
           min="0"
           max="9"
           class="w-full"
