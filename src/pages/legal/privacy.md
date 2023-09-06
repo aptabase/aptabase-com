@@ -18,7 +18,7 @@ Your privacy is the most important thing to us. We are committed to protecting y
 
 Aptabase SDK does not collect any device specific identifier such as Device ID, Hostname or Hardware Identifier. Instead, Aptabase generates a unique user identifier on the server based on a strong hash of client's IP Address and a strong salt, which differs for each app and is thrown away every 24 hours.
 
-> User ID = SHA(Client IP + Daily Rotated Salt)
+> User ID = SHA(Client IP + User Agent + Daily Rotated Salt)
 
 This is a common privacy-friendly strategy that makes it impossible for application developers to correlate sessions that happens throughout different days or apps. Application developers can only Aptabase to discover insights into how their apps are being used without identifying the user being each action.
 
