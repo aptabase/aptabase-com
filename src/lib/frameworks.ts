@@ -253,8 +253,8 @@ export default [
     href: "/for-webapps",
     sdkName: "JavaScript SDK for Aptabase",
     sdkUrl: "https://github.com/aptabase/aptabase-js",
-    sdkCodeExample: `trackEvent("play_music", {
-  name: "Here comes the sun"
+    sdkCodeExample: `trackEvent("settings_changed", {
+  theme: "dark"
 });`,
     sdkLanguage: "typescript",
     textColor: "text-[#F7DF1E]",
@@ -264,6 +264,40 @@ export default [
         title: "Feature Usage",
         description:
           "Are you aware of the features in your app that users engage with most frequently? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your Web app's user experience.",
+      },
+      {
+        icon: IconLanguage,
+        title: "Location and Language",
+        description:
+          "Understanding the geographical distribution of your user base can significantly inform the decision to localize your Web app, thereby enhancing its global accessibility and visibility on that market.",
+      },
+      {
+        icon: IconDesktop,
+        title: "What browsers are my users on?",
+        description:
+          "Aptabase efficiently gathers data such as the names of Browsers, alongside their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used browsers.",
+      },
+    ],
+  },
+  {
+    slug: "nextjs",
+    name: "Next.js",
+    title: "Next.js Apps",
+    image: "/tools/nextjs.svg",
+    href: "/for-nextjs",
+    sdkName: "Next.js SDK for Aptabase",
+    sdkUrl: "https://github.com/aptabase/aptabase-js",
+    sdkCodeExample: `trackEvent("settings_changed", {
+  theme: "dark"
+});`,
+    sdkLanguage: "typescript",
+    textColor: "text-[#2563EB]",
+    useCases: [
+      {
+        icon: IconClick,
+        title: "Feature Usage",
+        description:
+          "Are you aware of the features in your app that users engage with most frequently? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your Next.js app's user experience.",
       },
       {
         icon: IconLanguage,
@@ -338,6 +372,41 @@ export default [
         title: "Location and Language",
         description:
           "Understanding the geographical distribution of your user base can significantly inform the decision to localize your Unreal games, thereby enhancing its global accessibility and visibility on that market.",
+      },
+      {
+        icon: IconGamePad2,
+        title: "What devices and versions are my users on?",
+        description:
+          "Aptabase efficiently gathers data such as the names of operating systems such as Windows, PlayStation, Xbox, etc., and their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used OS and versions.",
+      },
+    ],
+  },
+  {
+    slug: "unity",
+    name: "Unity",
+    title: "Unity Games",
+    image: "/tools/unity.svg",
+    href: "/for-unity",
+    sdkName: "Unity SDK for Aptabase",
+    sdkUrl: "https://github.com/aptabase/aptabase-unity",
+    sdkCodeExample: `Aptabase.TrackEvent("game_started", new Dictionary<string, object>
+  {
+    {"difficulty", "Hard"}
+  });`,
+    sdkLanguage: "csharp",
+    textColor: "text-[#2563EB]",
+    useCases: [
+      {
+        icon: IconClick,
+        title: "Game Interaction",
+        description:
+          "Are you aware of what users spend most of their time on your game? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your Unity games user experience.",
+      },
+      {
+        icon: IconLanguage,
+        title: "Location and Language",
+        description:
+          "Understanding the geographical distribution of your user base can significantly inform the decision to localize your Unity games, thereby enhancing its global accessibility and visibility on that market.",
       },
       {
         icon: IconGamePad2,
