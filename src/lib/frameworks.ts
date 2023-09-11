@@ -390,9 +390,9 @@ export default [
     sdkName: "Unity SDK for Aptabase",
     sdkUrl: "https://github.com/aptabase/aptabase-unity",
     sdkCodeExample: `Aptabase.TrackEvent("game_started", new Dictionary<string, object>
-  {
-    {"difficulty", "Hard"}
-  });`,
+{
+  {"difficulty", "Hard"}
+});`,
     sdkLanguage: "csharp",
     textColor: "text-[#2563EB]",
     useCases: [
