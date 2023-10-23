@@ -1,21 +1,21 @@
 <script is:inline>
-  document.addEventListener("alpine:init", () => {
-    Alpine.data("pricing", () => ({
-      tier: 0,
-      tiers: [
-        { events: "20,000", name: "20k", price: "Free" },
-        { events: "200,000", name: "200k", price: "$10" },
-        { events: "1,000,000", name: "1M", price: "$20" },
-        { events: "2,000,000", name: "2M", price: "$40" },
-        { events: "5,000,000", name: "5M", price: "$75" },
-        { events: "10,000,000", name: "10M", price: "$140" },
-        { events: "20,000,000", name: "20M", price: "$240" },
-        { events: "30,000,000", name: "30M", price: "$300" },
-        { events: "50,000,000", name: "50M", price: "$450" },
-        { events: "50,000,000+", name: "50M+", price: "Contact us" },
-      ],
-    }));
-  });
+document.addEventListener("alpine:init", () => {
+  Alpine.data("pricing", () => ({
+    tier: 0,
+    tiers: [
+      { events: "20,000", name: "20k", price: "Free" },
+      { events: "200,000", name: "200k", price: "$10" },
+      { events: "1,000,000", name: "1M", price: "$20" },
+      { events: "2,000,000", name: "2M", price: "$40" },
+      { events: "5,000,000", name: "5M", price: "$75" },
+      { events: "10,000,000", name: "10M", price: "$140" },
+      { events: "20,000,000", name: "20M", price: "$240" },
+      { events: "30,000,000", name: "30M", price: "$300" },
+      { events: "50,000,000", name: "50M", price: "$450" },
+      { events: "50,000,000+", name: "50M+", price: "Contact us" },
+    ],
+  }));
+});
 </script>
 
 <div id="pricing" class="bg-white py-24 sm:py-32">
@@ -99,7 +99,7 @@
 
         <a
           href="https://eu.aptabase.com/auth/register"
-          class="rounded-md block bg-black px-6 py-2 text-center text-sm text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          class="plausible-event-name=Register rounded-md block bg-black px-6 py-2 text-center text-sm text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
         >
           Try free now!
         </a>
