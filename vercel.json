@@ -29,7 +29,7 @@
     },
     {
       "source": "/p.js",
-      "destination": "https://plausible.io/js/script.outbound-links.js"
+      "destination": "https://plausible.io/js/script.js"
     },
     {
       "source": "/e",
