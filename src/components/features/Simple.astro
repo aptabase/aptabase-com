@@ -1,5 +1,7 @@
 ---
 import FeatureItem from "./FeatureItem.astro";
+import { Image } from "astro:assets";
+import eventsImage from "../../assets/events.png";
 ---
 
 <div class="overflow-hidden bg-white py-24 sm:py-32">
@@ -41,12 +43,12 @@ import FeatureItem from "./FeatureItem.astro";
           </dl>
         </div>
       </div>
-      <img
-        src="/images/events.jpeg"
+      <Image
+        src={eventsImage}
         alt="Analytics"
+        width={630}
+        height={630}
         class="rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
-        width="2432"
-        height="1442"
       />
     </div>
   </div>
