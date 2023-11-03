@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import heroImage from "../assets/hero.png";
 import { Code } from "astro/components";
+import SignUpOrDashboard from "./SignUpOrDashboard.astro";
 
 const {
   name,
@@ -39,8 +40,10 @@ const {
         <p
           class="mt-6 mx-auto sm:mx-0 text-xl leading-8 text-gray-500 max-w-md"
         >
-          Aptabase is an <span class="text-gray-900">Open Source</span> alternative
-          to Google Firebase Analytics for <span class="text-gray-900">
+          Aptabase is an <span class="text-gray-900">Open Source</span>
+           alternative to Google Firebase Analytics for <span
+            class="text-gray-900"
+          >
             {title}
           </span>
         </p>
@@ -52,18 +55,7 @@ const {
           </div>
           <p class="mt-1 text-gray-600">Signing up takes less than a minute.</p>
           <div class="mt-4 flex items-center gap-x-4">
-            <a
-              href="https://eu.aptabase.com/auth/register"
-              class="plausible-event-name=Register rounded-md bg-black px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-            >
-              Sign up
-            </a>
-            <a
-              href="https://eu.aptabase.com/"
-              class="text-sm font-semibold rounded-md leading-6 px-4 focus-visible:outline-black py-2 hover:bg-gray-50"
-            >
-              Sign in <span aria-hidden="true">→</span>
-            </a>
+            <SignUpOrDashboard />
           </div>
         </div>
         <div>
@@ -78,8 +70,8 @@ const {
               href={sdkUrl}
             >
               {sdkName}
-            </a> to instrument your app. You're in total control of what events to
-            track.
+            </a> to instrument your app. You're in total control of what events
+            to track.
           </p>
           <p class="mt-4 text-gray-600">Here's an example 👇</p>
           <div class="prose mt-1">

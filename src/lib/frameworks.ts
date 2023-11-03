@@ -18,7 +18,7 @@ export default [
   "name": "Here comes the sun"
 ])`,
     sdkLanguage: "swift",
-    textColor: "text-[#027AFF]",
+    textColor: "text-[#F05138]",
     useCases: [
       {
         icon: IconClick,
