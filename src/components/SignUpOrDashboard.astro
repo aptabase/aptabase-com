@@ -34,9 +34,19 @@ var buttonStyle =
   </button>
 
   <template x-if="authEU">
-    <a href="https://eu.aptabase.com" class={buttonStyle}>Dashboard →</a>
+    <a
+      href="https://eu.aptabase.com"
+      class={`plausible-event-name=Dashboard-EU ${buttonStyle}`}
+    >
+      Dashboard →
+    </a>
   </template>
   <template x-if="authUS && !authEU">
-    <a href="https://us.aptabase.com" class={buttonStyle}>Dashboard →</a>
+    <a
+      href="https://us.aptabase.com"
+      class={`plausible-event-name=Dashboard-US ${buttonStyle}`}
+    >
+      Dashboard →
+    </a>
   </template>
 </div>
