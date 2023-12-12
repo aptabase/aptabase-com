@@ -68,10 +68,12 @@ fn main() {
     tauri::Builder::default()
         .plugin(
             tauri_plugin_aptabase::Builder::new("YOUR_KEY_HERE")
-                .with_panic_hook(Box::new(|client, info| {
-                    client.track_event("panic", Some(json!({
-                        "info": format!("{:?}", info)
-                    })));
+                .with_panic_hook(Box::new(|client, info, msg| {
+                 let location = info.location().map(|loc| format!("{}:{}:{}", loc.file(), loc.line(), loc.column())).unwrap_or_else(|| "".to_string());
+
+                 client.track_event("panic", Some(json!({
+                   "info": format!("{} ({})", msg, location),
+                 })));
                 }))
                 .build(),
         )
