@@ -314,6 +314,40 @@ export default [
     ],
   },
   {
+    slug: "browser-extensions",
+    name: "Browser",
+    title: "Browser Extensions",
+    image: "/tools/chrome.svg",
+    href: "/for-browser-extensions",
+    sdkName: "Browser Extension SDK for Aptabase",
+    sdkUrl: "https://github.com/aptabase/aptabase-js",
+    sdkCodeExample: `trackEvent("settings_changed", {
+  theme: "dark"
+});`,
+    sdkLanguage: "typescript",
+    textColor: "text-[#34a853]",
+    useCases: [
+      {
+        icon: IconClick,
+        title: "Feature Usage",
+        description:
+          "Are you aware of the features in your app that users engage with most frequently? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your extension's user experience.",
+      },
+      {
+        icon: IconLanguage,
+        title: "Location and Language",
+        description:
+          "Understanding the geographical distribution of your user base can significantly inform the decision to localize your extension, thereby enhancing its global accessibility and visibility on the various browser extension stores.",
+      },
+      {
+        icon: IconMobile,
+        title: "Which browser versions do my users have?",
+        description:
+          "Aptabase efficiently gathers data such as the names of browsers such as Chrome, Firefox, Edge and Safari, alongside their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used browsers and versions.",
+      },
+    ],
+  },
+  {
     slug: "maui",
     name: ".NET MAUI",
     title: ".NET MAUI Apps",
