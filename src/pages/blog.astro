@@ -5,7 +5,7 @@ const posts = await Astro.glob("./blog/*.mdx");
 const sorted = posts.sort(
   (a, b) =>
     new Date(b.frontmatter.publishedDate).getTime() -
-    new Date(a.frontmatter.publishedDate).getTime()
+    new Date(a.frontmatter.publishedDate).getTime(),
 );
 ---
 
@@ -15,9 +15,9 @@ const sorted = posts.sort(
 >
   <div class="mx-auto max-w-5xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl text-center">
-      <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
         The Aptabase Blog
-      </h2>
+      </h1>
       <p class="mt-2 text-lg leading-8 text-gray-600">
         Tips and tricks to help you get the most out of Aptabase and app
         development.

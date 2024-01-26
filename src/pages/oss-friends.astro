@@ -1,0 +1,44 @@
+---
+import ContentLayout from "../layouts/ContentLayout.astro";
+const res = await fetch("https://formbricks.com/api/oss-friends");
+const body = await res.json();
+const friends = body.data;
+---
+
+<ContentLayout
+  title="Aptabase 💖 Open Source"
+  description="Open-source projects and tools for an open world."
+>
+  <div class="mx-auto max-w-5xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        Our Open Source Friends
+      </h1>
+      <p class="mt-2 text-lg leading-6 text-gray-600">
+        Here are some of our favorites open-source projects.
+      </p>
+    </div>
+    <div
+      class="mt-8 gap-4 lg:gap-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+    >
+      {
+        friends.map((friend: any) => (
+          <a
+            href={friend.href}
+            class="flex flex-col justify-between border border-gray-200 rounded-lg hover:shadow-md p-4"
+          >
+            <div>
+              <h3 class="text-lg font-semibold leading-6 text-gray-900 line-clamp-2">
+                {friend.name}
+              </h3>
+              <p class="mt-2 text-sm leading-6 text-gray-500 line-clamp-4">
+                {friend.description}
+              </p>
+            </div>
+            <span class="text-xs text-blue-400 mt-4">Learn more</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</ContentLayout>
