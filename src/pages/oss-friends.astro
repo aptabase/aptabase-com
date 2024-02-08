@@ -2,7 +2,9 @@
 import ContentLayout from "../layouts/ContentLayout.astro";
 const res = await fetch("https://formbricks.com/api/oss-friends");
 const body = await res.json();
-const friends = body.data;
+const friends = body.data.filter(
+  (x: any) => !["Aptabase", "Novu", "HTMX"].includes(x.name),
+);
 ---
 
 <ContentLayout
