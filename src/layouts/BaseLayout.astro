@@ -32,9 +32,6 @@ const { title, description, og } = Astro.props;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={og ?? "https://aptabase.com/og.png"} />
-    <meta name="twitter:site" content="@aptabase" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:card" content="summary_large_image" />
     <style is:global>
       :root {
         color-scheme: light;
@@ -51,6 +48,7 @@ const { title, description, og } = Astro.props;
       async
       type="text/javascript"
       src="https://static.senja.io/dist/platform.js"
-    ></script>
+    >
+    </script>
   </body>
 </html>
