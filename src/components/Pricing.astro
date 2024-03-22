@@ -3,7 +3,6 @@
     Alpine.data("pricing", () => ({
       tier: 0,
       tiers: [
-        { events: "20,000", name: "20k", price: "Free" },
         { events: "200,000", name: "200k", price: "$10" },
         { events: "1,000,000", name: "1M", price: "$20" },
         { events: "2,000,000", name: "2M", price: "$40" },
@@ -24,7 +23,9 @@
       <p class="mt-2 text-4xl font-bold tracking-tight text-gray-900">
         Pricing plans for apps of all sizes
       </p>
-      <p class="text-stone-600">Start free and pay when you grow.</p>
+      <p class="text-stone-600 mt-2">
+        Try free for 30 days. No credit card required.
+      </p>
     </div>
     <div x-data="pricing" class="grid md:grid-cols-2 gap-6 mt-12">
       <div>
@@ -39,27 +40,42 @@
           type="range"
           class="mt-8 w-full bg-gray-200 appearance-none h-1.5 rounded-full [&::-webkit-slider-thumb]:w-[20px] [&::-webkit-slider-thumb]:h-[20px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:cursor-grab [&::-webkit-slider-thumb]:active:cursor-grabbing"
           min="0"
-          max="9"
+          max="8"
           class="w-full"
           step="1"
           x-model="tier"
         />
-        <p class="mt-2 text-sm text-stone-600">
+        <p class="mt-4 text-sm text-stone-600">
           You're in control of how many events to send from your apps. We
           recommend sending at least one when app starts.
         </p>
 
-        <div class="mt-10 text-sm text-stone-600">
-          <p>Did you know you can self-host Aptabase?</p>
-          <p>
-            Join our dedicated <a
-              href="https://discord.gg/d9d97unCUk"
-              target="_blank"
-              class="text-primary inline-block hover:underline"
+        <div class="mt-6 text-sm flex items-center gap-2 text-stone-600">
+          <svg
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            class="h-8 w-8"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              clip-rule="evenodd"
             >
-              #self-hosted
-            </a> channel to get started.
-          </p>
+            </path>
+          </svg>
+          <div>
+            <p>Did you know you can self-host Aptabase?</p>
+            <p>
+              Visit our <a
+                href="https://github.com/aptabase/self-hosting"
+                target="_blank"
+                class="text-primary inline-block hover:underline"
+              >
+                self-hosting guide
+              </a> to learn more.
+            </p>
+          </div>
         </div>
       </div>
       <div
@@ -83,30 +99,30 @@
           role="list"
           class="divide-gray-900/5 border-gray-900/5 text-gray-600 divide-y border-t text-sm leading-6 lg:border-t-0 my-4"
         >
-          <li class="flex gap-x-3 py-2">
+          <li class="flex gap-x-3 py-1">
             <span class="text-lg text-green-600">✓</span> Unlimited Apps
           </li>
-          <li class="flex gap-x-3 py-2">
+          <li class="flex gap-x-3 py-1">
             <span class="text-lg text-green-600">✓</span> EU or US data
             residency
           </li>
-          <li class="flex gap-x-3 py-2">
+          <li class="flex gap-x-3 py-1">
             <span class="text-lg text-green-600">✓</span> Built-in Dashboard
           </li>
-          <li class="flex gap-x-3 py-2">
+          <li class="flex gap-x-3 py-1">
             <span class="text-lg text-green-600">✓</span> Live View Dashboard
           </li>
-          <li class="flex gap-x-3 py-2">
+          <li class="flex gap-x-3 py-1">
             <span class="text-lg text-green-600">✓</span> Session Timeline
           </li>
-          <li class="flex gap-x-3 py-2">
+          <li class="flex gap-x-3 py-1">
             <span class="text-lg text-green-600">✓</span> Export to CSV
           </li>
-          <li class="flex gap-x-3 py-2">
+          <li class="flex gap-x-3 py-1">
             <span class="text-lg text-green-600">✓</span> SDKs for popular
             platforms
           </li>
-          <li class="flex gap-x-3 py-2">
+          <li class="flex gap-x-3 py-1">
             <span class="text-lg text-green-600">✓</span> 100% Data Ownership
           </li>
         </ul>
@@ -115,7 +131,7 @@
           x-on:click="document.getElementById('register').showModal()"
           class="rounded-md block bg-black px-6 py-2 text-center text-sm text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
         >
-          Try free now!
+          Try free for 30 days
         </button>
       </div>
     </div>
