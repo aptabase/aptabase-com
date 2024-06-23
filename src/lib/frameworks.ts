@@ -7,6 +7,74 @@ import IconChartHistogram from "@tabler/icons/chart-histogram.svg?raw";
 
 export default [
   {
+    slug: "electron",
+    name: "Electron",
+    title: "Electron Apps",
+    image: "/tools/electron.svg",
+    href: "/for-electron",
+    sdkName: "Electron SDK for Aptabase",
+    sdkUrl: "https://github.com/aptabase/aptabase-electron",
+    sdkCodeExample: `trackEvent("play_music", {
+  name: "Here comes the sun"
+});`,
+    sdkLanguage: "typescript",
+    textColor: "text-[#2DD0ED]",
+    useCases: [
+      {
+        icon: IconClick,
+        title: "Feature Usage",
+        description:
+          "Are you aware of the features in your app that users engage with most frequently? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your Electron app's user experience.",
+      },
+      {
+        icon: IconChartHistogram,
+        title: "Growth and Adoption",
+        description:
+          "Electron applications may lag in user updates due to the need for manual intervention during the update process. However, with Aptabase, you can swiftly determine the adoption rate of your app's newest version. This vital information aids you in making strategic decisions regarding the appropriate timing to phase out older versions.",
+      },
+      {
+        icon: IconDesktop,
+        title: "Which OS versions do my users have?",
+        description:
+          "Aptabase efficiently gathers data such as the names of operating systems such as Windows, macOS and various Linux distributions, alongside their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used OS and versions.",
+      },
+    ],
+  },
+  {
+    slug: "tauri",
+    name: "Tauri",
+    title: "Tauri Apps",
+    image: "/tools/tauri.svg",
+    href: "/for-tauri",
+    sdkName: "tauri-plugin-aptabase",
+    sdkUrl: "https://github.com/aptabase/tauri-plugin-aptabase",
+    sdkCodeExample: `trackEvent("play_music", {
+  name: "Here comes the sun"
+});`,
+    sdkLanguage: "typescript",
+    textColor: "text-[#FFC131]",
+    useCases: [
+      {
+        icon: IconClick,
+        title: "Feature Usage",
+        description:
+          "Are you aware of the features in your app that users engage with most frequently? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your Tauri app's user experience.",
+      },
+      {
+        icon: IconChartHistogram,
+        title: "Growth and Adoption",
+        description:
+          "Tauri apps may lag in user updates due to the need for manual intervention during the update process. However, with Aptabase, you can swiftly determine the adoption rate of your app's newest version. This vital information aids you in making strategic decisions regarding the appropriate timing to phase out older versions.",
+      },
+      {
+        icon: IconDesktop,
+        title: "Which OS versions do my users have?",
+        description:
+          "Aptabase efficiently gathers data such as the names of operating systems such ash Windows, macOS and various Linux distributions, alongside their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used OS and versions.",
+      },
+    ],
+  },
+  {
     slug: "swift",
     name: "Native iOS (Swift)",
     title: "Swift Apps",
@@ -109,40 +177,6 @@ export default [
     ],
   },
   {
-    slug: "electron",
-    name: "Electron",
-    title: "Electron Apps",
-    image: "/tools/electron.svg",
-    href: "/for-electron",
-    sdkName: "Electron SDK for Aptabase",
-    sdkUrl: "https://github.com/aptabase/aptabase-electron",
-    sdkCodeExample: `trackEvent("play_music", {
-  name: "Here comes the sun"
-});`,
-    sdkLanguage: "typescript",
-    textColor: "text-[#2DD0ED]",
-    useCases: [
-      {
-        icon: IconClick,
-        title: "Feature Usage",
-        description:
-          "Are you aware of the features in your app that users engage with most frequently? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your Electron app's user experience.",
-      },
-      {
-        icon: IconChartHistogram,
-        title: "Growth and Adoption",
-        description:
-          "Electron applications may lag in user updates due to the need for manual intervention during the update process. However, with Aptabase, you can swiftly determine the adoption rate of your app's newest version. This vital information aids you in making strategic decisions regarding the appropriate timing to phase out older versions.",
-      },
-      {
-        icon: IconDesktop,
-        title: "Which OS versions do my users have?",
-        description:
-          "Aptabase efficiently gathers data such as the names of operating systems such as Windows, macOS and various Linux distributions, alongside their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used OS and versions.",
-      },
-    ],
-  },
-  {
     slug: "nativescript",
     name: "NativeScript",
     title: "NativeScript Apps",
@@ -178,36 +212,105 @@ export default [
     ],
   },
   {
-    slug: "tauri",
-    name: "Tauri",
-    title: "Tauri Apps",
-    image: "/tools/tauri.svg",
-    href: "/for-tauri",
-    sdkName: "tauri-plugin-aptabase",
-    sdkUrl: "https://github.com/aptabase/tauri-plugin-aptabase",
-    sdkCodeExample: `trackEvent("play_music", {
-  name: "Here comes the sun"
+    slug: "maui",
+    name: ".NET MAUI",
+    title: ".NET MAUI Apps",
+    image: "/tools/dotnet.svg",
+    href: "/for-maui",
+    sdkName: ".NET MAUI SDK for Aptabase",
+    sdkUrl: "https://github.com/aptabase/aptabase-maui",
+    sdkCodeExample: `_aptabase.TrackEvent("play_music", new() {
+    { "name", "Here comes the sun" }
 });`,
-    sdkLanguage: "typescript",
-    textColor: "text-[#FFC131]",
+    sdkLanguage: "csharp",
+    textColor: "text-[#512BD4]",
     useCases: [
       {
         icon: IconClick,
         title: "Feature Usage",
         description:
-          "Are you aware of the features in your app that users engage with most frequently? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your Tauri app's user experience.",
+          "Are you aware of the features in your app that users engage with most frequently? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your .NET MAUI app's user experience.",
       },
       {
-        icon: IconChartHistogram,
-        title: "Growth and Adoption",
+        icon: IconLanguage,
+        title: "Location and Language",
         description:
-          "Tauri apps may lag in user updates due to the need for manual intervention during the update process. However, with Aptabase, you can swiftly determine the adoption rate of your app's newest version. This vital information aids you in making strategic decisions regarding the appropriate timing to phase out older versions.",
+          "Understanding the geographical distribution of your user base can significantly inform the decision to localize your .NET MAUI app, thereby enhancing its global accessibility and visibility on the Apple App Store and Google Play Store.",
       },
       {
-        icon: IconDesktop,
+        icon: IconMobile,
         title: "Which OS versions do my users have?",
         description:
-          "Aptabase efficiently gathers data such as the names of operating systems such ash Windows, macOS and various Linux distributions, alongside their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used OS and versions.",
+          "Aptabase efficiently gathers data such as the names of operating systems such as Windows, Android, iOS, iPadOS, macOS, etc., and their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used OS and versions.",
+      },
+    ],
+  },
+  {
+    slug: "unreal",
+    name: "Unreal Engine",
+    title: "Unreal Games",
+    image: "/tools/unreal.svg",
+    href: "/for-unreal",
+    sdkName: "Unreal Plugin for Aptabase",
+    sdkUrl: "https://github.com/aptabase/aptabase-unreal",
+    sdkCodeExample: `FAnalytics::Get().
+  GetDefaultConfiguredProvider()->
+  RecordEvent(TEXT("Game Started"), Attributes);`,
+    sdkLanguage: "cpp",
+    textColor: "text-[#2563EB]",
+    useCases: [
+      {
+        icon: IconClick,
+        title: "Game Interaction",
+        description:
+          "Are you aware of what users spend most of their time on your game? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your Unreal games user experience.",
+      },
+      {
+        icon: IconLanguage,
+        title: "Location and Language",
+        description:
+          "Understanding the geographical distribution of your user base can significantly inform the decision to localize your Unreal games, thereby enhancing its global accessibility and visibility on that market.",
+      },
+      {
+        icon: IconGamePad2,
+        title: "What devices and versions are my users on?",
+        description:
+          "Aptabase efficiently gathers data such as the names of operating systems such as Windows, PlayStation, Xbox, etc., and their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used OS and versions.",
+      },
+    ],
+  },
+  {
+    slug: "unity",
+    name: "Unity",
+    title: "Unity Games",
+    image: "/tools/unity.svg",
+    href: "/for-unity",
+    sdkName: "Unity SDK for Aptabase",
+    sdkUrl: "https://github.com/aptabase/aptabase-unity",
+    sdkCodeExample: `Aptabase.TrackEvent("game_started", new Dictionary<string, object>
+{
+  {"difficulty", "Hard"}
+});`,
+    sdkLanguage: "csharp",
+    textColor: "text-[#2563EB]",
+    useCases: [
+      {
+        icon: IconClick,
+        title: "Game Interaction",
+        description:
+          "Are you aware of what users spend most of their time on your game? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your Unity games user experience.",
+      },
+      {
+        icon: IconLanguage,
+        title: "Location and Language",
+        description:
+          "Understanding the geographical distribution of your user base can significantly inform the decision to localize your Unity games, thereby enhancing its global accessibility and visibility on that market.",
+      },
+      {
+        icon: IconGamePad2,
+        title: "What devices and versions are my users on?",
+        description:
+          "Aptabase efficiently gathers data such as the names of operating systems such as Windows, PlayStation, Xbox, etc., and their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used OS and versions.",
       },
     ],
   },
@@ -314,8 +417,41 @@ export default [
     ],
   },
   {
+    slug: "angular",
+    name: "Angular",
+    title: "Angular Apps",
+    image: "/tools/angular.svg",
+    href: "/for-angular",
+    sdkName: "Angular SDK for Aptabase",
+    sdkUrl:
+      "https://github.com/aptabase/aptabase-js/blob/main/packages/angular/README.md",
+    sdkCodeExample: `this._analyticsService.trackEvent("settings_changed", { theme: "dark" });`,
+    sdkLanguage: "typescript",
+    textColor: "text-[#2563EB]",
+    useCases: [
+      {
+        icon: IconClick,
+        title: "Feature Usage",
+        description:
+          "Are you aware of the features in your app that users engage with most frequently? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your Angular app's user experience.",
+      },
+      {
+        icon: IconLanguage,
+        title: "Location and Language",
+        description:
+          "Understanding the geographical distribution of your user base can significantly inform the decision to localize your Web app, thereby enhancing its global accessibility and visibility on that market.",
+      },
+      {
+        icon: IconDesktop,
+        title: "What browsers are my users on?",
+        description:
+          "Aptabase efficiently gathers data such as the names of Browsers, alongside their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used browsers.",
+      },
+    ],
+  },
+  {
     slug: "browser-extensions",
-    name: "Browser",
+    name: "Browser Extensions",
     title: "Browser Extensions",
     image: "/tools/chrome.svg",
     href: "/for-browser-extensions",
@@ -344,109 +480,6 @@ export default [
         title: "Which browser versions do my users have?",
         description:
           "Aptabase efficiently gathers data such as the names of browsers such as Chrome, Firefox, Edge and Safari, alongside their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used browsers and versions.",
-      },
-    ],
-  },
-  {
-    slug: "maui",
-    name: ".NET MAUI",
-    title: ".NET MAUI Apps",
-    image: "/tools/dotnet.svg",
-    href: "/for-maui",
-    sdkName: ".NET MAUI SDK for Aptabase",
-    sdkUrl: "https://github.com/aptabase/aptabase-maui",
-    sdkCodeExample: `_aptabase.TrackEvent("play_music", new() {
-    { "name", "Here comes the sun" }
-});`,
-    sdkLanguage: "csharp",
-    textColor: "text-[#512BD4]",
-    useCases: [
-      {
-        icon: IconClick,
-        title: "Feature Usage",
-        description:
-          "Are you aware of the features in your app that users engage with most frequently? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your .NET MAUI app's user experience.",
-      },
-      {
-        icon: IconLanguage,
-        title: "Location and Language",
-        description:
-          "Understanding the geographical distribution of your user base can significantly inform the decision to localize your .NET MAUI app, thereby enhancing its global accessibility and visibility on the Apple App Store and Google Play Store.",
-      },
-      {
-        icon: IconMobile,
-        title: "Which OS versions do my users have?",
-        description:
-          "Aptabase efficiently gathers data such as the names of operating systems such as Windows, Android, iOS, iPadOS, macOS, etc., and their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used OS and versions.",
-      },
-    ],
-  },
-  {
-    slug: "unreal",
-    name: "Unreal Engine",
-    title: "Unreal Games",
-    image: "/tools/unreal.svg",
-    href: "/for-unreal",
-    sdkName: "Unreal Plugin for Aptabase",
-    sdkUrl: "https://github.com/aptabase/aptabase-unreal",
-    sdkCodeExample: `FAnalytics::Get().
-  GetDefaultConfiguredProvider()->
-  RecordEvent(TEXT("Game Started"), Attributes);`,
-    sdkLanguage: "cpp",
-    textColor: "text-[#2563EB]",
-    useCases: [
-      {
-        icon: IconClick,
-        title: "Game Interaction",
-        description:
-          "Are you aware of what users spend most of their time on your game? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your Unreal games user experience.",
-      },
-      {
-        icon: IconLanguage,
-        title: "Location and Language",
-        description:
-          "Understanding the geographical distribution of your user base can significantly inform the decision to localize your Unreal games, thereby enhancing its global accessibility and visibility on that market.",
-      },
-      {
-        icon: IconGamePad2,
-        title: "What devices and versions are my users on?",
-        description:
-          "Aptabase efficiently gathers data such as the names of operating systems such as Windows, PlayStation, Xbox, etc., and their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used OS and versions.",
-      },
-    ],
-  },
-  {
-    slug: "unity",
-    name: "Unity",
-    title: "Unity Games",
-    image: "/tools/unity.svg",
-    href: "/for-unity",
-    sdkName: "Unity SDK for Aptabase",
-    sdkUrl: "https://github.com/aptabase/aptabase-unity",
-    sdkCodeExample: `Aptabase.TrackEvent("game_started", new Dictionary<string, object>
-{
-  {"difficulty", "Hard"}
-});`,
-    sdkLanguage: "csharp",
-    textColor: "text-[#2563EB]",
-    useCases: [
-      {
-        icon: IconClick,
-        title: "Game Interaction",
-        description:
-          "Are you aware of what users spend most of their time on your game? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your Unity games user experience.",
-      },
-      {
-        icon: IconLanguage,
-        title: "Location and Language",
-        description:
-          "Understanding the geographical distribution of your user base can significantly inform the decision to localize your Unity games, thereby enhancing its global accessibility and visibility on that market.",
-      },
-      {
-        icon: IconGamePad2,
-        title: "What devices and versions are my users on?",
-        description:
-          "Aptabase efficiently gathers data such as the names of operating systems such as Windows, PlayStation, Xbox, etc., and their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used OS and versions.",
       },
     ],
   },

@@ -4,6 +4,7 @@ import Logo from "./Logo.astro";
 import SignUpOrDashboard from "./SignUpOrDashboard.astro";
 import IconRss from "@tabler/icons/rss.svg?raw";
 import IconCoin from "@tabler/icons/coin.svg?raw";
+import IconSwitch from "@tabler/icons/switch-3.svg?raw";
 ---
 
 <header x-data="{ isOpen: false }">
@@ -30,6 +31,13 @@ import IconCoin from "@tabler/icons/coin.svg?raw";
         >
           <Fragment set:html={IconCoin.replace('width="24"', 'width="20"')} />
           <span>Pricing</span>
+        </a>
+        <a
+          href="/integrations"
+          class="flex items-center space-x-1 rounded-lg py-1 px-2 text-gray-700 hover:bg-gray-100 hover:text-black"
+        >
+          <Fragment set:html={IconSwitch.replace('width="24"', 'width="20"')} />
+          <span>Integrations</span>
         </a>
       </div>
     </div>
