@@ -123,6 +123,14 @@ import IconSwitch from "@tabler/icons/switch-3.svg?raw";
               <Fragment set:html={IconCoin} />
               <span>Pricing</span>
             </a>
+            <a
+              href="/integrations"
+              @click="isOpen = false"
+              class="flex items-center space-x-2 -mx-3 text-lg rounded-lg px-3 py-2 leading-7 text-gray-900 hover:bg-gray-50"
+            >
+              <Fragment set:html={IconSwitch} />
+              <span>Integrations</span>
+            </a>
           </div>
           <div class="py-6">
             <SignUpOrDashboard />
