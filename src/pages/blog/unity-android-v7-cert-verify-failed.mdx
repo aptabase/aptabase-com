@@ -1,0 +1,195 @@
+---
+title: Solving SSL Certificate Issues for Unity on Android v7
+description: Got "Cert verify failed. Certificate is not correctly signed by a trusted CA. UnityTls error code 7" on Android? Learn how to fix it
+slug: unity-android-v7-cert-verify-failed
+publishedDate: "2025-08-30T00:00:00.000Z"
+layout: ../../layouts/BlogPostLayout.astro
+category: Guide
+tags: ["unity", "android", "ssl", "certificates"]
+cta: "for-unity"
+---
+
+When integrating **Aptabase** analytics into your **Unity** game for Android devices, you might encounter SSL certificate errors on older Android versions, particularly Android 7.0 and below. This comprehensive guide will walk you through setting up the **Aptabase Unity SDK** while addressing the critical SSL certificate compatibility issues that emerged after **Let's Encrypt**'s certificate transition.
+
+
+```
+Unity   : Curl error 60: Cert verify failed. Certificate is not correctly signed by a trusted CA. UnityTls error code: 7
+Unity   : Failed to perform web request due to 0 and response body SSL CA certificate error
+Unity   : UnityEngine.DebugLogHandler:Internal_Log(LogType, LogOption, String, Object)
+Unity   : AptabaseSDK.<SendWebRequestAsync>d__1:MoveNext()
+```
+
+## The SSL Certificate Challenge
+
+Since October 2021, many developers have encountered SSL connection failures when their **Unity** games attempt to communicate with analytics services on older Android devices. This issue comes from **Let's Encrypt**'s transition from the expired **DST Root CA X3** certificate to their newer **ISRG Root X1** and **X2** certificates.
+
+The core issue affects Android devices running versions below 7.1.1 (API level 25). These older devices contain only the **DST Root CA X3** certificate in their trusted certificate store, which expired on September 30, 2021. When your **Unity** game tries to make HTTPS requests to **Aptabase**'s analytics endpoints, these devices can no longer verify the SSL certificates, resulting in connection failures.
+
+### Key Facts:
+
+- Android 7.1.1+ (API 25+) includes the newer **ISRG Root X1** certificates
+- Android 7.0 and below only contain the expired **DST Root CA X3** certificate
+- SSL requests to services using **Let's Encrypt** certificates will fail on older devices
+
+### Check SSL Certificate Issuer
+
+```
+echo | openssl s_client -servername us.aptabase.com -connect us.aptabase.com:443
+```
+
+## Setting Up Aptabase Unity SDK
+
+Before addressing the SSL issues, let's set up the **Aptabase Unity SDK** properly.
+
+
+### Installation
+
+- Open **Unity Package Manager** (Window > Package Manager)
+- Click the + button and select **Add Package** from git URL
+- Enter: https://github.com/aptabase/aptabase-unity.git
+
+### Configuration
+
+- Get your **App Key** from the **Aptabase** dashboard (Instructions menu)
+- Configure the settings at `Aptabase/Resources/AptabaseSettings.Asset`
+- Set your **App Key** - the **Host** will be automatically selected based on your key
+
+```csharp
+using System.Collections.Generic;
+using AptabaseSDK;
+
+public class GameAnalytics : MonoBehaviour
+{
+    void Start()
+    {
+        // Track app startup - recommended minimum event
+        Aptabase.TrackEvent("app_started");
+        
+        // Track with custom properties
+        Aptabase.TrackEvent("level_completed", new Dictionary<string, object> 
+        {
+            {"level", 1},
+            {"score", 1500},
+            {"time_seconds", 45.2}
+        });
+    }
+}
+```
+
+## Solving Android 7 SSL Certificate Issues
+
+For **Unity** games targeting Android 7.0 and below, you'll need to implement additional certificate handling to ensure analytics tracking works reliably.
+
+### Solution 1: Network Security Configuration (Recommended)
+
+The most effective solution is to use Android's **Network Security Configuration** to explicitly trust the required certificates.
+
+#### Step 1: Update AndroidManifest.xml
+
+Add the network security configuration to your Android manifest:
+
+```xml
+<application
+    android:networkSecurityConfig="@xml/network_security_config"
+    ... >
+    <!-- Your existing application configuration -->
+</application>
+```
+
+#### Step 2: Create Network Security Configuration
+
+Create `Assets/Plugins/Android/res/xml/network_security_config.xml`:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <!-- Include ISRG Root certificates -->
+            <certificates src="@raw/isrg_root_x1" />
+            <certificates src="@raw/isrg_root_x2" />
+            <!-- Keep system certificates -->
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>
+```
+
+#### Step 3: Add Certificate Files
+
+Download and add the certificate files to `Assets/Plugins/Android/res/raw/`:
+
+- **ISRG Root X1**: Download from [Let's Encrypt](https://letsencrypt.org/certs/isrgrootx1.der) and save as `isrg_root_x1.der`
+- **ISRG Root X2**: Download from [Let's Encrypt](https://letsencrypt.org/certs/isrg-root-x2.der) and save as `isrg_root_x2.der`
+
+### Solution 2: Custom Certificate Handling in Unity
+
+For more control, you can implement custom certificate validation in your **Unity** C# code:
+
+```csharp
+using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+
+public class SSLCertificateHandler
+{
+    public static void InitializeSSLCertificates()
+    {
+        ServicePointManager.ServerCertificateValidationCallback = ValidateServerCertificate;
+    }
+
+    private static bool ValidateServerCertificate(
+        object sender,
+        X509Certificate certificate,
+        X509Chain chain,
+        SslPolicyErrors sslPolicyErrors)
+    {
+        // For Aptabase endpoints, allow ISRG Root X1 certificates
+        if (IsAptabaseEndpoint(sender) && IsISRGRootCertificate(certificate))
+        {
+            return true;
+        }
+
+        // Use default validation for other certificates
+        return sslPolicyErrors == SslPolicyErrors.None;
+    }
+
+    private static bool IsAptabaseEndpoint(object sender)
+    {
+        if (sender is HttpWebRequest request)
+        {
+            return request.RequestUri.Host.Contains("aptabase.com");
+        }
+        return false;
+    }
+
+    private static bool IsISRGRootCertificate(X509Certificate certificate)
+    {
+        // Check if certificate is issued by ISRG Root X1
+        return certificate.Issuer.Contains("ISRG Root X1") || 
+               certificate.Subject.Contains("ISRG Root X1");
+    }
+}
+```
+Initialize this in your game's startup:
+```csharp
+void Awake()
+{
+    SSLCertificateHandler.InitializeSSLCertificates();
+    Aptabase.TrackEvent("app_started");
+}
+```
+
+## Final notes
+
+Using this setup ensures your app can securely communicate with **Aptabase** even on legacy Android devices that don’t trust newer CAs by default. As Android versions phase out legacy support, consider whether maintaining compatibility with very old devices is worth the added configuration.
+
+## References
+- https://www.danieldent.com/blog/android-apps-lets-encrypt-dst-root-expiry/
+- https://discussions.unity.com/t/ssl-ca-certificate-error-on-android-7/863567/8
+
+## Conclusion
+
+At Aptabase, we're developing an [open-source and privacy-centric analytics platform](https://aptabase.com) for desktop and mobile apps. Aptabase has SDKs for various frameworks, including **Unity**.
+
+If you have any questions or feedback, feel free to reach out on [Twitter](https://twitter.com/aptabase) or join us on [Discord](https://discord.gg/d9d97unCUk) and we'll be happy to help!
