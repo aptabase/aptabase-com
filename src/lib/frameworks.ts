@@ -246,6 +246,40 @@ export default [
     ],
   },
   {
+    slug: "python",
+    name: "Python",
+    title: "Python Apps",
+    image: "/tools/python.svg",
+    href: "/for-python",
+    sdkName: "Python SDK for Aptabase",
+    sdkUrl: "https://github.com/aptabase/aptabase-python",
+    sdkCodeExample: `await client.track("user_action", {
+    "action": "button_click",
+})`,
+    sdkLanguage: "python",
+    textColor: "text-[#3772FF]",
+    useCases: [
+      {
+        icon: IconClick,
+        title: "Feature Usage",
+        description:
+          "Are you aware of the features in your app that users engage with most frequently? What configurations that majority of your users prefer? Gaining insights into these areas allows you to make well-informed decisions on future focus points for enhancing your Python app's user experience.",
+      },
+      {
+        icon: IconLanguage,
+        title: "Location and Language",
+        description:
+          "Understanding the geographical distribution of your user base can significantly inform the decision to localize your Python app, thereby enhancing its global accessibility and visibility on the Apple App Store and Google Play Store.",
+      },
+      {
+        icon: IconMobile,
+        title: "Which OS versions do my users have?",
+        description:
+          "Aptabase efficiently gathers data such as the names of operating systems such as Windows, Android, iOS, iPadOS, macOS, etc., and their respective versions. This valuable insight enables you to concentrate on crafting enhanced user experiences tailored to the most widely used OS and versions.",
+      },
+    ],
+  },
+  {
     slug: "unreal",
     name: "Unreal Engine",
     title: "Unreal Games",
