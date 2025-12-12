@@ -34,10 +34,6 @@ const { title, description, og } = Astro.props;
     <meta property="og:image" content={og ?? "https://aptabase.com/og.png"} />
     <meta name="twitter:site" content="@aptabase" />
     <meta name="twitter:card" content="summary_large_image" />
-    <script>
-      window.lemonSqueezyAffiliateConfig = { store: "aptabase" };
-    </script>
-    <script src="https://lmsqueezy.com/affiliate.js" defer></script>
     <style is:global>
       :root {
         color-scheme: light;
@@ -57,4 +53,18 @@ const { title, description, og } = Astro.props;
     >
     </script>
   </body>
+  <footer>
+    <script>
+      window.lemonSqueezyAffiliateConfig = { store: "aptabase" };
+      
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(() => {
+          const script = document.createElement('script');
+          script.src = 'https://lmsqueezy.com/affiliate.js';
+          script.async = true;
+          document.body.appendChild(script);
+        });
+      });
+    </script>
+  </footer>
 </html>
