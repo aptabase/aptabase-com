@@ -1,0 +1,50 @@
+# Aptabase
+
+> Aptabase is an open-source, privacy-first analytics platform for Mobile, Desktop, and Web apps. It is GDPR-compliant by design - no cookies, no personal data, no IP tracking. Self-hostable or cloud-hosted. SDKs for 16+ platforms including Swift, Kotlin, Flutter, React Native, Electron, Tauri, .NET MAUI, Unity, Unreal, Python, and JavaScript (Web, React, Angular, Browser Extensions).
+
+## Documentation
+
+- [Build Modes](https://aptabase.com/docs/build-modes): Debug vs Release mode behavior
+- [Apple App Privacy](https://aptabase.com/docs/apple-app-privacy): How to fill out Apple's App Store Privacy Declaration
+- [Self-Hosting Guide](https://github.com/aptabase/aptabase): Self-host Aptabase with Docker
+
+## SDKs
+
+### Desktop
+
+- [Electron](https://github.com/aptabase/aptabase-electron): `@aptabase/electron` - `npm add @aptabase/electron`
+- [Tauri](https://github.com/aptabase/tauri-plugin-aptabase): `tauri-plugin-aptabase` (Rust) + `@aptabase/tauri` (JS) - `cargo add tauri-plugin-aptabase && npm add @aptabase/tauri`
+- [.NET MAUI](https://github.com/aptabase/aptabase-maui): `Aptabase.Maui` (NuGet) - `dotnet add package Aptabase.Maui`
+
+### Mobile
+
+- [Swift (iOS/macOS)](https://github.com/aptabase/aptabase-swift): `Aptabase` - SPM: `https://github.com/aptabase/aptabase-swift.git`
+- [Kotlin (Android)](https://github.com/aptabase/aptabase-kotlin): `com.github.aptabase:aptabase-kotlin` (JitPack) - `implementation("com.github.aptabase:aptabase-kotlin:0.0.8")`
+- [Flutter](https://github.com/aptabase/aptabase_flutter): `aptabase_flutter` (pub.dev) - `flutter pub add aptabase_flutter`
+- [React Native](https://github.com/aptabase/aptabase-react-native): `@aptabase/react-native` - `npm add @aptabase/react-native`
+
+### Web
+
+- [Web (SPA)](https://github.com/aptabase/aptabase-js): `@aptabase/web` - `npm add @aptabase/web`
+- [React / Next.js](https://github.com/aptabase/aptabase-js): `@aptabase/react` - `npm add @aptabase/react`
+- [Angular](https://github.com/aptabase/aptabase-js): `@aptabase/angular` - `npm add @aptabase/angular`
+- [Browser Extensions](https://github.com/aptabase/aptabase-js): `@aptabase/browser` - `npm add @aptabase/browser`
+
+### Games
+
+- [Unity](https://github.com/aptabase/aptabase-unity): UPM git URL - `https://github.com/aptabase/aptabase-unity.git`
+- [Unreal Engine](https://github.com/aptabase/aptabase-unreal): Plugin - clone into `Plugins/` folder
+
+### Other
+
+- [Python](https://github.com/aptabase/aptabase-python): `aptabase` (PyPI) - `pip install aptabase`
+- [C++](https://github.com/aptabase/aptabase-cpp): CMake - `add_subdirectory(path/to/aptabase-cpp)`
+- [NativeScript](https://github.com/nstudio/nativescript-plugins/tree/main/packages/nativescript-aptabase): `@nicogaldo/nativescript-aptabase` (community)
+
+## Optional
+
+- [Pricing](https://aptabase.com/#pricing): Free tier with 20K monthly events, paid plans available
+- [Changelog](https://aptabase.com/blog): Product updates and platform guides
+- [Privacy Policy](https://aptabase.com/legal/privacy): Privacy policy
+- [Terms of Service](https://aptabase.com/legal/terms): Terms of service
+- [GitHub (main repo)](https://github.com/aptabase/aptabase): Source code for the analytics platform

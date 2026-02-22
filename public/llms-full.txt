@@ -1,0 +1,607 @@
+# Aptabase
+
+> Aptabase is an open-source, privacy-first analytics platform for Mobile, Desktop, and Web apps. It is GDPR-compliant by design - no cookies, no personal data, no IP tracking. Self-hostable or cloud-hosted. SDKs for 16+ platforms including Swift, Kotlin, Flutter, React Native, Electron, Tauri, .NET MAUI, Unity, Unreal, Python, and JavaScript (Web, React, Angular, Browser Extensions).
+
+## General Notes
+
+- Get your App Key from the Aptabase dashboard under the "Instructions" menu.
+- App keys follow the format `A-EU-*` (European servers) or `A-US-*` (US servers).
+- All SDKs automatically enhance events with OS, app version, and locale information.
+- No events are tracked automatically - you must call the tracking function manually.
+- Only strings and numbers are allowed as custom property values.
+- All tracking functions are non-blocking and run in the background.
+- Events are separated into Debug and Release mode based on build configuration (see https://aptabase.com/docs/build-modes).
+
+## Electron
+
+Package: `@aptabase/electron`
+Install: `npm add @aptabase/electron`
+Repo: https://github.com/aptabase/aptabase-electron
+
+### Initialization (main process)
+
+```js
+import { initialize } from "@aptabase/electron/main";
+
+initialize("<YOUR_APP_KEY>");
+
+app.whenReady().then(() => {
+  // ... rest of app initialization
+});
+```
+
+### Track Events
+
+The `trackEvent` function is available under separate import paths depending on the process:
+
+- `@aptabase/electron/main` - track from the main process
+- `@aptabase/electron/renderer` - track from the renderer process
+
+```js
+import { trackEvent } from "@aptabase/electron/renderer";
+
+trackEvent("app_started");
+trackEvent("screen_view", { name: "Settings" });
+```
+
+## Tauri
+
+Packages: `tauri-plugin-aptabase` (Rust) + `@aptabase/tauri` (JavaScript)
+Install: `cargo add tauri-plugin-aptabase` and `npm add @aptabase/tauri`
+Repo: https://github.com/aptabase/tauri-plugin-aptabase
+
+### Initialization (Rust)
+
+Register the plugin in your Tauri builder:
+
+```rust
+#[tokio::main]
+async fn main() {
+    tauri::Builder::default()
+        .plugin(tauri_plugin_aptabase::Builder::new("<YOUR_APP_KEY>").build())
+        .run(tauri::generate_context!())
+        .expect("error while running tauri application");
+}
+```
+
+Add `aptabase:allow-track-event` to your Access Control List.
+
+### Track Events (Rust)
+
+Import the `EventTracker` trait to call `track_event` on `App`, `AppHandle`, or `Window`:
+
+```rust
+use tauri_plugin_aptabase::EventTracker;
+
+app.track_event("app_started", None);
+app.track_event("screen_view", Some(serde_json::json!({ "name": "Settings" })));
+```
+
+Call `flush_events_blocking()` before app exit to ensure all events are sent.
+
+### Track Events (JavaScript)
+
+```js
+import { trackEvent } from "@aptabase/tauri";
+
+trackEvent("save_settings");
+trackEvent("screen_view", { name: "Settings" });
+```
+
+## .NET MAUI
+
+Package: `Aptabase.Maui` (NuGet)
+Install: `dotnet add package Aptabase.Maui`
+Repo: https://github.com/aptabase/aptabase-maui
+
+### Initialization
+
+In `MauiProgram.cs`:
+
+```csharp
+public static MauiApp CreateMauiApp()
+{
+    var builder = MauiApp.CreateBuilder();
+    builder
+        .UseMauiApp<App>()
+        .UseAptabase("<YOUR_APP_KEY>", new AptabaseOptions
+        {
+#if DEBUG
+            IsDebugMode = true,
+#else
+            IsDebugMode = false,
+#endif
+        });
+    // ...
+}
+```
+
+### Track Events
+
+`UseAptabase` registers `IAptabaseClient` in the DI container. Inject it into your pages or view models:
+
+```csharp
+public partial class MainPage : ContentPage
+{
+    IAptabaseClient _aptabase;
+
+    public MainPage(IAptabaseClient aptabase)
+    {
+        InitializeComponent();
+        _aptabase = aptabase;
+    }
+
+    private void OnButtonClicked(object sender, EventArgs e)
+    {
+        _aptabase.TrackEvent("button_clicked");
+        _aptabase.TrackEvent("screen_view", new() { { "name", "Settings" } });
+    }
+}
+```
+
+## Swift (iOS / macOS / watchOS / tvOS)
+
+Package: `Aptabase` (Swift Package Manager)
+Install: Add `https://github.com/aptabase/aptabase-swift.git` via SPM or Xcode
+Repo: https://github.com/aptabase/aptabase-swift
+
+### Initialization
+
+```swift
+import SwiftUI
+import Aptabase
+
+@main
+struct ExampleApp: App {
+    init() {
+        Aptabase.shared.initialize(appKey: "<YOUR_APP_KEY>")
+    }
+
+    var body: some Scene {
+        WindowGroup {
+            MainView()
+        }
+    }
+}
+```
+
+### Track Events
+
+```swift
+import Aptabase
+
+Aptabase.shared.trackEvent("app_started")
+Aptabase.shared.trackEvent("screen_view", with: ["name": "Settings"])
+```
+
+### Platform Notes
+
+- macOS: Enable "Outgoing Connections (Client)" under App Sandbox.
+- For Apple App Store submission, see https://aptabase.com/docs/apple-app-privacy
+
+## Kotlin (Android)
+
+Package: `com.github.aptabase:aptabase-kotlin` (JitPack)
+Install: `implementation("com.github.aptabase:aptabase-kotlin:0.0.8")`
+Repo: https://github.com/aptabase/aptabase-kotlin
+
+### Setup
+
+Add JitPack repository in `settings.gradle.kts`:
+
+```kotlin
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = uri("https://www.jitpack.io") }
+    }
+}
+```
+
+Add dependency in module-level `build.gradle.kts`:
+
+```kotlin
+implementation("com.github.aptabase:aptabase-kotlin:0.0.8")
+```
+
+### Initialization
+
+Initialize in your `Application` class:
+
+```kotlin
+class MyApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        Aptabase.instance.initialize(applicationContext, "<YOUR_APP_KEY>")
+    }
+}
+```
+
+### Track Events
+
+```kotlin
+Aptabase.instance.trackEvent("app_started")
+Aptabase.instance.trackEvent("screen_view", mapOf("name" to "Settings"))
+```
+
+## Flutter
+
+Package: `aptabase_flutter` (pub.dev)
+Install: `flutter pub add aptabase_flutter`
+Repo: https://github.com/aptabase/aptabase_flutter
+Platforms: Android, iOS, macOS, Web, Linux, Windows
+
+### Initialization
+
+In `main.dart`:
+
+```dart
+import 'package:aptabase_flutter/aptabase_flutter.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Aptabase.init("<YOUR_APP_KEY>");
+  runApp(const MyApp());
+}
+```
+
+The `main` function must be `async` and call `WidgetsFlutterBinding.ensureInitialized()` before init.
+
+### Track Events
+
+```dart
+import 'package:aptabase_flutter/aptabase_flutter.dart';
+
+Aptabase.instance.trackEvent("app_started");
+Aptabase.instance.trackEvent("screen_view", {"name": "Settings"});
+```
+
+### Platform Notes
+
+- Android: Add `<uses-permission android:name="android.permission.INTERNET" />` to `AndroidManifest.xml`.
+
+## React Native
+
+Package: `@aptabase/react-native`
+Install: `npm add @aptabase/react-native`
+Repo: https://github.com/aptabase/aptabase-react-native
+
+### Initialization
+
+```js
+import Aptabase from "@aptabase/react-native";
+
+Aptabase.init("<YOUR_APP_KEY>");
+
+export default function App() {
+  return <MyApp />;
+}
+```
+
+### Track Events
+
+```js
+import { trackEvent } from "@aptabase/react-native";
+
+trackEvent("app_started");
+trackEvent("screen_view", { name: "Settings" });
+```
+
+### Platform Notes
+
+- Android: Add `<uses-permission android:name="android.permission.INTERNET" />` to `AndroidManifest.xml`.
+- Expo: Events sent in Expo Go will not have `App Version`. Set `appVersion` in `init()` options for dev, or build a standalone app.
+- To stop tracking: `Aptabase.dispose()`.
+
+## Web (SPA)
+
+Package: `@aptabase/web` (~1 kB)
+Install: `npm add @aptabase/web`
+Repo: https://github.com/aptabase/aptabase-js
+
+Designed for Single-Page Applications. Each page reload starts a new session.
+
+### Initialization
+
+```js
+import { init } from "@aptabase/web";
+
+init("<YOUR_APP_KEY>");
+```
+
+Optional second parameter: `{ appVersion: "1.0.0" }`.
+
+### Track Events
+
+```js
+import { trackEvent } from "@aptabase/web";
+
+trackEvent("app_started");
+trackEvent("screen_view", { name: "Settings" });
+```
+
+## React / Next.js
+
+Package: `@aptabase/react` (~1 kB)
+Install: `npm add @aptabase/react`
+Repo: https://github.com/aptabase/aptabase-js
+
+### Next.js App Router
+
+Wrap your root layout:
+
+```jsx
+import { AptabaseProvider } from "@aptabase/react";
+
+export default function RootLayout({ children }) {
+  return (
+    <AptabaseProvider appKey="<YOUR_APP_KEY>">
+      <html lang="en">
+        <body>{children}</body>
+      </html>
+    </AptabaseProvider>
+  );
+}
+```
+
+### Next.js Pages Router
+
+Wrap in `_app`:
+
+```jsx
+import { AptabaseProvider } from "@aptabase/react";
+
+export default function App({ Component, pageProps }) {
+  return (
+    <AptabaseProvider appKey="<YOUR_APP_KEY>">
+      <Component {...pageProps} />
+    </AptabaseProvider>
+  );
+}
+```
+
+### Track Events
+
+Use the `useAptabase` hook in any component:
+
+```jsx
+import { useAptabase } from "@aptabase/react";
+
+function MyComponent() {
+  const { trackEvent } = useAptabase();
+
+  trackEvent("app_started");
+  trackEvent("screen_view", { name: "Settings" });
+}
+```
+
+Also works with Remix, CRA, and Vite - wrap the root with `<AptabaseProvider>`.
+
+## Angular
+
+Package: `@aptabase/angular`
+Install: `npm add @aptabase/angular`
+Repo: https://github.com/aptabase/aptabase-js
+
+### Standalone API Setup
+
+```typescript
+import { provideAptabaseAnalytics } from "@aptabase/angular";
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideAptabaseAnalytics("<YOUR_APP_KEY>"),
+  ],
+};
+```
+
+### NgModules Setup
+
+```typescript
+import { AptabaseAnalyticsModule } from "@aptabase/angular";
+
+@NgModule({
+  imports: [AptabaseAnalyticsModule.forRoot("<YOUR_APP_KEY>")],
+})
+export class AppModule {}
+```
+
+### Track Events
+
+Inject `AptabaseAnalyticsService` in your component:
+
+```typescript
+import { AptabaseAnalyticsService } from "@aptabase/angular";
+
+@Component({ ... })
+export class MyComponent {
+  constructor(private _analyticsService: AptabaseAnalyticsService) {}
+
+  onClick() {
+    this._analyticsService.trackEvent("button_clicked");
+    this._analyticsService.trackEvent("screen_view", { name: "Settings" });
+  }
+}
+```
+
+## Browser Extensions
+
+Package: `@aptabase/browser` (~1 kB)
+Install: `npm add @aptabase/browser`
+Repo: https://github.com/aptabase/aptabase-js
+
+### Initialization
+
+Initialize in your background script:
+
+```js
+import { init } from "@aptabase/browser";
+
+init("<YOUR_APP_KEY>");
+```
+
+Optional second parameter: `{ isDebug: true }`. By default, the SDK detects dev mode by checking if the extension was installed from a store.
+
+### Track Events
+
+```js
+import { trackEvent } from "@aptabase/browser";
+
+trackEvent("extension_installed");
+trackEvent("popup_opened", { page: "settings" });
+```
+
+## Unity
+
+Package: Unity Package Manager (git URL)
+Install: Window > Package Manager > + > Add Package from git URL: `https://github.com/aptabase/aptabase-unity.git`
+Repo: https://github.com/aptabase/aptabase-unity
+
+### Configuration
+
+Set your App Key in the settings asset at `Aptabase/Resources/AptabaseSettings.Asset`.
+
+Events are batched and sent every 60 seconds in production and every 2 seconds in development. Override via the `FlushInterval` field.
+
+### Track Events
+
+```csharp
+Aptabase.TrackEvent("app_started");
+Aptabase.TrackEvent("screen_view", new Dictionary<string, object>
+{
+    { "name", "Settings" }
+});
+```
+
+Manual flush: `Aptabase.Flush();`
+
+## Unreal Engine
+
+Package: Plugin (clone into Plugins folder)
+Install: Clone https://github.com/aptabase/aptabase-unreal into your project's `Plugins/` folder (requires C++ project)
+Repo: https://github.com/aptabase/aptabase-unreal
+
+### Setup
+
+1. Enable the plugin: Toolbar > Edit > Plugins > Search "Aptabase" > Enable.
+2. Add to `Config/DefaultEngine.ini`:
+
+```ini
+[Analytics]
+ProviderModuleName=Aptabase
+```
+
+3. Set your App Key in Project Settings > Analytics > Aptabase.
+
+### Track Events (C++)
+
+```cpp
+TArray<FAnalyticsEventAttribute> Attributes;
+Attributes.Emplace(TEXT("name"), TEXT("Settings"));
+
+FAnalytics::Get().GetDefaultConfiguredProvider()->RecordEvent(TEXT("screen_view"), Attributes);
+```
+
+### Track Events (Blueprints)
+
+Use the "Record Event with Attributes" node. The Blueprint Analytics Plugin is recommended for provider-agnostic tracking.
+
+## Python
+
+Package: `aptabase` (PyPI)
+Install: `pip install aptabase`
+Repo: https://github.com/aptabase/aptabase-python
+Requires: Python 3.11+
+
+### Initialization and Tracking
+
+The SDK is fully async, built with `httpx` and `asyncio`:
+
+```python
+import asyncio
+from aptabase import Aptabase
+
+async def main():
+    async with Aptabase("<YOUR_APP_KEY>") as client:
+        await client.track("app_started")
+        await client.track("screen_view", {"name": "Settings"})
+
+asyncio.run(main())
+```
+
+### Configuration Options
+
+```python
+client = Aptabase(
+    app_key="<YOUR_APP_KEY>",
+    app_version="1.0.0",
+    is_debug=False,
+    max_batch_size=25,
+    flush_interval=10.0,
+    timeout=30.0
+)
+```
+
+### Manual Lifecycle
+
+```python
+client = Aptabase("<YOUR_APP_KEY>")
+await client.start()
+try:
+    await client.track("event")
+finally:
+    await client.stop()
+```
+
+## C++
+
+Package: CMake subdirectory
+Install: `add_subdirectory(path/to/aptabase-cpp)`
+Repo: https://github.com/aptabase/aptabase-cpp
+
+### CMake Integration
+
+Choose a networking backend:
+
+```cmake
+# Option A: cpp-httplib
+set(CMAKE_APTABASE_USE_HTTPLIB ON)
+add_subdirectory(path/to/aptabase-cpp)
+
+# Option B: Boost.Asio
+set(CMAKE_APTABASE_USE_BOOST ON)
+add_subdirectory(path/to/aptabase-cpp)
+```
+
+### Initialization and Tracking
+
+```cpp
+#include <aptabase/analytics.hpp>
+#include <aptabase/net/httplib.hpp>
+
+int main() {
+    Aptabase::Analytics aptabase(
+        std::make_unique<Aptabase::HttplibHttpClient>(),
+        "<YOUR_APP_KEY>",
+        "https://your.aptabase.url",
+        true // is_debug
+    );
+
+    aptabase.StartSession();
+    aptabase.RecordEvent("app_started");
+    aptabase.RecordEvent("screen_view", {{"name", "Settings"}});
+    aptabase.EndSession();
+}
+```
+
+Event attributes support `std::string`, `float`, and `double` types.
+
+## Optional
+
+- [All SDKs overview](https://aptabase.com/llms.txt): Discover all 16+ Aptabase SDKs
+- [Pricing](https://aptabase.com/#pricing): Free tier with 20K monthly events, paid plans available
+- [Self-Hosting](https://github.com/aptabase/aptabase): Self-host Aptabase with Docker
+- [Privacy Policy](https://aptabase.com/legal/privacy): Privacy policy
+- [Terms of Service](https://aptabase.com/legal/terms): Terms of service
