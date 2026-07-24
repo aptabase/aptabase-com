@@ -12,8 +12,6 @@ This DPA reflects the parties' agreement with regard to the processing of person
 
 This DPA is automatically executed and legally binding upon the Customer's acceptance of the Agreement or use of the service. No signature is required. Customers who need a countersigned copy for their records may request one at [support@aptabase.com](mailto:support@aptabase.com).
 
-_Effective date: June 1, 2026_
-
 ## Section I
 
 ### Clause 1 — Purpose and scope
