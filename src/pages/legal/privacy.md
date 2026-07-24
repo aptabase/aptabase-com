@@ -10,7 +10,7 @@ description: "Aptabase Privacy Policy"
 
 Aptabase is built with privacy in mind and we made this privacy policy exceptionally short and easy to understand so you know exactly what data we collect and how we process it.
 
-This privacy notice explains how we, Sumbit Labs Ltd., process personal data in our business as per the General Data Protection Regulation (GDPR) and other relevant data protection and privacy laws applicable to our business.
+This privacy notice explains how we, Technov Solutions SRL, process personal data in our business as per the General Data Protection Regulation (GDPR) and other relevant data protection and privacy laws applicable to our business.
 
 ### 2. As a end-user of an app built with Aptabase
 
@@ -32,17 +32,23 @@ We only collect the bare minimum data required to provide our service. Your data
 
 **GitHub and Google sign-in** You may choose to sign in to Aptabase using your GitHub or Google account. We only store your account ID and email address to facilitate the sign-in process. We do not ask for additional permissions on your account.
 
-### 4, Changes
+**Data residency** Aptabase Cloud is offered in two independent regions: EU (eu.aptabase.com) and US (us.aptabase.com). All analytics data of EU-region accounts is processed and stored exclusively within the European Union, and all analytics data of US-region accounts exclusively within the United States.
+
+**Data Processing Agreement** Where you use Aptabase to process personal data of your applications' end users, you act as the controller and we act as your processor under Article 28 GDPR. Our [Data Processing Agreement](https://aptabase.com/legal/dpa) is incorporated into our Terms of Service and governs that processing.
+
+### 4. Changes
 
 We may update this policy as needed to comply with relevant regulations and reflect any new practices. Whenever we make a significant change to our policies, we will also announce them on our company blog or social media profiles.
 
 ### 5. Owner and Data Controller
 
-Sumbit Labs Limited\
-51 Bracken Road\
-Sandyford Dublin D18 CV48\
-Ireland
+Technov Solutions SRL\
+Str. Fabricii, Nr. 47\
+Bucharest\
+Romania\
+Trade Register No.: J40/7232/2017\
+CUI: 37597235
 
-Owner contact email: [support@aptabase.com](mailto:support@aptabase.com)
+Owner contact email: [office@technov.ro](mailto:office@technov.ro)
 
-_Last updated: September 4, 2023_
+_Last updated: July 24, 2026_

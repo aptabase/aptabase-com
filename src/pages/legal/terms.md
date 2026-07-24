@@ -10,7 +10,7 @@ description: "Aptabase Terms of Service"
 
 Thank you for using Aptabase! We're happy you're here.
 
-When we say ”company”, “we”, “our”, “us”, ”service” or ”services” in this document, we are referring to **Aptabase**, a service operated by **Sumbit Labs Limited**.
+When we say ”company”, “we”, “our”, “us”, ”service” or ”services” in this document, we are referring to **Aptabase**, a service operated by **Technov Solutions SRL**, a company registered in Romania (Trade Register No. J40/7232/2017, CUI 37597235).
 
 These Terms of Service (“Terms”, “Terms of Service”) govern your use of our web pages located at https://aptabase.com, https://us.aptabase.com and https://eu.aptabase.com. Please read this Terms of Service agreement carefully before accessing or using Aptabase.
 
@@ -30,9 +30,9 @@ By creating an Account on our Service, you agree to subscribe to newsletters, ma
 
 Some parts of Service are billed on a subscription basis (“Subscription(s)”). You will be billed in advance on a recurring and periodic basis (“Billing Cycle”). Billing cycles are set either on a monthly or annual basis, depending on the type of subscription plan you select when purchasing a Subscription.
 
-At the end of each Billing Cycle, your Subscription will automatically renew under the exact same conditions unless you cancel it or Sumbit Labs Limited cancels it. You may cancel your Subscription renewal either through your online account management page or by contacting Sumbit Labs Limited customer support team.
+At the end of each Billing Cycle, your Subscription will automatically renew under the exact same conditions unless you cancel it or Technov Solutions SRL cancels it. You may cancel your Subscription renewal either through your online account management page or by contacting Technov Solutions SRL customer support team.
 
-A valid payment method, including credit card, is required to process the payment for your subscription. You shall provide Sumbit Labs Limited with accurate and complete billing information including full name, address, state, zip code, telephone number, and a valid payment method information. By submitting such payment information, you automatically authorize Sumbit Labs Limited to charge all Subscription fees incurred through your account to any such payment instruments.
+A valid payment method, including credit card, is required to process the payment for your subscription. You shall provide Technov Solutions SRL with accurate and complete billing information including full name, address, state, zip code, telephone number, and a valid payment method information. By submitting such payment information, you automatically authorize Technov Solutions SRL to charge all Subscription fees incurred through your account to any such payment instruments.
 
 ### 4. Free Trial
 
@@ -42,9 +42,9 @@ If you are upgrading from a free trial to a paid plan, we will charge you immedi
 
 ### 5. Fee Changes
 
-Sumbit Labs Limited, in its sole discretion and at any time, may modify Subscription fees for the Subscriptions. Any Subscription fee change will become effective at the end of the then-current Billing Cycle.
+Technov Solutions SRL, in its sole discretion and at any time, may modify Subscription fees for the Subscriptions. Any Subscription fee change will become effective at the end of the then-current Billing Cycle.
 
-Sumbit Labs Limited will provide you with a reasonable prior notice of any change in Subscription fees to give you an opportunity to terminate your Subscription before such change becomes effective.
+Technov Solutions SRL will provide you with a reasonable prior notice of any change in Subscription fees to give you an opportunity to terminate your Subscription before such change becomes effective.
 
 Your continued use of Service after Subscription fee change comes into effect constitutes your agreement to pay the modified Subscription fee amount.
 
@@ -72,6 +72,8 @@ Our privacy policy can be found at https://aptabase.com/legal/privacy, the terms
 
 We take the protection of personal data very seriously. Our Services shall not be used to track personal data, such as full name, email address, mailing address, etc. If we detect that you are intentionally using Aptabase for tracking of personal data, we may terminate your account without warning.
 
+Where you use the Service to process personal data of your applications' end users, you act as the data controller and we act as your data processor within the meaning of Article 28 GDPR. Our [Data Processing Agreement](https://aptabase.com/legal/dpa) is hereby incorporated into these Terms by reference and governs such processing.
+
 ### 10. Intellectual Property
 
 You understand and agree that the Website and its entire contents, features, and functionality, including, but not limited to, all information, software, code, text, displays, graphics, photographs, video, audio, design, presentation, selection, and arrangement, are owned by us, our licensors, or other providers of such material and are protected in all forms by intellectual property laws including without limitation, copyright, trademark, patent, trade secret, and any other proprietary rights.
@@ -84,11 +86,11 @@ You have no right, title, or interest in or to the Website or to any content on 
 
 ### 11. Links To Other Websites
 
-Our Service may contain links to third party web sites or services that are not owned or controlled by Sumbit Labs Limited
+Our Service may contain links to third party web sites or services that are not owned or controlled by Technov Solutions SRL
 
-Sumbit Labs Limited has no control over, and assumes no responsibility for the content, privacy policies, or practices of any third party web sites or services. We do not warrant the offerings of any of these entities/individuals or their websites.
+Technov Solutions SRL has no control over, and assumes no responsibility for the content, privacy policies, or practices of any third party web sites or services. We do not warrant the offerings of any of these entities/individuals or their websites.
 
-YOU ACKNOWLEDGE AND AGREE THAT SUMBIT LABS LIMITED SHALL NOT BE RESPONSIBLE OR LIABLE, DIRECTLY OR INDIRECTLY, FOR ANY DAMAGE OR LOSS CAUSED OR ALLEGED TO BE CAUSED BY OR IN CONNECTION WITH USE OF OR RELIANCE ON ANY SUCH CONTENT, GOODS OR SERVICES AVAILABLE ON OR THROUGH ANY SUCH THIRD PARTY WEB SITES OR SERVICES.
+YOU ACKNOWLEDGE AND AGREE THAT TECHNOV SOLUTIONS SRL SHALL NOT BE RESPONSIBLE OR LIABLE, DIRECTLY OR INDIRECTLY, FOR ANY DAMAGE OR LOSS CAUSED OR ALLEGED TO BE CAUSED BY OR IN CONNECTION WITH USE OF OR RELIANCE ON ANY SUCH CONTENT, GOODS OR SERVICES AVAILABLE ON OR THROUGH ANY SUCH THIRD PARTY WEB SITES OR SERVICES.
 
 WE STRONGLY ADVISE YOU TO READ THE TERMS OF SERVICE AND PRIVACY POLICIES OF ANY THIRD PARTY WEB SITES OR SERVICES THAT YOU VISIT.
 
@@ -116,7 +118,7 @@ All provisions of Terms which by their nature should survive termination shall s
 
 ### 15. Governing Law
 
-These Terms shall be governed and construed in accordance with the laws of Ireland, without regard to its conflict of law provisions.
+These Terms shall be governed and construed in accordance with the laws of Romania, without regard to its conflict of law provisions.
 
 Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect. These Terms constitute the entire agreement between us regarding our Service, and supersede and replace any prior agreements we might have between us regarding the Service.
 
@@ -130,4 +132,4 @@ By continuing to access or use our Service after those revisions become effectiv
 
 Please send your feedback, comments, requests for technical support by email to [support@aptabase.com](mailto:support@aptabase.com).
 
-_Last updated: March 31, 2023_
+_Last updated: July 24, 2026_
