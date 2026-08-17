@@ -1,22 +1,30 @@
-<script is:inline>
-  document.addEventListener("alpine:init", () => {
-    Alpine.data("pricing", () => ({
-      tier: 0,
-      tiers: [
-        { events: "20,000", name: "20k", price: "Free" },
-        { events: "200,000", name: "200k", price: "$10" },
-        { events: "1,000,000", name: "1M", price: "$20" },
-        { events: "2,000,000", name: "2M", price: "$40" },
-        { events: "5,000,000", name: "5M", price: "$75" },
-        { events: "10,000,000", name: "10M", price: "$140" },
-        { events: "20,000,000", name: "20M", price: "$240" },
-        { events: "30,000,000", name: "30M", price: "$300" },
-        { events: "50,000,000", name: "50M", price: "$450" },
-        { events: "50,000,000+", name: "50M+", price: "Contact us" },
-      ],
-    }));
-  });
-</script>
+---
+const tiers = [
+  { events: "Up to 20,000", price: "Free" },
+  { events: "200,000", price: "$10" },
+  { events: "1,000,000", price: "$20" },
+  { events: "2,000,000", price: "$40" },
+  { events: "5,000,000", price: "$75" },
+  { events: "10,000,000", price: "$140" },
+  { events: "20,000,000", price: "$240" },
+  { events: "30,000,000", price: "$300" },
+  { events: "50,000,000", price: "$450" },
+];
+
+const features = [
+  "Unlimited Apps",
+  "EU or US data residency",
+  "Built-in Dashboard",
+  "Live View Dashboard",
+  "Session Timeline",
+  "Export to CSV",
+  "SDKs for popular platforms",
+  "100% Data Ownership",
+];
+
+const summaryStyle =
+  "flex items-center justify-between gap-x-4 cursor-pointer list-none p-6 [&::-webkit-details-marker]:hidden rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+---
 
 <div id="pricing" class="bg-white py-24 sm:py-32">
   <div class="mx-auto max-w-4xl px-6 lg:px-8">
@@ -26,99 +34,147 @@
       </p>
       <p class="text-stone-600">Start free and pay when you grow.</p>
     </div>
-    <div x-data="pricing" class="grid md:grid-cols-2 gap-6 mt-12">
-      <div>
-        <label for="events" class="text-xl tracking-tight">
-          How many events per month?
-        </label>
-        <p class="text-5xl flex items-center space-x-1 mt-2">
-          <span x-text="tiers[tier].events"></span>
-        </p>
-        <input
-          name="events"
-          type="range"
-          class="mt-8 w-full bg-gray-200 appearance-none h-1.5 rounded-full [&::-webkit-slider-thumb]:w-[20px] [&::-webkit-slider-thumb]:h-[20px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:cursor-grab [&::-webkit-slider-thumb]:active:cursor-grabbing"
-          min="0"
-          max="9"
-          class="w-full"
-          step="1"
-          x-model="tier"
-        />
-        <p class="mt-2 text-sm text-stone-600">
-          You're in control of how many events to send from your apps. We
-          recommend sending at least one when app starts.
-        </p>
 
-        <div class="mt-10 text-sm text-stone-600">
-          <p>Did you know you can self-host Aptabase?</p>
-          <p>
-            Join our dedicated <a
-              href="https://discord.gg/d9d97unCUk"
-              target="_blank"
-              class="text-primary inline-block hover:underline"
+    <div
+      class="mx-auto max-w-xl mt-12 rounded-xl bg-gray-400/5 ring-1 ring-inset ring-gray-200 divide-y divide-gray-900/5"
+    >
+      <details name="pricing-plans" open class="group">
+        <summary class={summaryStyle}>
+          <span class="text-2xl font-bold font-title tracking-tight text-gray-900">
+            Free
+          </span>
+          <span class="flex items-center gap-x-3 text-sm text-gray-600">
+            up to 20,000 events/month
+            <svg
+              class="h-4 w-4 shrink-0 text-gray-400 transition-transform group-open:rotate-180"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              aria-hidden="true"
             >
-              #self-hosted
-            </a> channel to get started.
+              <path d="M4 6l4 4 4-4"></path>
+            </svg>
+          </span>
+        </summary>
+        <div class="px-6 pb-6">
+          <p class="text-sm text-gray-600">
+            No credit card required. Every plan includes:
           </p>
+          <ul
+            role="list"
+            class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-x-6 text-sm leading-7 text-gray-600"
+          >
+            {
+              features.map((feature) => (
+                <li class="flex gap-x-2">
+                  <span class="text-green-600">✓</span>
+                  {feature}
+                </li>
+              ))
+            }
+          </ul>
+          <button
+            onclick="document.getElementById('register').showModal()"
+            class="mt-6 rounded-md block w-full sm:w-auto bg-black px-6 py-2 text-center text-sm text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+          >
+            Try free now!
+          </button>
         </div>
-      </div>
-      <div
-        class="px-4 rounded-xl bg-gray-400/5 ring-1 ring-inset ring-gray-200 py-4"
-      >
-        <p class="flex gap-x-2 items-center mx-4">
-          <span
-            class="text-5xl font-bold font-title tracking-tight text-gray-900"
-            x-text="tiers[tier].price"
-          >
-          </span>
-          <span
-            x-show="tiers[tier].price.startsWith('$')"
-            class="text-sm text-gray-600"
-          >
-            /month
-          </span>
-        </p>
+      </details>
 
-        <ul
-          role="list"
-          class="divide-gray-900/5 border-gray-900/5 text-gray-600 divide-y border-t text-sm leading-6 lg:border-t-0 my-4"
-        >
-          <li class="flex gap-x-3 py-1">
-            <span class="text-lg text-green-600">✓</span> Unlimited Apps
-          </li>
-          <li class="flex gap-x-3 py-1">
-            <span class="text-lg text-green-600">✓</span> EU or US data
-            residency
-          </li>
-          <li class="flex gap-x-3 py-1">
-            <span class="text-lg text-green-600">✓</span> Built-in Dashboard
-          </li>
-          <li class="flex gap-x-3 py-1">
-            <span class="text-lg text-green-600">✓</span> Live View Dashboard
-          </li>
-          <li class="flex gap-x-3 py-1">
-            <span class="text-lg text-green-600">✓</span> Session Timeline
-          </li>
-          <li class="flex gap-x-3 py-1">
-            <span class="text-lg text-green-600">✓</span> Export to CSV
-          </li>
-          <li class="flex gap-x-3 py-1">
-            <span class="text-lg text-green-600">✓</span> SDKs for popular
-            platforms
-          </li>
-          <li class="flex gap-x-3 py-1">
-            <span class="text-lg text-green-600">✓</span> 100% Data Ownership
-          </li>
-        </ul>
-
-        <button
-          x-on:click="document.getElementById('register').showModal()"
-          class="rounded-md block bg-black px-6 py-2 text-center text-sm text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-        >
-          Try free now!
-        </button>
-      </div>
+      <details name="pricing-plans" class="group">
+        <summary class={summaryStyle}>
+          <span class="text-2xl font-bold font-title tracking-tight text-gray-900">
+            Pay as you grow
+          </span>
+          <span class="flex items-center gap-x-3 text-sm text-gray-600">
+            from $10/month
+            <svg
+              class="h-4 w-4 shrink-0 text-gray-400 transition-transform group-open:rotate-180"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              aria-hidden="true"
+            >
+              <path d="M4 6l4 4 4-4"></path>
+            </svg>
+          </span>
+        </summary>
+        <div class="px-6 pb-6">
+          <table class="w-full text-sm">
+            <caption class="sr-only">
+              Monthly pricing by number of events
+            </caption>
+            <thead>
+              <tr
+                class="text-left text-xs uppercase tracking-wide text-gray-500"
+              >
+                <th scope="col" class="py-1.5 font-medium">Events per month</th>
+                <th scope="col" class="py-1.5 font-medium text-right">Price</th>
+              </tr>
+            </thead>
+            <tbody
+              class="divide-y divide-gray-900/5 border-t border-gray-900/5"
+            >
+              {
+                tiers.map((tier) => (
+                  <tr>
+                    <td class="py-1.5 text-gray-600 tabular-nums">
+                      {tier.events}
+                    </td>
+                    <td class="py-1.5 text-right tabular-nums font-medium text-gray-900">
+                      {tier.price}
+                    </td>
+                  </tr>
+                ))
+              }
+              <tr>
+                <td class="py-1.5 text-gray-600 tabular-nums">50,000,000+</td>
+                <td class="py-1.5 text-right font-medium">
+                  <a
+                    href="mailto:hi@aptabase.com"
+                    class="text-primary hover:underline"
+                  >
+                    Contact us
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="mt-6 text-xs uppercase tracking-wide text-gray-500">
+            Every plan includes
+          </p>
+          <ul
+            role="list"
+            class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-x-6 text-sm leading-7 text-gray-600"
+          >
+            {
+              features.map((feature) => (
+                <li class="flex gap-x-2">
+                  <span class="text-green-600">✓</span>
+                  {feature}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </details>
     </div>
+
+    <p class="mx-auto max-w-xl mt-6 text-center text-sm text-stone-600">
+      Prefer to self-host Aptabase? Join our dedicated
+      <a
+        href="https://discord.gg/d9d97unCUk"
+        target="_blank"
+        class="text-primary inline-block hover:underline"
+      >
+        #self-hosted
+      </a>
+      channel to get started.
+    </p>
+
     <div
       class="senja-embed mx-auto max-w-xl mt-12"
       data-id="9e183b87-c526-48d7-95d5-e4f60b8d20ad"
