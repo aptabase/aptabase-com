@@ -11,6 +11,14 @@
   --color-primary: #1a61ff;
 }
 
+/* Smooth-scroll in-page anchors (e.g. "Learn more" → #features,
+   header → #pricing) unless the user prefers reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 /* Tailwind v3 compatibility: v4 changed the default border/divide color
    from gray-200 to currentColor. */
 @layer base {

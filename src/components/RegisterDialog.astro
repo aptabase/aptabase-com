@@ -1,31 +1,102 @@
 <dialog
   id="register"
-  class="border rounded p-4 fixed w-[30rem] backdrop:bg-black/50 space-y-4"
+  closedby="any"
+  class="m-auto w-[min(30rem,calc(100vw-2rem))] rounded-2xl bg-white p-8 shadow-2xl ring-1 ring-gray-900/10 backdrop:bg-gray-950/40 backdrop:backdrop-blur-sm"
 >
-  <p class="font-medium text-center">
+  <form method="dialog">
+    <button
+      aria-label="Close"
+      class="absolute right-3 top-3 rounded-full p-1.5 text-gray-400 hover:bg-gray-100 hover:text-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+    >
+      <svg
+        class="h-5 w-5"
+        viewBox="0 0 20 20"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        aria-hidden="true"
+      >
+        <path d="M6 6l8 8M14 6l-8 8"></path>
+      </svg>
+    </button>
+  </form>
+  <p class="font-title text-xl tracking-tight text-center text-gray-900">
     Where would you prefer to host your data?
   </p>
-  <div class="flex flex-col md:flex-row gap-4 justify-around">
+  <div class="mt-6 flex flex-col md:flex-row gap-4 justify-around">
     <a
       href="https://eu.aptabase.com/auth/register"
-      class="plausible-event-name=Register-EU flex flex-col items-center hover:bg-blue-50 rounded py-2 px-6"
+      class="plausible-event-name=Register-EU flex flex-col items-center rounded-xl ring-1 ring-gray-200 py-4 px-6 transition hover:bg-blue-50 hover:ring-blue-300"
     >
-      <img class="h-12 mb-2" src="/eu.svg" />
-      <span class="text-sm">European Union</span>
+      <img class="h-12 mb-2" src="/eu.svg" alt="" />
+      <span class="text-sm font-medium text-gray-900">European Union</span>
       <span class="text-xs text-gray-600">Germany</span>
     </a>
     <a
       href="https://us.aptabase.com/auth/register"
-      class="plausible-event-name=Register-US flex flex-col items-center hover:bg-red-50 rounded py-2 px-6"
+      class="plausible-event-name=Register-US flex flex-col items-center rounded-xl ring-1 ring-gray-200 py-4 px-6 transition hover:bg-red-50 hover:ring-red-300"
     >
-      <img class="h-12 mb-2" src="/us.svg" />
-      <span class="text-sm">United States</span>
+      <img class="h-12 mb-2" src="/us.svg" alt="" />
+      <span class="text-sm font-medium text-gray-900">United States</span>
       <span class="text-xs text-gray-600">Virginia</span>
     </a>
   </div>
-  <p class="text-xs text-gray-600 text-left">
+  <p class="mt-6 text-xs leading-5 text-gray-600 text-left">
     We typically advise selecting the region nearest to the majority of your
     users' locations. However, if your user base is global and dispersed, opt
     for the region that is geographically closest to your own location.
   </p>
 </dialog>
+
+<script>
+  // Light dismiss fallback for browsers without `closedby="any"`:
+  // a click on the backdrop targets the dialog but lands outside its box.
+  const dialog = document.getElementById("register") as HTMLDialogElement;
+  if (!("closedBy" in dialog)) {
+    dialog.addEventListener("click", (e) => {
+      const r = dialog.getBoundingClientRect();
+      const outside =
+        e.clientX < r.left ||
+        e.clientX > r.right ||
+        e.clientY < r.top ||
+        e.clientY > r.bottom;
+      if (outside) dialog.close();
+    });
+  }
+</script>
+
+<style>
+  /* Fade/scale in when opened; fade the backdrop with it. */
+  dialog {
+    opacity: 0;
+    transform: translateY(0.5rem) scale(0.97);
+    transition:
+      opacity 0.15s ease,
+      transform 0.15s ease,
+      overlay 0.15s ease allow-discrete,
+      display 0.15s ease allow-discrete;
+  }
+  dialog[open] {
+    opacity: 1;
+    transform: none;
+  }
+  dialog::backdrop {
+    opacity: 0;
+    transition:
+      opacity 0.15s ease,
+      overlay 0.15s ease allow-discrete,
+      display 0.15s ease allow-discrete;
+  }
+  dialog[open]::backdrop {
+    opacity: 1;
+  }
+  @starting-style {
+    dialog[open] {
+      opacity: 0;
+      transform: translateY(0.5rem) scale(0.97);
+    }
+    dialog[open]::backdrop {
+      opacity: 0;
+    }
+  }
+</style>
