@@ -3,7 +3,9 @@ import BlogPostCard from "./BlogPostCard.astro";
 
 const { slug, cta } = Astro.props;
 
-const posts = await Astro.glob("../../pages/blog/*.mdx");
+const posts = Object.values(
+  import.meta.glob("../../pages/blog/*.mdx", { eager: true })
+);
 const related = posts.filter(
   (post) => post.frontmatter.cta === cta && post.frontmatter.slug !== slug
 );

@@ -1,5 +1,5 @@
-import { defineConfig, sharpImageService } from "astro/config";
-import tailwind from "@astrojs/tailwind";
+import { defineConfig } from "astro/config";
+import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import alpine from "@astrojs/alpinejs";
 
@@ -9,11 +9,14 @@ import mdx from "@astrojs/mdx";
 export default defineConfig({
   site: "https://aptabase.com",
   trailingSlash: "never",
-  integrations: [tailwind(), sitemap(), alpine(), mdx()],
+  // Restore pre-v7 HTML whitespace rules; the templates rely on
+  // whitespace around inline elements.
+  compressHTML: true,
+  integrations: [sitemap(), alpine(), mdx()],
   server: {
     port: 4000
   },
-  image: {
-    service: sharpImageService()
+  vite: {
+    plugins: [tailwindcss()]
   }
 });

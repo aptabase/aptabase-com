@@ -1,9 +1,9 @@
-import IconClick from "@tabler/icons/click.svg?raw";
-import IconLanguage from "@tabler/icons/language.svg?raw";
-import IconMobile from "@tabler/icons/device-mobile.svg?raw";
-import IconDesktop from "@tabler/icons/device-desktop.svg?raw";
-import IconGamePad2 from "@tabler/icons/device-gamepad-2.svg?raw";
-import IconChartHistogram from "@tabler/icons/chart-histogram.svg?raw";
+import IconClick from "@tabler/icons/outline/click.svg?raw";
+import IconLanguage from "@tabler/icons/outline/language.svg?raw";
+import IconMobile from "@tabler/icons/outline/device-mobile.svg?raw";
+import IconDesktop from "@tabler/icons/outline/device-desktop.svg?raw";
+import IconGamePad2 from "@tabler/icons/outline/device-gamepad-2.svg?raw";
+import IconChartHistogram from "@tabler/icons/outline/chart-histogram.svg?raw";
 
 export default [
   {
