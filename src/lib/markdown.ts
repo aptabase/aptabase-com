@@ -43,8 +43,8 @@ export const pricingTableMd = () =>
     ...tiers.map(
       (t) => `| ${formatEvents(t.events)} | ${formatPricePerMonth(t.price)} |`,
     ),
-    `| ${formatEvents(contactThreshold)}+ | Contact ${product.links.email} |`,
-  ].join("\n");
+  ].join("\n") +
+  `\n\nNeed more than ${formatEvents(contactThreshold)} events per month? Email ${product.links.email} for a custom plan.`;
 
 export const planFeaturesMd = () => bullets(planFeatures);
 

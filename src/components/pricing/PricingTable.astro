@@ -38,18 +38,14 @@ const { class: className = "" } = Astro.props;
         </tr>
       ))
     }
-    <tr>
-      <td class="py-1.5 text-gray-600 tabular-nums">
-        {formatEvents(contactThreshold)}+
-      </td>
-      <td class="py-1.5 text-right font-medium">
-        <a
-          href={`mailto:${product.links.email}`}
-          class="text-primary hover:underline"
-        >
-          Contact us
-        </a>
-      </td>
-    </tr>
   </tbody>
 </table>
+<p class="mt-4 text-sm text-gray-600">
+  Need more than {formatEvents(contactThreshold)} events per month?
+  <a
+    href={`mailto:${product.links.email}`}
+    class="text-primary hover:underline"
+  >
+    Email us
+  </a> for a custom plan.
+</p>

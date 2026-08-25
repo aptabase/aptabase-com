@@ -5,12 +5,14 @@ import SignUpOrDashboard from "./SignUpOrDashboard.astro";
 import IconRss from "@tabler/icons/outline/rss.svg?raw";
 import IconCoin from "@tabler/icons/outline/coin.svg?raw";
 import IconSwitch from "@tabler/icons/outline/switch-3.svg?raw";
-import IconBook from "@tabler/icons/outline/book.svg?raw";
+import IconHome from "@tabler/icons/outline/home.svg?raw";
 
+const isHome = Astro.url.pathname.replace(/\/+$/, "") === "";
 const navItems = [
+  // "Home" appears everywhere except on the homepage itself.
+  ...(isHome ? [] : [{ name: "Home", href: "/", icon: IconHome }]),
   { name: "Blog", href: "/blog", icon: IconRss },
   { name: "Pricing", href: "/pricing", icon: IconCoin },
-  { name: "Docs", href: "/docs", icon: IconBook },
   { name: "Integrations", href: "/integrations", icon: IconSwitch },
 ];
 const small = (svg: string) => svg.replace('width="24"', 'width="20"');
