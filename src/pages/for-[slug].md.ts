@@ -1,14 +1,14 @@
 import type { APIRoute, GetStaticPaths } from "astro";
-import frameworks from "../lib/frameworks";
+import { sdkPages, type Sdk } from "../data/sdks";
 import { frameworkMarkdown } from "../lib/markdown";
 
 /** Markdown twin of each framework landing page, served at /for-<slug>.md. */
 export const getStaticPaths: GetStaticPaths = () =>
-  frameworks.map((fw) => ({ params: { slug: fw.slug }, props: { fw } }));
+  sdkPages.map((sdk) => ({ params: { slug: sdk.page.slug }, props: { sdk } }));
 
 export const GET: APIRoute = ({ props }) => {
-  const { fw } = props as { fw: (typeof frameworks)[number] };
-  return new Response(frameworkMarkdown(fw), {
+  const { sdk } = props as { sdk: Sdk };
+  return new Response(frameworkMarkdown(sdk), {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },
   });
 };

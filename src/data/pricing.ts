@@ -51,6 +51,7 @@ export const pricingNotes = {
 };
 
 export const formatEvents = (n: number) => n.toLocaleString("en-US");
-export const formatPrice = (price: number) => (price === 0 ? "Free" : `$${price}`);
+export const formatPrice = (price: number) =>
+  price === 0 ? "Free" : `$${price}`;
 export const formatPricePerMonth = (price: number) =>
   price === 0 ? "Free" : `$${price}/month`;

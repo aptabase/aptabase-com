@@ -6,6 +6,14 @@ import IconRss from "@tabler/icons/outline/rss.svg?raw";
 import IconCoin from "@tabler/icons/outline/coin.svg?raw";
 import IconSwitch from "@tabler/icons/outline/switch-3.svg?raw";
 import IconBook from "@tabler/icons/outline/book.svg?raw";
+
+const navItems = [
+  { name: "Blog", href: "/blog", icon: IconRss },
+  { name: "Pricing", href: "/pricing", icon: IconCoin },
+  { name: "Docs", href: "/docs", icon: IconBook },
+  { name: "Integrations", href: "/integrations", icon: IconSwitch },
+];
+const small = (svg: string) => svg.replace('width="24"', 'width="20"');
 ---
 
 <header x-data="{ isOpen: false }">
@@ -19,34 +27,17 @@ import IconBook from "@tabler/icons/outline/book.svg?raw";
         <span class="sr-only">Aptabase</span>
       </a>
       <div class="hidden md:flex md:gap-x-6">
-        <a
-          href="/blog"
-          class="flex items-center space-x-1 rounded-lg py-1 px-2 text-gray-700 hover:bg-gray-100 hover:text-black"
-        >
-          <Fragment set:html={IconRss.replace('width="24"', 'width="20"')} />
-          <span>Blog</span>
-        </a>
-        <a
-          href="/pricing"
-          class="flex items-center space-x-1 rounded-lg py-1 px-2 text-gray-700 hover:bg-gray-100 hover:text-black"
-        >
-          <Fragment set:html={IconCoin.replace('width="24"', 'width="20"')} />
-          <span>Pricing</span>
-        </a>
-        <a
-          href="/docs"
-          class="flex items-center space-x-1 rounded-lg py-1 px-2 text-gray-700 hover:bg-gray-100 hover:text-black"
-        >
-          <Fragment set:html={IconBook.replace('width="24"', 'width="20"')} />
-          <span>Docs</span>
-        </a>
-        <a
-          href="/integrations"
-          class="flex items-center space-x-1 rounded-lg py-1 px-2 text-gray-700 hover:bg-gray-100 hover:text-black"
-        >
-          <Fragment set:html={IconSwitch.replace('width="24"', 'width="20"')} />
-          <span>Integrations</span>
-        </a>
+        {
+          navItems.map((item) => (
+            <a
+              href={item.href}
+              class="flex items-center space-x-1 rounded-lg py-1 px-2 text-gray-700 hover:bg-gray-100 hover:text-black"
+            >
+              <Fragment set:html={small(item.icon)} />
+              <span>{item.name}</span>
+            </a>
+          ))
+        }
       </div>
     </div>
     <div class="flex md:hidden">
@@ -115,38 +106,18 @@ import IconBook from "@tabler/icons/outline/book.svg?raw";
       <div class="mt-6 flow-root">
         <div class="-my-6 divide-y divide-gray-500/10">
           <div class="space-y-2 py-6">
-            <a
-              href="/blog"
-              @click="isOpen = false"
-              class="flex items-center space-x-2 -mx-3 text-lg rounded-lg px-3 py-2 leading-7 text-gray-900 hover:bg-gray-50"
-            >
-              <Fragment set:html={IconRss} />
-              <span>Blog</span>
-            </a>
-            <a
-              href="/pricing"
-              @click="isOpen = false"
-              class="flex items-center space-x-2 -mx-3 text-lg rounded-lg px-3 py-2 leading-7 text-gray-900 hover:bg-gray-50"
-            >
-              <Fragment set:html={IconCoin} />
-              <span>Pricing</span>
-            </a>
-            <a
-              href="/docs"
-              @click="isOpen = false"
-              class="flex items-center space-x-2 -mx-3 text-lg rounded-lg px-3 py-2 leading-7 text-gray-900 hover:bg-gray-50"
-            >
-              <Fragment set:html={IconBook} />
-              <span>Docs</span>
-            </a>
-            <a
-              href="/integrations"
-              @click="isOpen = false"
-              class="flex items-center space-x-2 -mx-3 text-lg rounded-lg px-3 py-2 leading-7 text-gray-900 hover:bg-gray-50"
-            >
-              <Fragment set:html={IconSwitch} />
-              <span>Integrations</span>
-            </a>
+            {
+              navItems.map((item) => (
+                <a
+                  href={item.href}
+                  x-on:click="isOpen = false"
+                  class="flex items-center space-x-2 -mx-3 text-lg rounded-lg px-3 py-2 leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  <Fragment set:html={item.icon} />
+                  <span>{item.name}</span>
+                </a>
+              ))
+            }
           </div>
           <div class="py-6">
             <SignUpOrDashboard />

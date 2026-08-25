@@ -1,48 +1,11 @@
 ---
 import Logo from "./Logo.astro";
+import { sdkPages, sdkHref } from "../data/sdks";
 
-const product = [
-  {
-    name: "for Tauri Apps",
-    href: "/for-tauri",
-  },
-  {
-    name: "for Apple (Swift) Apps",
-    href: "/for-swift",
-  },
-  {
-    name: "for Android (Kotlin) Apps",
-    href: "/for-android",
-  },
-  {
-    name: "for Electron Apps",
-    href: "/for-electron",
-  },
-  {
-    name: "for React Native Apps",
-    href: "/for-react-native",
-  },
-  {
-    name: "for Flutter Apps",
-    href: "/for-flutter",
-  },
-  {
-    name: "for .NET MAUI",
-    href: "/for-maui",
-  },
-  {
-    name: "for Unreal Engine",
-    href: "/for-unreal",
-  },
-  {
-    name: "for Unity",
-    href: "/for-unity",
-  },
-  {
-    name: "for NativeScript",
-    href: "/for-nativescript",
-  },
-];
+const product = sdkPages.map((sdk) => ({
+  name: `for ${sdk.page.title}`,
+  href: sdkHref(sdk)!,
+}));
 
 const resources = [
   {

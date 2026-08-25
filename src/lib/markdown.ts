@@ -1,7 +1,7 @@
 /**
- * Markdown renderers for agent-facing resources: llms.txt and the `.md` twin
- * of each key page. Everything is derived from src/data so the HTML pages,
- * the Markdown pages and llms.txt can never disagree.
+ * Markdown renderers for agent-facing resources: llms.txt, llms-full.txt and
+ * the `.md` twin of each key page. Everything is derived from src/data so the
+ * HTML pages, the Markdown pages and the llms files can never disagree.
  */
 import { product } from "../data/product";
 import {
@@ -13,16 +13,22 @@ import {
   firstPaidTier,
   lastTier,
   formatEvents,
-  formatPrice,
   formatPricePerMonth,
 } from "../data/pricing";
-import { sdks, sdkGroups, sdksInGroup, sdkForPage } from "../data/sdks";
+import {
+  sdks,
+  sdkGroups,
+  sdksInGroup,
+  sdkHref,
+  type Sdk,
+  type Snippet,
+} from "../data/sdks";
 import { faqs, faqsByCategory, type Faq } from "../data/faq";
 
 const abs = (path: string) => new URL(path, product.url).toString();
 const bullets = (items: readonly string[]) =>
   items.map((i) => `- ${i}`).join("\n");
-const join = (...blocks: (string | false | undefined)[]) =>
+const join = (...blocks: (string | false | undefined | null)[]) =>
   blocks.filter(Boolean).join("\n\n") + "\n";
 
 /* ---------- reusable fragments ---------- */
@@ -47,10 +53,14 @@ export const faqMd = (items: Faq[]) =>
     .map((f) => `### ${f.question}\n\n${f.answers.join("\n\n")}`)
     .join("\n\n");
 
-export const sdkLineMd = (s: (typeof sdks)[number]) =>
-  `- [${s.name}](${s.repo}): \`${s.package}\` — \`${s.install}\`` +
-  (s.page ? ` ([guide](${abs(s.page)}))` : "") +
-  (s.community ? " (community-maintained)" : "");
+export const sdkLineMd = (s: Sdk) => {
+  const href = sdkHref(s);
+  return (
+    `- [${s.name}](${s.repo}): \`${s.package}\` — \`${s.install}\`` +
+    (href ? ` ([guide](${abs(href)}))` : "") +
+    (s.community ? " (community-maintained)" : "")
+  );
+};
 
 export const sdkListMd = () =>
   sdkGroups
@@ -68,6 +78,13 @@ export const dataMd = () =>
 export const featuresMd = () =>
   product.features.map((f) => `- **${f.title}** — ${f.description}`).join("\n");
 
+export const privacyFeaturesMd = () =>
+  bullets(
+    product.features
+      .filter((f) => /anonymous|fingerprinting|compliant/i.test(f.title))
+      .map((f) => f.description),
+  );
+
 export const regionsMd = () =>
   bullets([
     ...product.regions.map(
@@ -76,22 +93,24 @@ export const regionsMd = () =>
     ),
   ]);
 
+const registerLinksMd = () =>
+  product.regions.map((r) => `[${r.name}](${r.register})`).join(" or ");
+
 const gettingStartedMd = () =>
   [
-    `1. Create a free account in the ${product.regions.map((r) => `[${r.id}](${r.register})`).join(" or ")} region (no credit card required).`,
-    `2. Create an app in the dashboard and copy its App Key from the **Instructions** menu. Keys look like \`${product.regions.map((r) => `${r.keyPrefix}*`).join("\` or \`")}\`.`,
+    `1. Create a free account in the ${registerLinksMd()} region (no credit card required).`,
+    `2. Create an app in the dashboard and copy its App Key from the **Instructions** menu. Keys look like \`${product.regions.map((r) => `${r.keyPrefix}*`).join("` or `")}\`.`,
     "3. Install the SDK for your platform (list below), initialize it with the App Key, and call the track function for the events you care about.",
     "4. Open the dashboard — events show up in real time.",
   ].join("\n");
 
-const sdkNotesMd = () =>
-  bullets([
-    "Nothing is tracked automatically — you call the track function for each event.",
-    "Every event is enriched automatically with OS name/version, app version and locale.",
-    "Custom property values must be strings or numbers.",
-    "Tracking calls are non-blocking and run in the background.",
-    `Events are separated into Debug and Release build modes automatically (see ${abs("/docs/build-modes")}).`,
-  ]);
+export const sdkBehaviourNotes = [
+  "Nothing is tracked automatically — you call the track function for each event.",
+  "Every event is enriched automatically with OS name/version, app version and locale.",
+  "Custom property values must be strings or numbers.",
+  "Tracking calls are non-blocking and run in the background.",
+  `Events are separated into Debug and Release build modes automatically (see ${abs("/docs/build-modes")}).`,
+];
 
 const agentNotesMd = () =>
   bullets([
@@ -99,6 +118,34 @@ const agentNotesMd = () =>
     `[llms-full.txt](${abs("/llms-full.txt")}) — install, initialization and tracking code for every SDK.`,
     "Every key page has a Markdown version: append `.md` to the path (for example `/pricing.md`, `/about.md`, `/docs.md`, `/docs/build-modes.md`, `/for-swift.md`) or send `Accept: text/markdown`.",
   ]);
+
+/* ---------- SDK reference (shared by llms-full.txt and /for-*.md) ---------- */
+
+const snippetMd = (s: Snippet) =>
+  join(
+    `### ${s.title}`,
+    s.intro,
+    s.code !== undefined && "```" + (s.lang ?? "") + "\n" + s.code + "\n```",
+    s.outro,
+  ).trimEnd();
+
+/** Package/install/repo header plus every snippet and note for one SDK. */
+export const sdkReferenceMd = (sdk: Sdk) =>
+  join(
+    [
+      `Package: \`${sdk.package}\``,
+      `Install: \`${sdk.install}\``,
+      `Repo: ${sdk.repo}`,
+      sdk.requires && `Requires: ${sdk.requires}`,
+      sdk.platforms && `Platforms: ${sdk.platforms}`,
+      sdk.community && "Maintained by the community.",
+    ]
+      .filter(Boolean)
+      .join("\n"),
+    sdk.description,
+    ...sdk.snippets.map(snippetMd),
+    sdk.notes && `### Platform notes\n\n${bullets(sdk.notes)}`,
+  ).trimEnd();
 
 /* ---------- page twins ---------- */
 
@@ -151,7 +198,7 @@ export const docsMarkdown = () =>
     "## Getting started",
     gettingStartedMd(),
     "## How the SDKs behave",
-    sdkNotesMd(),
+    bullets(sdkBehaviourNotes),
     `## SDKs (${sdks.length} platforms)`,
     sdkListMd(),
     `Don't see your platform? [Build your own SDK](${product.links.buildYourOwnSdk}).`,
@@ -181,40 +228,29 @@ export const docsMarkdown = () =>
     agentNotesMd(),
   );
 
-export interface FrameworkLike {
-  slug: string;
-  name: string;
-  title: string;
-  href: string;
-  sdkName: string;
-  sdkUrl: string;
-  sdkCodeExample: string;
-  sdkLanguage: string;
-  useCases: { title: string; description: string }[];
-}
-
-export const frameworkMarkdown = (fw: FrameworkLike) => {
-  const sdk = sdkForPage(fw.href);
+/** Markdown twin of /for-<slug>. */
+export const frameworkMarkdown = (sdk: Sdk) => {
+  const page = sdk.page;
+  if (!page) throw new Error(`${sdk.id} has no landing page`);
   return join(
-    `# ${product.name} Analytics for ${fw.title}`,
-    `${product.name} is an open source, privacy-first alternative to Google Firebase Analytics for ${fw.title}: it collects no personal data, uses no cookies or device identifiers, and needs no consent banner.`,
+    `# ${product.name} Analytics for ${page.title}`,
+    `${product.name} is an open source, privacy-first alternative to Google Firebase Analytics for ${page.title}: it collects no personal data, uses no cookies or device identifiers, and needs no consent banner.`,
     "## Get started",
-    `1. Register: ${product.regions.map((r) => `[${r.name}](${r.register})`).join(" or ")} — takes less than a minute.`,
-    `2. Instrument: use the [${fw.sdkName}](${fw.sdkUrl}) to instrument your app.` +
-      (sdk ? ` Package: \`${sdk.package}\`. Install: \`${sdk.install}\`.` : ""),
-    "```" + fw.sdkLanguage + "\n" + fw.sdkCodeExample + "\n```",
-    "3. Explore: events show up on your dashboard in real time.",
-    `## Why add analytics to your ${fw.title}?`,
-    fw.useCases.map((u) => `- **${u.title}** — ${u.description}`).join("\n"),
+    `1. Register: ${registerLinksMd()} — takes less than a minute, no credit card required.`,
+    `2. Create an app in the dashboard and copy its App Key from the **Instructions** menu (\`${product.regions.map((r) => `${r.keyPrefix}*`).join("` / `")}\`).`,
+    `3. Instrument your app with the [${page.sdkName}](${sdk.repo}) — see the quickstart below.`,
+    "4. Explore: events show up on your dashboard in real time.",
+    `## Quickstart: ${sdk.name}`,
+    sdkReferenceMd(sdk),
+    "### How the SDK behaves",
+    bullets(sdkBehaviourNotes),
+    `## Why add analytics to your ${page.title}?`,
+    page.useCases.map((u) => `- **${u.title}** — ${u.description}`).join("\n"),
     "## Privacy",
-    bullets(
-      product.features
-        .filter((f) => /anonymous|fingerprinting|compliant/i.test(f.title))
-        .map((f) => f.description),
-    ),
+    privacyFeaturesMd(),
     "## Pricing",
     `${pricingSummary()} Details: ${abs("/pricing")}`,
-    `More: [Documentation](${abs("/docs")}) · [All SDKs](${abs("/integrations")}) · [About](${abs("/about")})`,
+    `More: [Documentation](${abs("/docs")}) · [All SDKs](${abs("/integrations")}) · [SDK reference](${abs("/llms-full.txt")}) · [About](${abs("/about")})`,
   );
 };
 
@@ -230,7 +266,7 @@ export const llmsTxt = () =>
       `[Pricing](${abs("/pricing")}): ${pricingSummary()}`,
       `[Documentation](${abs("/docs")}): Getting started, SDKs, data collected`,
       `[About](${abs("/about")}): What Aptabase is, who it's for, how the privacy model works`,
-      `[Integrations](${abs("/integrations")}): Landing pages per framework`,
+      `[Integrations](${abs("/integrations")}): Landing pages per framework, each with a quickstart`,
       `[SDK reference (llms-full.txt)](${abs("/llms-full.txt")}): Install, initialization and tracking code for every SDK`,
     ]),
     "## Pricing (USD, monthly)",
@@ -271,5 +307,39 @@ export const llmsTxt = () =>
       `[Terms of Service](${abs("/legal/terms")})`,
       `[Data Processing Agreement](${abs("/legal/dpa")})`,
       `[GitHub](${product.links.github}) · [Discord](${product.links.discord}) · [Twitter/X](${product.links.twitter}) · Email ${product.links.email}`,
+    ]),
+  );
+
+/* ---------- llms-full.txt ---------- */
+
+export const llmsFullTxt = () =>
+  join(
+    `# ${product.name} SDK reference`,
+    `> ${product.oneLiner}`,
+    `Install, initialization and tracking code for all ${sdks.length} SDKs. For product facts, pricing and the page index see ${abs("/llms.txt")}.`,
+    "## General notes",
+    bullets([
+      `Get your App Key from the Aptabase dashboard under the "Instructions" menu.`,
+      `App keys follow the format ${product.regions.map((r) => `\`${r.keyPrefix}*\` (${r.name})`).join(" or ")}.`,
+      ...sdkBehaviourNotes,
+    ]),
+    ...sdkGroups.flatMap((g) =>
+      sdksInGroup(g.id).map((sdk) => {
+        const href = sdkHref(sdk);
+        return join(
+          `## ${sdk.name}`,
+          sdkReferenceMd(sdk),
+          href && `Guide: ${abs(href)}`,
+        ).trimEnd();
+      }),
+    ),
+    "## Optional",
+    bullets([
+      `[llms.txt](${abs("/llms.txt")}): Product facts, who it's for, full pricing table and the index of all SDKs`,
+      `[Documentation](${abs("/docs")}): Getting started, SDK catalogue, data collected (Markdown: ${abs("/docs.md")})`,
+      `[Pricing](${abs("/pricing")}): ${pricingSummary()} (Markdown: ${abs("/pricing.md")})`,
+      `[About](${abs("/about")}): What Aptabase is and who it's for (Markdown: ${abs("/about.md")})`,
+      `[MCP server](${product.links.mcp}): Query your Aptabase analytics from AI agents`,
+      `[Privacy Policy](${abs("/legal/privacy")}) · [Terms of Service](${abs("/legal/terms")})`,
     ]),
   );

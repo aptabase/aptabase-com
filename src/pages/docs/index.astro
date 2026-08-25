@@ -2,7 +2,7 @@
 import ContentLayout from "../../layouts/ContentLayout.astro";
 import { Code } from "astro/components";
 import { product } from "../../data/product";
-import { sdks, sdkGroups, sdksInGroup } from "../../data/sdks";
+import { sdks, sdkGroups, sdksInGroup, sdkHref } from "../../data/sdks";
 import { pricingNotes } from "../../data/pricing";
 import { pricingSummary } from "../../lib/markdown";
 import { breadcrumbs, softwareApplication } from "../../lib/jsonld";
@@ -13,7 +13,6 @@ init("A-EU-0000000000"); // your App Key
 
 trackEvent("app_started");
 trackEvent("screen_view", { name: "Settings" });`;
-
 
 const sections = [
   { id: "getting-started", name: "Getting started" },
@@ -93,7 +92,7 @@ const link = "text-primary hover:underline";
             ))
           }
           region ({pricingNotes.noCreditCard.toLowerCase().replace(/\.$/, "")}),
-         .
+          .
         </li>
         <li>
           <strong class="text-gray-900">
@@ -208,10 +207,10 @@ const link = "text-primary hover:underline";
                         >
                           README
                         </a>
-                        {sdk.page && (
+                        {sdkHref(sdk) && (
                           <>
                             <span class="mx-1 text-gray-300">·</span>
-                            <a href={sdk.page} class={link}>
+                            <a href={sdkHref(sdk)} class={link}>
                               Guide
                             </a>
                           </>
@@ -265,7 +264,6 @@ const link = "text-primary hover:underline";
         </li>
       </ul>
     </section>
-
 
     <section id="data" aria-labelledby="data-heading" class="mt-16">
       <h2 id="data-heading" class={h2}>Data &amp; privacy</h2>

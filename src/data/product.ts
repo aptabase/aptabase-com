@@ -80,8 +80,7 @@ export const product = {
     },
     {
       title: "EU or US data residency",
-      description:
-        "Choose data centers in Germany or the United States.",
+      description: "Choose data centers in Germany or the United States.",
     },
     {
       title: "Debug / Release build modes",
@@ -105,7 +104,8 @@ export const product = {
     },
     {
       title: "Mobile-first dashboard with dark mode",
-      description: "A built-in dashboard made for mobile so you can peek at your data on the go.",
+      description:
+        "A built-in dashboard made for mobile so you can peek at your data on the go.",
     },
   ],
 
@@ -150,7 +150,6 @@ export const product = {
       keyPrefix: "A-US-",
     },
   ] as Region[],
-
 
   links: {
     github: "https://github.com/aptabase/aptabase",
