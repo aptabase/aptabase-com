@@ -1,15 +1,30 @@
 ---
 import ContentLayout from "./ContentLayout.astro";
+import { breadcrumbs } from "../lib/jsonld";
+
 const { frontmatter } = Astro.props;
+const slug: string = frontmatter.slug;
+const path = `/docs/${slug}`;
 ---
 
 <ContentLayout
   title={`${frontmatter.title} - Aptabase`}
   description={frontmatter.description}
+  markdown={`${path}.md`}
+  schema={[
+    breadcrumbs([
+      { name: "Home", url: "/" },
+      { name: "Documentation", url: "/docs" },
+      { name: frontmatter.title, url: path },
+    ]),
+  ]}
 >
   <div
     class="mx-auto text-center max-w-5xl px-6 lg:px-8 mb-12 flex w-full flex-col space-y-4"
   >
+    <nav aria-label="Breadcrumb" class="text-sm text-gray-500">
+      <a href="/docs" class="hover:text-primary">Documentation</a>
+    </nav>
     <h1 class="text-4xl font-title text-gray-900 sm:text-5xl lg:text-6xl">
       {frontmatter.title}
     </h1>

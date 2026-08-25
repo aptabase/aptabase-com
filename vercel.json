@@ -2,6 +2,7 @@
   "github": {
     "silent": true
   },
+  "trailingSlash": false,
   "headers": [
     {
       "source": "/avatar/(.*)",
@@ -20,6 +21,130 @@
           "value": "public, max-age=86400"
         }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/faq",
+      "destination": "/#faq",
+      "permanent": true
+    },
+    {
+      "source": "/features",
+      "destination": "/#features",
+      "permanent": true
+    },
+    {
+      "source": "/documentation",
+      "destination": "/docs",
+      "permanent": true
+    },
+    {
+      "source": "/sdks",
+      "destination": "/docs#sdks",
+      "permanent": true
+    },
+    {
+      "source": "/sdk",
+      "destination": "/docs#sdks",
+      "permanent": true
+    },
+    {
+      "source": "/changelog",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/about#contact",
+      "permanent": true
+    },
+    {
+      "source": "/privacy",
+      "destination": "/legal/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/terms",
+      "destination": "/legal/terms",
+      "permanent": true
+    },
+    {
+      "source": "/dpa",
+      "destination": "/legal/dpa",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "destination": "/llms.txt",
+      "permanent": false
+    },
+    {
+      "source": "/pricing",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "destination": "/pricing.md",
+      "permanent": false
+    },
+    {
+      "source": "/about",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "destination": "/about.md",
+      "permanent": false
+    },
+    {
+      "source": "/docs",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "destination": "/docs.md",
+      "permanent": false
+    },
+    {
+      "source": "/docs/:slug([a-z0-9-]+)",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "destination": "/docs/:slug.md",
+      "permanent": false
+    },
+    {
+      "source": "/for-:slug([a-z0-9-]+)",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "destination": "/for-:slug.md",
+      "permanent": false
     }
   ],
   "rewrites": [

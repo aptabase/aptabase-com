@@ -2,17 +2,26 @@
 import "cal-sans";
 import "@fontsource/inter";
 import BaseLayout from "./BaseLayout.astro";
+import type { JsonLd } from "../lib/jsonld";
 
 export interface Props {
   title: string;
   description: string;
   og?: string;
+  markdown?: string;
+  schema?: JsonLd[];
 }
 
-const { title, description, og } = Astro.props;
+const { title, description, og, markdown, schema } = Astro.props;
 ---
 
-<BaseLayout title={title} description={description} og={og}>
+<BaseLayout
+  title={title}
+  description={description}
+  og={og}
+  markdown={markdown}
+  schema={schema}
+>
   <main class="py-16">
     <slot />
   </main>

@@ -1,0 +1,382 @@
+---
+import ContentLayout from "../../layouts/ContentLayout.astro";
+import { Code } from "astro/components";
+import { product } from "../../data/product";
+import { sdks, sdkGroups, sdksInGroup, sdkHref } from "../../data/sdks";
+import { pricingNotes } from "../../data/pricing";
+import { pricingSummary } from "../../lib/markdown";
+import { breadcrumbs, softwareApplication } from "../../lib/jsonld";
+
+const example = `import { init, trackEvent } from "@aptabase/web";
+
+init("A-EU-0000000000"); // your App Key
+
+trackEvent("app_started");
+trackEvent("screen_view", { name: "Settings" });`;
+
+const sections = [
+  { id: "getting-started", name: "Getting started" },
+  { id: "sdks", name: "SDKs" },
+  { id: "guides", name: "Guides" },
+  { id: "data", name: "Data & privacy" },
+  { id: "limits", name: "Limits & pricing" },
+  { id: "tools", name: "Tools" },
+  { id: "help", name: "Help" },
+  { id: "agents", name: "For AI agents" },
+];
+
+const h2 =
+  "text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl scroll-mt-24";
+const h3 = "mt-8 text-lg font-semibold text-gray-900";
+const p = "mt-4 text-base leading-7 text-gray-600";
+const list = "mt-4 space-y-2 text-base leading-7 text-gray-600 list-disc pl-5";
+const steps =
+  "mt-4 space-y-4 text-base leading-7 text-gray-600 list-decimal pl-5";
+const link = "text-primary hover:underline";
+---
+
+<ContentLayout
+  title="Documentation - Aptabase"
+  description={`Getting started with Aptabase: create an app, install one of ${sdks.length} SDKs, track events. Plus build modes, Apple App Privacy and exactly what data is collected.`}
+  markdown="/docs.md"
+  schema={[
+    softwareApplication(),
+    breadcrumbs([
+      { name: "Home", url: "/" },
+      { name: "Documentation", url: "/docs" },
+    ]),
+  ]}
+>
+  <div class="mx-auto max-w-4xl px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        Documentation
+      </h1>
+      <p class="mt-4 text-lg leading-8 text-gray-600">{product.oneLiner}</p>
+    </div>
+
+    <nav aria-label="On this page" class="mt-10">
+      <ul class="flex flex-wrap justify-center gap-2 text-sm">
+        {
+          sections.map((s) => (
+            <li>
+              <a
+                href={`#${s.id}`}
+                class="inline-block rounded-full border border-gray-200 px-3 py-1 text-gray-700 hover:border-primary hover:text-primary"
+              >
+                {s.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <section
+      id="getting-started"
+      aria-labelledby="getting-started-heading"
+      class="mt-16"
+    >
+      <h2 id="getting-started-heading" class={h2}>Getting started</h2>
+      <ol class={steps}>
+        <li>
+          <strong class="text-gray-900">Create a free account</strong> in the
+          {
+            product.regions.map((r, i) => (
+              <>
+                <a href={r.register} class={link}>
+                  {r.name}
+                </a>
+                {i < product.regions.length - 1 ? " or " : ""}
+              </>
+            ))
+          }
+          region ({pricingNotes.noCreditCard.toLowerCase().replace(/\.$/, "")}),
+          .
+        </li>
+        <li>
+          <strong class="text-gray-900">
+            Create an app and copy its App Key
+          </strong>
+          from the <em>Instructions</em> menu in the dashboard. The key tells the
+          SDK where to send data:
+          <ul class="mt-2 list-disc pl-5">
+            {
+              product.regions.map((r) => (
+                <li>
+                  <code>{r.keyPrefix}*</code> — {r.name} ({r.location}),
+                  dashboard at
+                  <a href={r.dashboard} class={link}>
+                    {r.dashboard.replace("https://", "")}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </li>
+        <li>
+          <strong class="text-gray-900">
+            Install the SDK for your platform
+          </strong>
+          (<a href="#sdks" class={link}>full list below</a>), initialize it with
+          the App Key and call the track function for the events you care about.
+          For example, in a web app:
+          <div class="prose mt-3 max-w-none">
+            <Code code={example} lang="js" theme="dark-plus" />
+          </div>
+        </li>
+        <li>
+          <strong class="text-gray-900">Open the dashboard.</strong> Events show up
+          in real time. Debug builds are kept separate from release builds automatically
+          — see <a href="/docs/build-modes" class={link}>Build Modes</a>.
+        </li>
+      </ol>
+
+      <h3 class={h3}>How the SDKs behave</h3>
+      <ul class={list}>
+        <li>
+          Nothing is tracked automatically — you call the track function for
+          each event.
+        </li>
+        <li>
+          Every event is enriched automatically with OS name and version, app
+          version and locale.
+        </li>
+        <li>Custom property values must be strings or numbers.</li>
+        <li>Tracking calls are non-blocking and run in the background.</li>
+        <li>
+          Events are separated into Debug and Release
+          <a href="/docs/build-modes" class={link}>build modes</a> based on your build
+          configuration.
+        </li>
+      </ul>
+    </section>
+
+    <section id="sdks" aria-labelledby="sdks-heading" class="mt-16">
+      <h2 id="sdks-heading" class={h2}>SDKs ({sdks.length} platforms)</h2>
+      <p class={p}>
+        Every SDK is open source under the {product.license.sdks} license. The
+        <a href="/llms-full.txt" class={link}>SDK reference</a> has initialization
+        and tracking code for each one; the framework guides walk through a full setup.
+      </p>
+      {
+        sdkGroups.map((group) => (
+          <div>
+            <h3 class={h3}>{group.name}</h3>
+            <div class="mt-3 overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="text-left text-xs uppercase tracking-wide text-gray-500">
+                    <th scope="col" class="py-1.5 pr-4 font-medium">
+                      Platform
+                    </th>
+                    <th scope="col" class="py-1.5 pr-4 font-medium">
+                      Package
+                    </th>
+                    <th scope="col" class="py-1.5 pr-4 font-medium">
+                      Install
+                    </th>
+                    <th scope="col" class="py-1.5 font-medium">
+                      Links
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-900/5 border-t border-gray-900/5 align-top">
+                  {sdksInGroup(group.id).map((sdk) => (
+                    <tr>
+                      <td class="py-2 pr-4 font-medium text-gray-900">
+                        {sdk.name}
+                        {sdk.community && (
+                          <span class="ml-1 text-xs font-normal text-gray-500">
+                            (community)
+                          </span>
+                        )}
+                      </td>
+                      <td class="py-2 pr-4 text-gray-600">
+                        <code class="text-xs break-words">{sdk.package}</code>
+                      </td>
+                      <td class="py-2 pr-4 text-gray-600">
+                        <code class="text-xs break-words">{sdk.install}</code>
+                      </td>
+                      <td class="py-2 whitespace-nowrap">
+                        <a
+                          href={sdk.repo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class={link}
+                        >
+                          README
+                        </a>
+                        {sdkHref(sdk) && (
+                          <>
+                            <span class="mx-1 text-gray-300">·</span>
+                            <a href={sdkHref(sdk)} class={link}>
+                              Guide
+                            </a>
+                          </>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))
+      }
+      <p class={p}>
+        Don't see your platform?
+        <a
+          href={product.links.buildYourOwnSdk}
+          target="_blank"
+          rel="noopener noreferrer"
+          class={link}
+        >
+          Build your own SDK
+        </a> — the ingestion API is small and documented in the wiki.
+      </p>
+    </section>
+
+    <section id="guides" aria-labelledby="guides-heading" class="mt-16">
+      <h2 id="guides-heading" class={h2}>Guides</h2>
+      <ul class={list}>
+        <li>
+          <a href="/docs/build-modes" class={link}>Build Modes</a> — how Debug and
+          Release data are kept apart, and how to switch between them in the dashboard.
+        </li>
+        <li>
+          <a href="/docs/apple-app-privacy" class={link}>Apple App Privacy</a> — how
+          to answer the App Store privacy questionnaire when using Aptabase.
+        </li>
+        <li>
+          <a
+            href={product.links.buildYourOwnSdk}
+            target="_blank"
+            rel="noopener noreferrer"
+            class={link}
+          >
+            How to build your own SDK
+          </a> — for platforms we don't cover yet.
+        </li>
+        <li>
+          <a href="/blog" class={link}>Blog</a> — product updates and platform-specific
+          tutorials.
+        </li>
+      </ul>
+    </section>
+
+    <section id="data" aria-labelledby="data-heading" class="mt-16">
+      <h2 id="data-heading" class={h2}>Data &amp; privacy</h2>
+      <p class={p}>{product.privacyModel}</p>
+      <div class="mt-4 grid gap-8 md:grid-cols-2">
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900">Data collected</h3>
+          <ul class={list}>
+            {product.dataCollected.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900">
+            Data never collected
+          </h3>
+          <ul class={list}>
+            {product.dataNotCollected.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+      <p class={p}>
+        This is why apps using Aptabase stay {product.compliance.join(", ")}
+        compliant without a consent banner, and why user-level metrics such as Monthly
+        Active Users or retention are not available — see
+        <a href="/about#who" class={link}>who Aptabase is for</a>. Legal
+        details:
+        <a href="/legal/privacy" class={link}>Privacy Policy</a> and
+        <a href="/legal/dpa" class={link}>Data Processing Agreement</a>.
+      </p>
+    </section>
+
+    <section id="limits" aria-labelledby="limits-heading" class="mt-16">
+      <h2 id="limits-heading" class={h2}>Limits &amp; pricing</h2>
+      <p class={p}>
+        {pricingSummary()} Every call to the track function counts as one event.
+      </p>
+      <p class={p}>{pricingNotes.overage}</p>
+      <p class={p}>
+        <a href="/pricing" class={link}>See all plans →</a>
+      </p>
+    </section>
+
+    <section id="tools" aria-labelledby="tools-heading" class="mt-16">
+      <h2 id="tools-heading" class={h2}>Tools</h2>
+      <ul class={list}>
+        <li>
+          <a
+            href={product.links.mcp}
+            target="_blank"
+            rel="noopener noreferrer"
+            class={link}
+          >
+            MCP server
+          </a> — lets AI agents (Cursor, Claude Desktop and others) query your Aptabase
+          analytics. Aptabase has no public query API; the MCP server wraps the dashboard
+          endpoints.
+        </li>
+        <li>CSV export — export your data at any time from the dashboard.</li>
+      </ul>
+    </section>
+
+    <section id="help" aria-labelledby="help-heading" class="mt-16">
+      <h2 id="help-heading" class={h2}>Help</h2>
+      <ul class={list}>
+        <li>
+          <a
+            href={product.links.discord}
+            target="_blank"
+            rel="noopener noreferrer"
+            class={link}
+          >
+            Discord
+          </a> — community and support
+        </li>
+        <li>
+          <a
+            href={product.links.issues}
+            target="_blank"
+            rel="noopener noreferrer"
+            class={link}
+          >
+            GitHub issues
+          </a> — bugs and feature requests
+        </li>
+        <li>
+          <a href={`mailto:${product.links.email}`} class={link}>
+            {product.links.email}
+          </a> — email
+        </li>
+      </ul>
+    </section>
+
+    <section id="agents" aria-labelledby="agents-heading" class="mt-16">
+      <h2 id="agents-heading" class={h2}>For AI agents</h2>
+      <ul class={list}>
+        <li>
+          <a href="/llms.txt" class={link}>llms.txt</a> — product facts, who it's
+          for, the full pricing table and the SDK index, with links.
+        </li>
+        <li>
+          <a href="/llms-full.txt" class={link}>llms-full.txt</a> — install, initialization
+          and tracking code for every SDK.
+        </li>
+        <li>
+          Every key page has a Markdown version: append <code>.md</code> to the path
+          (<a href="/pricing.md" class={link}>/pricing.md</a>,
+          <a href="/about.md" class={link}>/about.md</a>,
+          <a href="/docs.md" class={link}>/docs.md</a>,
+          <a href="/docs/build-modes.md" class={link}>/docs/build-modes.md</a>,
+          <a href="/for-swift.md" class={link}>/for-swift.md</a>) or request the
+          HTML URL with <code>Accept: text/markdown</code>.
+        </li>
+      </ul>
+    </section>
+  </div>
+</ContentLayout>

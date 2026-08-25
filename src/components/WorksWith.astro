@@ -1,5 +1,5 @@
 ---
-import frameworks from "../lib/frameworks";
+import { sdkPages, sdkHref } from "../data/sdks";
 ---
 
 <div class="mt-20 mx-auto">
@@ -7,12 +7,12 @@ import frameworks from "../lib/frameworks";
     <span>Works with the framework of your choice!</span>
   </p>
   <div
-    class="grid grid-cols-3 md:grid-cols-6 mx-4 md:mx-20 lg:mx-0 lg:flex items-center mt-8 gap-8"
+    class="grid grid-cols-3 md:grid-cols-6 mx-4 md:mx-20 lg:mx-0 lg:flex lg:flex-wrap lg:justify-center items-center mt-8 gap-8"
   >
     {
-      frameworks.map((fw) => (
-        <a href={fw.href}>
-          <img class="mx-auto h-14 w-14" src={fw.image} alt={fw.name} />
+      sdkPages.map((sdk) => (
+        <a href={sdkHref(sdk)} class="shrink-0">
+          <img class="mx-auto h-14 w-14" src={sdk.page.image} alt={sdk.name} />
         </a>
       ))
     }

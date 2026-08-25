@@ -1,0 +1,88 @@
+---
+import ContentLayout from "../layouts/ContentLayout.astro";
+import PricingTable from "../components/pricing/PricingTable.astro";
+import PlanFeatures from "../components/pricing/PlanFeatures.astro";
+import FAQ from "../components/FAQ.astro";
+import {
+  freeTier,
+  firstPaidTier,
+  contactThreshold,
+  pricingNotes,
+  formatEvents,
+  formatPricePerMonth,
+} from "../data/pricing";
+import { faqsByCategory } from "../data/faq";
+import { product } from "../data/product";
+import { softwareApplication, breadcrumbs } from "../lib/jsonld";
+
+const description = `Free up to ${formatEvents(freeTier.events)} events per month, then from ${formatPricePerMonth(firstPaidTier.price)}. No overage fees.`;
+const cardStyle =
+  "flex flex-col rounded-xl bg-gray-400/5 ring-1 ring-inset ring-gray-200 p-6 sm:p-8";
+---
+
+<ContentLayout
+  title="Pricing - Aptabase"
+  description={description}
+  markdown="/pricing.md"
+  schema={[
+    softwareApplication(),
+    breadcrumbs([
+      { name: "Home", url: "/" },
+      { name: "Pricing", url: "/pricing" },
+    ]),
+  ]}
+>
+  <div class="mx-auto max-w-5xl px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl text-center">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        Pricing
+      </h1>
+      <p class="mt-2 text-lg leading-8 text-gray-600">
+        Start free and pay when you grow. {pricingNotes.noCreditCard}
+      </p>
+    </div>
+
+    <div class="mx-auto mt-12 grid max-w-4xl gap-8 lg:grid-cols-2">
+      <section aria-labelledby="plan-free-heading" class={cardStyle}>
+        <h2
+          id="plan-free-heading"
+          class="text-2xl font-bold font-title tracking-tight text-gray-900"
+        >
+          Free
+        </h2>
+        <p class="mt-1 text-gray-600">
+          Up to {formatEvents(freeTier.events)} events per month.
+        </p>
+        <button
+          onclick="document.getElementById('register').showModal()"
+          class="mt-6 rounded-md block w-full sm:w-auto bg-black px-6 py-2 text-center text-sm text-white shadow-xs hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+        >
+          Try free now!
+        </button>
+        <p class="mt-8 text-xs uppercase tracking-wide text-gray-500">
+          Every plan includes
+        </p>
+        <PlanFeatures class="mt-3" />
+      </section>
+
+      <section aria-labelledby="plan-paid-heading" class={cardStyle}>
+        <h2
+          id="plan-paid-heading"
+          class="text-2xl font-bold font-title tracking-tight text-gray-900"
+        >
+          Pay as you grow
+        </h2>
+        <p class="mt-1 text-gray-600">
+          From {formatPricePerMonth(firstPaidTier.price)}. {
+            pricingNotes.billing
+          }
+        </p>
+        <PricingTable class="mt-6" />
+      </section>
+    </div>
+  </div>
+
+  <div class="mt-24">
+    <FAQ items={faqsByCategory("pricing")} />
+  </div>
+</ContentLayout>

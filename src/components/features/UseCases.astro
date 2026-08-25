@@ -1,8 +1,24 @@
 ---
-type UseCase = {
-    icon: string;
+import IconClick from "@tabler/icons/outline/click.svg?raw";
+import IconLanguage from "@tabler/icons/outline/language.svg?raw";
+import IconMobile from "@tabler/icons/outline/device-mobile.svg?raw";
+import IconDesktop from "@tabler/icons/outline/device-desktop.svg?raw";
+import IconGamePad2 from "@tabler/icons/outline/device-gamepad-2.svg?raw";
+import IconChartHistogram from "@tabler/icons/outline/chart-histogram.svg?raw";
+import type { UseCase, UseCaseIcon } from "../../data/sdks";
+
+interface Props {
     title: string;
-    description: string;
+    useCases: UseCase[];
+}
+
+const icons: Record<UseCaseIcon, string> = {
+    click: IconClick,
+    language: IconLanguage,
+    mobile: IconMobile,
+    desktop: IconDesktop,
+    gamepad: IconGamePad2,
+    chart: IconChartHistogram,
 };
 
 const { title, useCases } = Astro.props;
@@ -11,14 +27,14 @@ const { title, useCases } = Astro.props;
 <div class="bg-white py-24 sm:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="mx-auto max-w-2xl lg:text-center">
-            <h2 class="text-base font-semibold leading-7 text-cyan-600">
+            <p class="text-base font-semibold leading-7 text-cyan-600">
                 Use Cases
-            </h2>
-            <p
+            </p>
+            <h2
                 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
             >
                 Why add Analytics to your {title}?
-            </p>
+            </h2>
             <p
                 class="mt-6 text-lg max-w-2xl lg:mx-auto leading-8 text-gray-600"
             >
@@ -35,7 +51,7 @@ const { title, useCases } = Astro.props;
                         <div class="flex flex-col">
                             <dt class="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
                                 <span class="text-cyan-600">
-                                    <Fragment set:html={useCase.icon} />
+                                    <Fragment set:html={icons[useCase.icon]} />
                                 </span>
                                 {useCase.title}
                             </dt>

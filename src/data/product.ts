@@ -1,0 +1,168 @@
+/**
+ * Single source of truth for product facts.
+ *
+ * Used by: the homepage, /about, /docs, /pricing, llms.txt, the Markdown
+ * twins of those pages, and the JSON-LD emitted by BaseLayout. Change facts
+ * here, not in the pages.
+ */
+
+import { sdks } from "./sdks";
+
+export interface Region {
+  id: "EU" | "US";
+  name: string;
+  location: string;
+  dashboard: string;
+  register: string;
+  keyPrefix: string;
+}
+
+export const product = {
+  name: "Aptabase",
+  url: "https://aptabase.com",
+  tagline: "Analytics for Apps. Privacy-First. Simple. Real-Time.",
+
+  /** The one sentence an agent should be able to quote back. */
+  oneLiner:
+    "Aptabase is an open-source, privacy-first analytics platform for mobile, desktop and web apps — an alternative to Google Firebase Analytics that collects no personal data, uses no cookies or device identifiers, and needs no consent banner.",
+
+  /** <meta name="description"> for the homepage. */
+  description:
+    "Open Source, Privacy-First and Simple Analytics for Mobile, Desktop and Web apps. Get simple and actionable insights without compromising user privacy. Try it now!",
+
+  since: 2023,
+  license: { server: "AGPL-3.0", sdks: "MIT" },
+
+  audience: {
+    for: [
+      "Developers and small teams shipping mobile, desktop or web apps — indie developers, studios, open-source projects and SaaS teams.",
+      "Apps that need usage insights (sessions, events, app versions, OS versions, countries) without collecting personal data.",
+      "Teams that want GDPR, CCPA and PECR compliance by design, with no cookie or consent banner.",
+      "Anyone who wants to own their analytics data, hosted in the EU or US.",
+    ],
+    notFor: [
+      "User-level analytics. Aptabase never identifies users, so it cannot report Monthly Active Users, per-user retention or funnels tied to individual people.",
+      "Advertising attribution or targeted marketing. There are no advertising IDs, fingerprints or cross-app tracking.",
+      "Marketing website analytics (page views, referrers, UTM campaigns). Aptabase is built for apps; for websites the team recommends Plausible.",
+    ],
+  },
+
+  features: [
+    {
+      title: "Real-time dashboard",
+      description:
+        "Data is updated in real time as users interact with your app. No need to wait hours to see what's happening.",
+    },
+    {
+      title: "Event tracking with custom properties",
+      description:
+        "Track button clicks, feature usage, configuration changes and more. Attach string or number properties to any event. You decide what to measure — nothing is tracked automatically.",
+    },
+    {
+      title: "Sessions, live view and session timeline",
+      description:
+        "See active sessions as they happen, a live geo view, and the timeline of events inside a session.",
+    },
+    {
+      title: "Truly anonymous data",
+      description:
+        "Sessions are completely anonymous and untraceable. Data is never linked to an identifiable individual — no pseudonymisation, full anonymisation.",
+    },
+    {
+      title: "No fingerprinting",
+      description:
+        "No device identifiers, cookies, fingerprinting or long-term user identification.",
+    },
+    {
+      title: "GDPR, CCPA and PECR compliant",
+      description:
+        "Aptabase collects no personal data, so your app stays compliant with strict privacy regulations without a consent banner.",
+    },
+    {
+      title: "EU or US data residency",
+      description: "Choose data centers in Germany or the United States.",
+    },
+    {
+      title: "Debug / Release build modes",
+      description:
+        "SDKs detect debug builds automatically so experiments never pollute production data.",
+    },
+    {
+      title: "100% data ownership and CSV export",
+      description:
+        "It's your data. We don't sell it or use it, and you can export it at any time.",
+    },
+    {
+      title: "100% open source",
+      description:
+        "The server (AGPL-3.0) and every SDK (MIT) are open source. Inspect the code and contribute.",
+    },
+    {
+      title: `Lightweight SDKs for ${sdks.length} platforms`,
+      description:
+        "Swift, Kotlin, Flutter, React Native, Electron, Tauri, .NET MAUI, Unity, Unreal, Godot, Python, C++ and JavaScript for web, React, Next.js, Angular and browser extensions.",
+    },
+    {
+      title: "Mobile-first dashboard with dark mode",
+      description:
+        "A built-in dashboard made for mobile so you can peek at your data on the go.",
+    },
+  ],
+
+  dataCollected: [
+    "The event name and the custom properties you attach to it (strings and numbers only)",
+    "App version and build number",
+    "Operating system name and version",
+    "Device model",
+    "Locale / language",
+    "Country and region, derived on the server from the IP address (the IP address itself is not stored)",
+    "A random, short-lived session id generated by the SDK, plus timestamps",
+  ],
+
+  dataNotCollected: [
+    "Device IDs, advertising IDs or hardware identifiers",
+    "Cookies, fingerprints or any persistent user identifier",
+    "IP addresses (used transiently to derive the country and a daily-rotated anonymous hash, never stored)",
+    "Names, emails or any other personal data",
+  ],
+
+  privacyModel:
+    "SDKs send no identifiers. On the server, Aptabase derives a temporary anonymous hash from the client IP, user agent and a salt that rotates every 24 hours, which makes it impossible to correlate sessions across days or apps. Analytics data is retained for up to 5 years.",
+
+  compliance: ["GDPR", "CCPA", "PECR"],
+  retentionYears: 5,
+
+  regions: [
+    {
+      id: "EU",
+      name: "European Union",
+      location: "Germany",
+      dashboard: "https://eu.aptabase.com",
+      register: "https://eu.aptabase.com/auth/register",
+      keyPrefix: "A-EU-",
+    },
+    {
+      id: "US",
+      name: "United States",
+      location: "Virginia",
+      dashboard: "https://us.aptabase.com",
+      register: "https://us.aptabase.com/auth/register",
+      keyPrefix: "A-US-",
+    },
+  ] as Region[],
+
+  links: {
+    github: "https://github.com/aptabase/aptabase",
+    githubOrg: "https://github.com/aptabase",
+    buildYourOwnSdk:
+      "https://github.com/aptabase/aptabase/wiki/How-to-build-your-own-SDK",
+    mcp: "https://github.com/aptabase/aptabase-mcp",
+    discord: "https://discord.gg/d9d97unCUk",
+    twitter: "https://twitter.com/aptabase",
+    email: "hi@aptabase.com",
+    issues: "https://github.com/aptabase/aptabase/issues/new",
+    affiliates: "https://aptabase.lemonsqueezy.com/affiliates",
+  },
+} as const;
+
+export type Product = typeof product;

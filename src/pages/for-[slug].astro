@@ -1,38 +1,42 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroFor from "../components/HeroFor.astro";
-import PrivacyFirst from "../components/features/PrivacyFirst.astro";
-import Simple from "../components/features/Simple.astro";
-import Pricing from "../components/Pricing.astro";
-import FAQ from "../components/FAQ.astro";
-import Testimonials from "../components/Testimonials.astro";
-import Developers from "../components/features/Developers.astro";
-import frameworks from "../lib/frameworks";
 import UseCases from "../components/features/UseCases.astro";
+import Quickstart from "../components/Quickstart.astro";
+import PrivacyFirst from "../components/features/PrivacyFirst.astro";
+import PricingSummary from "../components/pricing/PricingSummary.astro";
+import { sdkPages, sdkBySlug } from "../data/sdks";
+import { softwareApplication, breadcrumbs } from "../lib/jsonld";
 
 export function getStaticPaths() {
-  return frameworks.map((fw) => {
-    return { params: { slug: fw.slug } };
-  });
+  return sdkPages.map((sdk) => ({ params: { slug: sdk.page.slug } }));
 }
 
 const { slug } = Astro.params;
-const fw = frameworks.find((x) => x.slug === slug);
-if (!fw) {
-  throw new Error(`Framework ${slug} not found`);
+const sdk = sdkBySlug(slug!);
+if (!sdk) {
+  throw new Error(`No landing page for ${slug}`);
 }
+const { page } = sdk;
+const href = `/for-${page.slug}`;
 ---
 
 <BaseLayout
-  title={`Analytics for ${fw.title} • Aptabase`}
-  description={`Open Source, Privacy-First Analytics for ${fw.title}. Get simple and actionable insights without compromising user privacy.`}
+  title={`Analytics for ${page.title} • Aptabase`}
+  description={`Open Source, Privacy-First Analytics for ${page.title}. Install the ${sdk.name} SDK (${sdk.install}) and track events in minutes without compromising user privacy.`}
+  markdown={`${href}.md`}
+  schema={[
+    softwareApplication(),
+    breadcrumbs([
+      { name: "Home", url: "/" },
+      { name: "Integrations", url: "/integrations" },
+      { name: page.title, url: href },
+    ]),
+  ]}
 >
-  <HeroFor {...fw} />
-  <UseCases {...fw} />
+  <HeroFor sdk={sdk} />
+  <UseCases title={page.title} useCases={page.useCases} />
+  <Quickstart sdk={sdk} />
   <PrivacyFirst />
-  <Simple />
-  <Developers />
-  <Pricing />
-  <FAQ />
-  <Testimonials />
+  <PricingSummary />
 </BaseLayout>

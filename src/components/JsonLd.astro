@@ -1,0 +1,22 @@
+---
+/**
+ * Emits one <script type="application/ld+json"> per item.
+ * Build the objects with the helpers in src/lib/jsonld.ts.
+ */
+import type { JsonLd } from "../lib/jsonld";
+
+interface Props {
+  data: JsonLd | JsonLd[];
+}
+
+const { data } = Astro.props;
+const items = Array.isArray(data) ? data : [data];
+// Escape "<" so a "</script>" inside a string can never close the tag.
+const serialize = (d: JsonLd) => JSON.stringify(d).replace(/</g, "\\u003c");
+---
+
+{
+  items.map((d) => (
+    <script type="application/ld+json" is:inline set:html={serialize(d)} />
+  ))
+}

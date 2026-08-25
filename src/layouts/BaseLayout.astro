@@ -5,15 +5,31 @@ import "@fontsource/inter";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import RegisterDialog from "../components/RegisterDialog.astro";
+import JsonLd from "../components/JsonLd.astro";
+import {
+  organization,
+  website,
+  type JsonLd as JsonLdData,
+} from "../lib/jsonld";
 
 export interface Props {
   title: string;
   description: string;
   og?: string | undefined;
+  /**
+   * Path of a Markdown/plain-text twin of this page (e.g. "/pricing.md").
+   * Advertised via <link rel="alternate"> so agents can fetch it directly.
+   */
+  markdown?: string;
+  /** Extra JSON-LD objects for this page (Organization + WebSite are always emitted). */
+  schema?: JsonLdData[];
 }
 
 const url = Astro.url.toString().replace(/\/+$/, "");
-const { title, description, og } = Astro.props;
+const { title, description, og, markdown, schema = [] } = Astro.props;
+const markdownType = markdown?.endsWith(".txt")
+  ? "text/plain"
+  : "text/markdown";
 ---
 
 <!doctype html>
@@ -28,6 +44,16 @@ const { title, description, og } = Astro.props;
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="canonical" href={url} />
+    {
+      markdown && (
+        <link
+          rel="alternate"
+          type={markdownType}
+          href={markdown}
+          title="Markdown version of this page"
+        />
+      )
+    }
     <meta property="og:url" content={url} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
@@ -35,6 +61,7 @@ const { title, description, og } = Astro.props;
     <meta property="og:image" content={og ?? "https://aptabase.com/og.png"} />
     <meta name="twitter:site" content="@aptabase" />
     <meta name="twitter:card" content="summary_large_image" />
+    <JsonLd data={[organization(), website(), ...schema]} />
     <style is:global>
       :root {
         color-scheme: light;
@@ -42,6 +69,20 @@ const { title, description, og } = Astro.props;
     </style>
   </head>
   <body>
+    <!-- Icon sprite: repeated icons are referenced with <use href="#icon-…"> -->
+    <svg class="hidden" aria-hidden="true">
+      <symbol id="icon-check" viewBox="0 0 20 20">
+        <path
+          fill-rule="evenodd"
+          d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+          clip-rule="evenodd"
+        >
+        </path>
+      </symbol>
+      <symbol id="icon-chevron" viewBox="0 0 16 16">
+        <path d="M4 6l4 4 4-4"></path>
+      </symbol>
+    </svg>
     <Header />
     <slot />
     <RegisterDialog />

@@ -1,0 +1,120 @@
+---
+/**
+ * SDK quickstart for /for-<slug>: install, every snippet from the SDK record
+ * and the platform notes. The same data renders llms-full.txt and the .md twin.
+ */
+import { Code } from "astro/components";
+import { installIsCommand, type Sdk, type SdkPage } from "../data/sdks";
+import { product } from "../data/product";
+import { inlineHtml } from "../lib/inline";
+import { sdkBehaviourNotes } from "../lib/markdown";
+
+interface Props {
+  sdk: Sdk & { page: SdkPage };
+}
+
+const { sdk } = Astro.props;
+const { page } = sdk;
+const h3 = "mt-12 text-xl font-semibold text-gray-900";
+const p = "mt-3 text-base leading-7 text-gray-600";
+const link = "text-primary hover:underline";
+const keyFormats = product.regions.map((r) => `${r.keyPrefix}*`).join(", ");
+---
+
+<section
+  id="quickstart"
+  aria-labelledby="quickstart-heading"
+  class="bg-gray-50 py-24 sm:py-32"
+>
+  <div class="mx-auto max-w-4xl px-6 lg:px-8">
+    <p class="text-base font-semibold leading-7 text-primary">Quickstart</p>
+    <h2
+      id="quickstart-heading"
+      class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+    >
+      Add Aptabase to your {page.title}
+    </h2>
+    <p class="mt-6 text-lg leading-8 text-gray-600">
+      Install the {sdk.name} SDK, initialize it with your App Key and track your first
+      event. Get the App Key from the dashboard's <em>Instructions</em>
+      menu — keys look like <code>{keyFormats}</code>.
+    </p>
+    {
+      (sdk.requires || sdk.platforms || sdk.community) && (
+        <p class="mt-3 text-sm text-gray-500">
+          {sdk.requires && <span>Requires {sdk.requires}. </span>}
+          {sdk.platforms && <span>Platforms: {sdk.platforms}. </span>}
+          {sdk.community && <span>Community-maintained SDK. </span>}
+        </p>
+      )
+    }
+
+    <h3 class={h3}>1. Install</h3>
+    <p class={p}>
+      Package: <code>{sdk.package}</code>
+    </p>
+    {
+      installIsCommand(sdk) ? (
+        <div class="prose mt-3 max-w-none">
+          <Code code={sdk.install} lang="sh" theme="dark-plus" />
+        </div>
+      ) : (
+        <p class={p}>{sdk.install}</p>
+      )
+    }
+    {sdk.description && <p class={p}>{sdk.description}</p>}
+
+    {
+      sdk.snippets.map((snippet, i) => (
+        <div>
+          <h3 class={h3}>
+            {i + 2}. {snippet.title}
+          </h3>
+          {snippet.intro && (
+            <p class={p} set:html={inlineHtml(snippet.intro)} />
+          )}
+          {snippet.code !== undefined && (
+            <div class="prose mt-3 max-w-none">
+              <Code
+                code={snippet.code}
+                lang={(snippet.lang ?? "text") as any}
+                theme="dark-plus"
+              />
+            </div>
+          )}
+          {snippet.outro && (
+            <p class={p} set:html={inlineHtml(snippet.outro)} />
+          )}
+        </div>
+      ))
+    }
+
+    {
+      sdk.notes && (
+        <div>
+          <h3 class={h3}>Platform notes</h3>
+          <ul class="mt-3 list-disc space-y-2 pl-5 text-base leading-7 text-gray-600">
+            {sdk.notes.map((note) => (
+              <li set:html={inlineHtml(note)} />
+            ))}
+          </ul>
+        </div>
+      )
+    }
+
+    <h3 class={h3}>How the SDK behaves</h3>
+    <ul class="mt-3 list-disc space-y-2 pl-5 text-base leading-7 text-gray-600">
+      {sdkBehaviourNotes.map((note) => <li set:html={inlineHtml(note)} />)}
+    </ul>
+
+    <p class="mt-12 text-sm text-gray-600">
+      <a href={sdk.repo} target="_blank" rel="noopener noreferrer" class={link}>
+        README on GitHub →
+      </a>
+      <span class="mx-2 text-gray-300">·</span>
+      <a href="/docs/build-modes" class={link}>Build Modes →</a>
+      <span class="mx-2 text-gray-300">·</span>
+      <a href="/llms-full.txt" class={link}>All SDKs reference →</a>
+    </p>
+  </div>
+</section>

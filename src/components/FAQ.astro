@@ -1,57 +1,32 @@
 ---
-const faqs = [
-  {
-    question: "What does “Data not linked to anyone” really mean?",
-    answers: [
-      `It means all data points sent by an App instrumented by Aptabase are disconnected in a way that prevents them from being associated with a specific individual. We do not apply any pseudonymisation, every datapoint 100% anonymised for that extra peace of mind and compliance.`,
-    ],
-  },
-  {
-    question: "But what's the difference between Pseudonymised and Anonymised?",
-    answers: [
-      "Based on the GDPR Article 4(5), the main difference between pseudonymisation and anonymisation is that pseudonymisation is a reversible process that allows the data subject to be re-identified using the additional information kept separately, whereas anonymisation is an irreversible process that results in data that cannot be linked back to a specific individual.",
+import JsonLd from "./JsonLd.astro";
+import { faqs, type Faq } from "../data/faq";
+import { faqPage } from "../lib/jsonld";
+import { product } from "../data/product";
 
-      "Opt-in consent is required whenever personal data is collected, even when pseudonymisation techniques such as hashing is applied as the data is still considered personal data. However, anonymised data is not considered personal data and therefore does not require consent as per Recital 26 of the GDPR.",
-    ],
-  },
-  {
-    question: "This seems to good to be true. What's the catch?",
-    answers: [
-      `Anonymous analytics have a huge benefit in terms of end-user data privacy and significantly reduced compliance burden. However, it does come with a few limitations for app developers.`,
+interface Props {
+  /** Defaults to every question. Pass a subset (e.g. pricing) on other pages. */
+  items?: Faq[];
+}
 
-      `Because data points collected by Aptabase do not have a unique user identifier, it's not possible to perform user-level analytics such as Monthly Active Users or User Retention.`,
-
-      `While we've grown used to these metrics, have you asked yourself if they are really worth it? The alternative is to ask for consent, which also has its own limitations. We believe that the benefits of anonymous analytics far outweigh the limitations.`,
-    ],
-  },
-  {
-    question: "Why is Aptabase not free like Firebase and Google Analytics?",
-    answers: [
-      `You've likely heard this many times, but simply put — we don't sell your end-users data.`,
-
-      `Free analytics usually sell end-users data to third-parties (known as Data Brokers) which then use it to perform user profiling and targeted advertising. This is a huge privacy concern and is the reason why we have to charge a subscription fee to keep the lights on.`,
-    ],
-  },
-  {
-    question: "What happens if I go over my plan's monthly limit?",
-    answers: [
-      `You will not be charged any overage fees. We will send you an email notification when you're close to reaching your plan's monthly limit. If you exceed your plan's monthly limit, we will temporarily disable your analytics until the start of the next month`,
-    ],
-  },
-];
+const { items = faqs } = Astro.props;
 ---
 
-<div class="bg-gray-900">
+<section id="faq" aria-labelledby="faq-heading" class="bg-gray-900">
+  <JsonLd data={faqPage(items)} />
   <div
     class="mx-auto max-w-7xl divide-y divide-gray-900/10 px-6 py-24 sm:py-32 lg:px-8 lg:py-40"
   >
-    <h2 class="text-2xl font-bold leading-10 tracking-tight text-white">
+    <h2
+      id="faq-heading"
+      class="text-2xl font-bold leading-10 tracking-tight text-white"
+    >
       Frequently asked questions
     </h2>
     <p class="mt-6 max-w-2xl text-base leading-7 text-gray-300">
       Can't find the answer you're looking for? <br />
       <a
-        href="mailto:hi@aptabase.com"
+        href={`mailto:${product.links.email}`}
         class="font-semibold text-blue-400 hover:text-blue-300"
       >
         Send us an email
@@ -59,7 +34,7 @@ const faqs = [
     </p>
     <dl class="mt-10 space-y-8 divide-y divide-gray-300/10">
       {
-        faqs.map((faq) => (
+        items.map((faq) => (
           <div class="pt-8 lg:grid lg:grid-cols-12 lg:gap-8">
             <dt class="text-base font-semibold leading-7 text-white lg:col-span-5">
               {faq.question}
@@ -74,4 +49,4 @@ const faqs = [
       }
     </dl>
   </div>
-</div>
+</section>

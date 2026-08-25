@@ -3,6 +3,7 @@ import Logo from "../components/Logo.astro";
 import CTA from "../components/CTA.astro";
 import RelatedPosts from "../components/blog/RelatedPosts.astro";
 import ContentLayout from "../layouts/ContentLayout.astro";
+import { breadcrumbs, blogPosting } from "../lib/jsonld";
 const { frontmatter } = Astro.props;
 ---
 
@@ -10,6 +11,14 @@ const { frontmatter } = Astro.props;
   title={`${frontmatter.title} - Aptabase`}
   description={frontmatter.description}
   og={`https://aptabase.com/blogcover/${frontmatter.slug}.png`}
+  schema={[
+    breadcrumbs([
+      { name: "Home", url: "/" },
+      { name: "Blog", url: "/blog" },
+      { name: frontmatter.title, url: `/blog/${frontmatter.slug}` },
+    ]),
+    blogPosting(frontmatter),
+  ]}
 >
   <div
     class="mx-auto max-w-5xl px-6 lg:px-8 mb-12 flex w-full flex-col space-y-4"

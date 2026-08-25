@@ -1,53 +1,16 @@
 ---
 import Logo from "./Logo.astro";
+import { sdkPages, sdkHref } from "../data/sdks";
 
-const product = [
-  {
-    name: "for Tauri Apps",
-    href: "/for-tauri",
-  },
-  {
-    name: "for Apple (Swift) Apps",
-    href: "/for-swift",
-  },
-  {
-    name: "for Android (Kotlin) Apps",
-    href: "/for-android",
-  },
-  {
-    name: "for Electron Apps",
-    href: "/for-electron",
-  },
-  {
-    name: "for React Native Apps",
-    href: "/for-react-native",
-  },
-  {
-    name: "for Flutter Apps",
-    href: "/for-flutter",
-  },
-  {
-    name: "for .NET MAUI",
-    href: "/for-maui",
-  },
-  {
-    name: "for Unreal Engine",
-    href: "/for-unreal",
-  },
-  {
-    name: "for Unity",
-    href: "/for-unity",
-  },
-  {
-    name: "for NativeScript",
-    href: "/for-nativescript",
-  },
-];
+const product = sdkPages.map((sdk) => ({
+  name: `for ${sdk.page.title}`,
+  href: sdkHref(sdk)!,
+}));
 
 const resources = [
   {
     name: "Pricing",
-    href: "/#pricing",
+    href: "/pricing",
   },
   {
     name: "Blog",
@@ -96,6 +59,10 @@ const blog = [
 
 const company = [
   {
+    name: "About",
+    href: "/about",
+  },
+  {
     name: "Apple App Privacy",
     href: "/docs/apple-app-privacy",
   },
@@ -106,6 +73,10 @@ const company = [
   {
     name: "Terms",
     href: "/legal/terms",
+  },
+  {
+    name: "DPA",
+    href: "/legal/dpa",
   },
 ];
 ---
@@ -243,7 +214,7 @@ const company = [
             </ul>
           </div>
           <div class="mt-12 md:mt-0">
-            <h3 class="text-base font-medium text-gray-900">Legal</h3>
+            <h3 class="text-base font-medium text-gray-900">Company</h3>
             <ul role="list" class="mt-4 space-y-4">
               {
                 company.map((item) => (

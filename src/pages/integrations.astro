@@ -1,11 +1,18 @@
 ---
 import ContentLayout from "../layouts/ContentLayout.astro";
-import frameworks from "../lib/frameworks";
+import { sdkPages, sdkHref } from "../data/sdks";
+import { breadcrumbs } from "../lib/jsonld";
 ---
 
 <ContentLayout
   title="Aptabase Integrations"
   description="Use Aptabase with your desired platform or framework."
+  schema={[
+    breadcrumbs([
+      { name: "Home", url: "/" },
+      { name: "Integrations", url: "/integrations" },
+    ]),
+  ]}
 >
   <div class="mx-auto max-w-5xl px-6 lg:px-8">
     <div class="mx-auto max-w-2xl text-center">
@@ -13,22 +20,26 @@ import frameworks from "../lib/frameworks";
         Integrations
       </h1>
       <p class="mt-2 text-lg leading-6 text-gray-600">
-        Here is a list of frameworks that you can use with Aptabase
+        Here is a list of frameworks that you can use with Aptabase. Each page
+        has a quickstart for its SDK; the
+        <a href="/docs#sdks" class="text-primary hover:underline">
+          full SDK catalogue
+        </a> is in the docs.
       </p>
     </div>
     <div
       class="mt-8 gap-4 lg:gap-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
     >
       {
-        frameworks.map((fw: any) => (
+        sdkPages.map((sdk) => (
           <a
-            href={fw.href}
+            href={sdkHref(sdk)}
             class="flex flex-row border border-gray-200 rounded-lg hover:shadow-md p-4 items-center gap-8"
           >
-            <img class="h-14 w-14" src={fw.image} alt={fw.name} />
+            <img class="h-14 w-14" src={sdk.page.image} alt={sdk.name} />
             <div>
               <h3 class="text-lg font-semibold leading-6 text-gray-900 line-clamp-2">
-                {fw.name}
+                {sdk.name}
               </h3>
             </div>
           </a>

@@ -1,5 +1,23 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+// A guessed URL should still get the reader (human or agent) to the right
+// place in one hop, so list the pages people most often look for.
+const links = [
+  { name: "Pricing", href: "/pricing", hint: "Free tier, plans and limits" },
+  { name: "About", href: "/about", hint: "What Aptabase is and who it's for" },
+  {
+    name: "Integrations",
+    href: "/integrations",
+    hint: "SDKs for every framework",
+  },
+  { name: "Blog", href: "/blog", hint: "Product updates and guides" },
+  {
+    name: "llms.txt",
+    href: "/llms.txt",
+    hint: "Everything above, for AI agents",
+  },
+];
 ---
 
 <BaseLayout
@@ -17,8 +35,27 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         Page not found
       </h1>
       <p class="mt-6 text-base leading-7 text-gray-600">
-        Sorry, we couldn't find the page you're looking for.
+        Sorry, we couldn't find the page you're looking for. Were you looking
+        for one of these?
       </p>
+      <ul
+        role="list"
+        class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 text-left max-w-xl mx-auto"
+      >
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="block rounded-lg border border-gray-200 p-4 hover:shadow-md"
+              >
+                <span class="font-semibold text-gray-900">{link.name}</span>
+                <span class="block text-sm text-gray-600">{link.hint}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
       <div class="mt-10 flex items-center justify-center gap-x-6">
         <a
           href="/"
