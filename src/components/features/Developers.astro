@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import iphoneImage from "../../assets/iphone.png";
+import { sdks } from "../../data/sdks";
 ---
 
 <div class="overflow-hidden bg-white py-24 sm:py-32">
@@ -18,7 +19,7 @@ import iphoneImage from "../../assets/iphone.png";
         <div>
           <dt class="font-semibold text-gray-900">Lightweight SDK</dt>
           <dd class="mt-1 text-gray-600">
-            Over 10 SDKs to choose from. All lightweight and built to do one
+            {sdks.length} SDKs to choose from. All lightweight and built to do one
             thing, and do it well.
           </dd>
           <dd class="mt-1 text-gray-600">

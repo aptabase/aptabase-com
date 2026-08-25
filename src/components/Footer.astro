@@ -46,8 +46,12 @@ const product = [
 
 const resources = [
   {
+    name: "Documentation",
+    href: "/docs",
+  },
+  {
     name: "Pricing",
-    href: "/#pricing",
+    href: "/pricing",
   },
   {
     name: "Blog",
@@ -96,6 +100,10 @@ const blog = [
 
 const company = [
   {
+    name: "About",
+    href: "/about",
+  },
+  {
     name: "Apple App Privacy",
     href: "/docs/apple-app-privacy",
   },
@@ -106,6 +114,10 @@ const company = [
   {
     name: "Terms",
     href: "/legal/terms",
+  },
+  {
+    name: "DPA",
+    href: "/legal/dpa",
   },
 ];
 ---
@@ -243,7 +255,7 @@ const company = [
             </ul>
           </div>
           <div class="mt-12 md:mt-0">
-            <h3 class="text-base font-medium text-gray-900">Legal</h3>
+            <h3 class="text-base font-medium text-gray-900">Company</h3>
             <ul role="list" class="mt-4 space-y-4">
               {
                 company.map((item) => (

@@ -1,0 +1,183 @@
+---
+import ContentLayout from "../layouts/ContentLayout.astro";
+import FeatureItem from "../components/features/FeatureItem.astro";
+import SignUpOrDashboard from "../components/SignUpOrDashboard.astro";
+import { product } from "../data/product";
+import { sdks } from "../data/sdks";
+import { pricingSummary } from "../lib/markdown";
+import { softwareApplication, breadcrumbs } from "../lib/jsonld";
+
+const h2 = "text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl";
+const p = "mt-4 text-base leading-7 text-gray-600";
+const list = "mt-4 space-y-3 text-base leading-7 text-gray-600 list-disc pl-5";
+---
+
+<ContentLayout
+  title="About Aptabase"
+  description={product.oneLiner}
+  markdown="/about.md"
+  schema={[
+    softwareApplication(),
+    breadcrumbs([
+      { name: "Home", url: "/" },
+      { name: "About", url: "/about" },
+    ]),
+  ]}
+>
+  <div class="mx-auto max-w-4xl px-6 lg:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        About Aptabase
+      </h1>
+      <p class="mt-4 text-lg leading-8 text-gray-600">{product.oneLiner}</p>
+      <p class="mt-4 text-base text-gray-500">
+        Open source since {product.since} — server under {
+          product.license.server
+        }, SDKs under {product.license.sdks}.
+        <a
+          href={product.links.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-primary hover:underline"
+        >
+          Source on GitHub →
+        </a>
+      </p>
+    </div>
+
+    <section id="what" aria-labelledby="what-heading" class="mt-20">
+      <h2 id="what-heading" class={h2}>What it does</h2>
+      <p class={p}>
+        You add one of {sdks.length} SDKs to your app, call the track function for
+        the events you care about, and watch them arrive on a real-time dashboard
+        — sessions, events, app versions, OS versions, devices and countries — without
+        ever collecting personal data.
+      </p>
+      <dl
+        class="mt-8 grid grid-cols-1 gap-x-8 gap-y-8 text-base leading-7 text-gray-600 sm:grid-cols-2"
+      >
+        {
+          product.features.map((f) => (
+            <FeatureItem
+              color="text-sky-500"
+              title={f.title}
+              description={f.description}
+            />
+          ))
+        }
+      </dl>
+    </section>
+
+    <section id="who" aria-labelledby="who-heading" class="mt-20">
+      <h2 id="who-heading" class={h2}>Who it's for</h2>
+      <div class="mt-4 grid gap-8 md:grid-cols-2">
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900">Aptabase is for</h3>
+          <ul class={list}>
+            {product.audience.for.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900">
+            Aptabase is not for
+          </h3>
+          <ul class={list}>
+            {product.audience.notFor.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="privacy" aria-labelledby="privacy-heading" class="mt-20">
+      <h2 id="privacy-heading" class={h2}>How the privacy model works</h2>
+      <p class={p}>{product.privacyModel}</p>
+      <div class="mt-4 grid gap-8 md:grid-cols-2">
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900">Data collected</h3>
+          <ul class={list}>
+            {product.dataCollected.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900">
+            Data never collected
+          </h3>
+          <ul class={list}>
+            {product.dataNotCollected.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+      <p class={p}>
+        That is what keeps apps using Aptabase compliant with {
+          product.compliance.join(", ")
+        }
+        without a cookie or consent banner. See
+        <a href="/docs/apple-app-privacy" class="text-primary hover:underline">
+          how to fill out Apple's App Privacy form
+        </a>
+        when using Aptabase.
+      </p>
+    </section>
+
+    <section id="hosting" aria-labelledby="hosting-heading" class="mt-20">
+      <h2 id="hosting-heading" class={h2}>Hosting and pricing</h2>
+      <ul class={list}>
+        {
+          product.regions.map((r) => (
+            <li>
+              <strong class="text-gray-900">{r.name}</strong> — data stored in
+              {r.location}, dashboard at
+              <a href={r.dashboard} class="text-primary hover:underline">
+                {r.dashboard.replace("https://", "")}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class={p}>
+        {pricingSummary()}
+        <a href="/pricing" class="text-primary hover:underline">
+          See pricing →
+        </a>
+      </p>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-heading" class="mt-20">
+      <h2 id="contact-heading" class={h2}>Contact</h2>
+      <ul class={list}>
+        <li>
+          Email:
+          <a
+            href={`mailto:${product.links.email}`}
+            class="text-primary hover:underline"
+          >
+            {product.links.email}
+          </a>
+        </li>
+        <li>
+          Community:
+          <a href={product.links.discord} class="text-primary hover:underline">
+            Discord
+          </a>
+        </li>
+        <li>
+          Bugs and feature requests:
+          <a href={product.links.issues} class="text-primary hover:underline">
+            GitHub issues
+          </a>
+        </li>
+        <li>
+          Updates:
+          <a href={product.links.twitter} class="text-primary hover:underline">
+            @aptabase
+          </a>
+          and the <a href="/blog" class="text-primary hover:underline">blog</a>
+        </li>
+      </ul>
+    </section>
+
+    <div class="mt-20 flex justify-center">
+      <SignUpOrDashboard />
+    </div>
+  </div>
+</ContentLayout>

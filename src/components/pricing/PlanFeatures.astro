@@ -1,0 +1,24 @@
+---
+/** "Every plan includes" checklist, shared by the homepage and /pricing. */
+import { planFeatures } from "../../data/pricing";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<ul
+  role="list"
+  class={`grid grid-cols-1 sm:grid-cols-2 gap-x-6 text-sm leading-7 text-gray-600 ${className}`}
+>
+  {
+    planFeatures.map((feature) => (
+      <li class="flex gap-x-2">
+        <span class="text-green-600">✓</span>
+        {feature}
+      </li>
+    ))
+  }
+</ul>

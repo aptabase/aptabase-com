@@ -1,50 +1,52 @@
 ---
-const tiers = [
-  { events: "Up to 20,000", price: "Free" },
-  { events: "200,000", price: "$10" },
-  { events: "1,000,000", price: "$20" },
-  { events: "2,000,000", price: "$40" },
-  { events: "5,000,000", price: "$75" },
-  { events: "10,000,000", price: "$140" },
-  { events: "20,000,000", price: "$240" },
-  { events: "30,000,000", price: "$300" },
-  { events: "50,000,000", price: "$450" },
-];
-
-const features = [
-  "Unlimited Apps",
-  "EU or US data residency",
-  "Built-in Dashboard",
-  "Live View Dashboard",
-  "Session Timeline",
-  "Export to CSV",
-  "SDKs for popular platforms",
-  "100% Data Ownership",
-];
+import PricingTable from "./pricing/PricingTable.astro";
+import PlanFeatures from "./pricing/PlanFeatures.astro";
+import {
+  freeTier,
+  firstPaidTier,
+  pricingNotes,
+  formatEvents,
+  formatPricePerMonth,
+} from "../data/pricing";
+import { product } from "../data/product";
 
 const summaryStyle =
   "flex items-center justify-between gap-x-4 cursor-pointer list-none p-6 [&::-webkit-details-marker]:hidden rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 ---
 
-<div id="pricing" class="bg-white py-24 sm:py-32">
+<section
+  id="pricing"
+  aria-labelledby="pricing-heading"
+  class="bg-white py-24 sm:py-32"
+>
   <div class="mx-auto max-w-4xl px-6 lg:px-8">
     <div class="mx-auto max-w-4xl text-center">
-      <p class="mt-2 text-4xl font-bold tracking-tight text-gray-900">
+      <h2
+        id="pricing-heading"
+        class="mt-2 text-4xl font-bold tracking-tight text-gray-900"
+      >
         Pricing plans for apps of all sizes
-      </p>
+      </h2>
       <p class="text-stone-600">Start free and pay when you grow.</p>
     </div>
 
+    <!--
+      Both panels ship fully expanded in the HTML so crawlers, AI agents and
+      readers without JavaScript see every tier. The inline script right after
+      the panels turns them into an exclusive accordion with "Free" open.
+    -->
     <div
       class="mx-auto max-w-xl mt-12 rounded-xl bg-gray-400/5 ring-1 ring-inset ring-gray-200 divide-y divide-gray-900/5"
     >
-      <details name="pricing-plans" open class="group">
+      <details id="plan-free" open class="group">
         <summary class={summaryStyle}>
-          <span class="text-2xl font-bold font-title tracking-tight text-gray-900">
+          <span
+            class="text-2xl font-bold font-title tracking-tight text-gray-900"
+          >
             Free
           </span>
           <span class="flex items-center gap-x-3 text-sm text-gray-600">
-            up to 20,000 events/month
+            up to {formatEvents(freeTier.events)} events/month
             <svg
               class="h-4 w-4 shrink-0 text-gray-400 transition-transform group-open:rotate-180"
               viewBox="0 0 16 16"
@@ -59,21 +61,9 @@ const summaryStyle =
         </summary>
         <div class="px-6 pb-6">
           <p class="text-sm text-gray-600">
-            No credit card required. Every plan includes:
+            {pricingNotes.noCreditCard} Every plan includes:
           </p>
-          <ul
-            role="list"
-            class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-x-6 text-sm leading-7 text-gray-600"
-          >
-            {
-              features.map((feature) => (
-                <li class="flex gap-x-2">
-                  <span class="text-green-600">✓</span>
-                  {feature}
-                </li>
-              ))
-            }
-          </ul>
+          <PlanFeatures class="mt-3" />
           <button
             onclick="document.getElementById('register').showModal()"
             class="mt-6 rounded-md block w-full sm:w-auto bg-black px-6 py-2 text-center text-sm text-white shadow-xs hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
@@ -83,13 +73,15 @@ const summaryStyle =
         </div>
       </details>
 
-      <details name="pricing-plans" class="group">
+      <details id="plan-paid" open class="group">
         <summary class={summaryStyle}>
-          <span class="text-2xl font-bold font-title tracking-tight text-gray-900">
+          <span
+            class="text-2xl font-bold font-title tracking-tight text-gray-900"
+          >
             Pay as you grow
           </span>
           <span class="flex items-center gap-x-3 text-sm text-gray-600">
-            from $10/month
+            from {formatPricePerMonth(firstPaidTier.price)}
             <svg
               class="h-4 w-4 shrink-0 text-gray-400 transition-transform group-open:rotate-180"
               viewBox="0 0 16 16"
@@ -103,70 +95,39 @@ const summaryStyle =
           </span>
         </summary>
         <div class="px-6 pb-6">
-          <table class="w-full text-sm">
-            <caption class="sr-only">
-              Monthly pricing by number of events
-            </caption>
-            <thead>
-              <tr
-                class="text-left text-xs uppercase tracking-wide text-gray-500"
-              >
-                <th scope="col" class="py-1.5 font-medium">Events per month</th>
-                <th scope="col" class="py-1.5 font-medium text-right">Price</th>
-              </tr>
-            </thead>
-            <tbody
-              class="divide-y divide-gray-900/5 border-t border-gray-900/5"
-            >
-              {
-                tiers.map((tier) => (
-                  <tr>
-                    <td class="py-1.5 text-gray-600 tabular-nums">
-                      {tier.events}
-                    </td>
-                    <td class="py-1.5 text-right tabular-nums font-medium text-gray-900">
-                      {tier.price}
-                    </td>
-                  </tr>
-                ))
-              }
-              <tr>
-                <td class="py-1.5 text-gray-600 tabular-nums">50,000,000+</td>
-                <td class="py-1.5 text-right font-medium">
-                  <a
-                    href="mailto:hi@aptabase.com"
-                    class="text-primary hover:underline"
-                  >
-                    Contact us
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <PricingTable />
           <p class="mt-6 text-xs uppercase tracking-wide text-gray-500">
             Every plan includes
           </p>
-          <ul
-            role="list"
-            class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-x-6 text-sm leading-7 text-gray-600"
-          >
-            {
-              features.map((feature) => (
-                <li class="flex gap-x-2">
-                  <span class="text-green-600">✓</span>
-                  {feature}
-                </li>
-              ))
-            }
-          </ul>
+          <PlanFeatures class="mt-3" />
+          <p class="mt-4 text-sm text-gray-600">{pricingNotes.overage}</p>
         </div>
       </details>
     </div>
+    <script is:inline>
+      // Progressive enhancement: the HTML above is fully expanded; with JS we
+      // make the two panels an exclusive accordion and collapse the paid one.
+      (function () {
+        var free = document.getElementById("plan-free");
+        var paid = document.getElementById("plan-paid");
+        if (!free || !paid) return;
+        free.setAttribute("name", "pricing-plans");
+        paid.setAttribute("name", "pricing-plans");
+        paid.removeAttribute("open");
+        free.setAttribute("open", "");
+      })();
+    </script>
 
     <p class="mx-auto max-w-xl mt-6 text-center text-sm text-stone-600">
+      <a href="/pricing" class="text-primary hover:underline">
+        See full pricing details →
+      </a>
+    </p>
+
+    <p class="mx-auto max-w-xl mt-3 text-center text-sm text-stone-600">
       Prefer to self-host Aptabase? Join our dedicated
       <a
-        href="https://discord.gg/d9d97unCUk"
+        href={product.links.discord}
         target="_blank"
         class="text-primary inline-block hover:underline"
       >
@@ -182,4 +143,4 @@ const summaryStyle =
     >
     </div>
   </div>
-</div>
+</section>

@@ -5,15 +5,31 @@ import "@fontsource/inter";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import RegisterDialog from "../components/RegisterDialog.astro";
+import JsonLd from "../components/JsonLd.astro";
+import {
+  organization,
+  website,
+  type JsonLd as JsonLdData,
+} from "../lib/jsonld";
 
 export interface Props {
   title: string;
   description: string;
   og?: string | undefined;
+  /**
+   * Path of a Markdown/plain-text twin of this page (e.g. "/pricing.md").
+   * Advertised via <link rel="alternate"> so agents can fetch it directly.
+   */
+  markdown?: string;
+  /** Extra JSON-LD objects for this page (Organization + WebSite are always emitted). */
+  schema?: JsonLdData[];
 }
 
 const url = Astro.url.toString().replace(/\/+$/, "");
-const { title, description, og } = Astro.props;
+const { title, description, og, markdown, schema = [] } = Astro.props;
+const markdownType = markdown?.endsWith(".txt")
+  ? "text/plain"
+  : "text/markdown";
 ---
 
 <!doctype html>
@@ -28,6 +44,16 @@ const { title, description, og } = Astro.props;
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="canonical" href={url} />
+    {
+      markdown && (
+        <link
+          rel="alternate"
+          type={markdownType}
+          href={markdown}
+          title="Markdown version of this page"
+        />
+      )
+    }
     <meta property="og:url" content={url} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
@@ -35,6 +61,7 @@ const { title, description, og } = Astro.props;
     <meta property="og:image" content={og ?? "https://aptabase.com/og.png"} />
     <meta name="twitter:site" content="@aptabase" />
     <meta name="twitter:card" content="summary_large_image" />
+    <JsonLd data={[organization(), website(), ...schema]} />
     <style is:global>
       :root {
         color-scheme: light;
@@ -51,8 +78,7 @@ const { title, description, og } = Astro.props;
       async
       type="text/javascript"
       src="https://static.senja.io/dist/platform.js"
-    >
-    </script>
+    ></script>
     <script>
       window.lemonSqueezyAffiliateConfig = { store: "aptabase" };
 

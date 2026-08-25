@@ -1,0 +1,55 @@
+---
+/** Full tier table. Rendered on the homepage and on /pricing from the same data. */
+import {
+  tiers,
+  contactThreshold,
+  formatEvents,
+  formatPrice,
+} from "../../data/pricing";
+import { product } from "../../data/product";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<table class={`w-full text-sm ${className}`}>
+  <caption class="sr-only">Monthly pricing by number of events</caption>
+  <thead>
+    <tr class="text-left text-xs uppercase tracking-wide text-gray-500">
+      <th scope="col" class="py-1.5 font-medium">Events per month</th>
+      <th scope="col" class="py-1.5 font-medium text-right">Price</th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-gray-900/5 border-t border-gray-900/5">
+    {
+      tiers.map((tier) => (
+        <tr>
+          <td class="py-1.5 text-gray-600 tabular-nums">
+            {tier.price === 0
+              ? `Up to ${formatEvents(tier.events)}`
+              : formatEvents(tier.events)}
+          </td>
+          <td class="py-1.5 text-right tabular-nums font-medium text-gray-900">
+            {formatPrice(tier.price)}
+          </td>
+        </tr>
+      ))
+    }
+    <tr>
+      <td class="py-1.5 text-gray-600 tabular-nums">
+        {formatEvents(contactThreshold)}+
+      </td>
+      <td class="py-1.5 text-right font-medium">
+        <a
+          href={`mailto:${product.links.email}`}
+          class="text-primary hover:underline"
+        >
+          Contact us
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>

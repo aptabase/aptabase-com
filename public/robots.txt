@@ -3,4 +3,9 @@ Allow: /
 
 Sitemap: https://aptabase.com/sitemap-index.xml
 
-# AI agent documentation: https://aptabase.com/llms.txt
+# For AI agents and LLM crawlers:
+#   https://aptabase.com/llms.txt       - product facts, pricing, docs and SDK index
+#   https://aptabase.com/llms-full.txt  - install + code reference for every SDK
+#   Markdown versions of key pages: append .md (e.g. /pricing.md, /docs.md,
+#   /about.md, /docs/build-modes.md, /for-swift.md) or request the HTML URL
+#   with "Accept: text/markdown".

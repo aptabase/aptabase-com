@@ -9,6 +9,7 @@ import Testimonials from "../components/Testimonials.astro";
 import Developers from "../components/features/Developers.astro";
 import frameworks from "../lib/frameworks";
 import UseCases from "../components/features/UseCases.astro";
+import { softwareApplication, breadcrumbs } from "../lib/jsonld";
 
 export function getStaticPaths() {
   return frameworks.map((fw) => {
@@ -26,6 +27,15 @@ if (!fw) {
 <BaseLayout
   title={`Analytics for ${fw.title} • Aptabase`}
   description={`Open Source, Privacy-First Analytics for ${fw.title}. Get simple and actionable insights without compromising user privacy.`}
+  markdown={`${fw.href}.md`}
+  schema={[
+    softwareApplication(),
+    breadcrumbs([
+      { name: "Home", url: "/" },
+      { name: "Integrations", url: "/integrations" },
+      { name: fw.title, url: fw.href },
+    ]),
+  ]}
 >
   <HeroFor {...fw} />
   <UseCases {...fw} />

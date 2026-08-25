@@ -508,6 +508,23 @@ FAnalytics::Get().GetDefaultConfiguredProvider()->RecordEvent(TEXT("screen_view"
 
 Use the "Record Event with Attributes" node. The Blueprint Analytics Plugin is recommended for provider-agnostic tracking.
 
+## Godot
+
+Package: `addons/aptabase` (autoload singleton, Godot 4.2+)
+Install: Copy the `addons/aptabase` folder into your project's `addons/` directory and enable the plugin under Project > Project Settings > Plugins
+Repo: https://github.com/aptabase/aptabase-godot
+
+### Initialization and Tracking
+
+```gdscript
+func _ready() -> void:
+    Aptabase.init("<YOUR_APP_KEY>", {"app_version": "1.2.3"})
+    Aptabase.track("app_started")
+    Aptabase.track("level_completed", {"level": 3, "score": 1200})
+```
+
+Options: `is_debug` (default: OS.is_debug_build()), `max_batch_size` (25), `flush_interval` (10s), `timeout` (30s). Events are batched and sent in the background; a failed request is logged and retried and never affects the game.
+
 ## Python
 
 Package: `aptabase` (PyPI)
@@ -600,8 +617,10 @@ Event attributes support `std::string`, `float`, and `double` types.
 
 ## Optional
 
-- [All SDKs overview](https://aptabase.com/llms.txt): Discover all 16+ Aptabase SDKs
-- [Pricing](https://aptabase.com/#pricing): Free tier with 20K monthly events, paid plans available
-- [Self-Hosting](https://github.com/aptabase/aptabase): Self-host Aptabase with Docker
+- [llms.txt](https://aptabase.com/llms.txt): Product facts, who it's for, full pricing table and the index of all SDKs
+- [Documentation](https://aptabase.com/docs): Getting started, SDK catalogue, self-hosting, data collected (Markdown: https://aptabase.com/docs.md)
+- [Pricing](https://aptabase.com/pricing): Free up to 20,000 events/month, paid from $10/month, no overage fees (Markdown: https://aptabase.com/pricing.md)
+- [About](https://aptabase.com/about): What Aptabase is and who it's for (Markdown: https://aptabase.com/about.md)
+- [MCP server](https://github.com/aptabase/aptabase-mcp): Query your Aptabase analytics from AI agents
 - [Privacy Policy](https://aptabase.com/legal/privacy): Privacy policy
 - [Terms of Service](https://aptabase.com/legal/terms): Terms of service

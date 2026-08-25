@@ -5,6 +5,7 @@ import SignUpOrDashboard from "./SignUpOrDashboard.astro";
 import IconRss from "@tabler/icons/outline/rss.svg?raw";
 import IconCoin from "@tabler/icons/outline/coin.svg?raw";
 import IconSwitch from "@tabler/icons/outline/switch-3.svg?raw";
+import IconBook from "@tabler/icons/outline/book.svg?raw";
 ---
 
 <header x-data="{ isOpen: false }">
@@ -26,11 +27,18 @@ import IconSwitch from "@tabler/icons/outline/switch-3.svg?raw";
           <span>Blog</span>
         </a>
         <a
-          href="/#pricing"
+          href="/pricing"
           class="flex items-center space-x-1 rounded-lg py-1 px-2 text-gray-700 hover:bg-gray-100 hover:text-black"
         >
           <Fragment set:html={IconCoin.replace('width="24"', 'width="20"')} />
           <span>Pricing</span>
+        </a>
+        <a
+          href="/docs"
+          class="flex items-center space-x-1 rounded-lg py-1 px-2 text-gray-700 hover:bg-gray-100 hover:text-black"
+        >
+          <Fragment set:html={IconBook.replace('width="24"', 'width="20"')} />
+          <span>Docs</span>
         </a>
         <a
           href="/integrations"
@@ -116,12 +124,20 @@ import IconSwitch from "@tabler/icons/outline/switch-3.svg?raw";
               <span>Blog</span>
             </a>
             <a
-              href="/#pricing"
+              href="/pricing"
               @click="isOpen = false"
               class="flex items-center space-x-2 -mx-3 text-lg rounded-lg px-3 py-2 leading-7 text-gray-900 hover:bg-gray-50"
             >
               <Fragment set:html={IconCoin} />
               <span>Pricing</span>
+            </a>
+            <a
+              href="/docs"
+              @click="isOpen = false"
+              class="flex items-center space-x-2 -mx-3 text-lg rounded-lg px-3 py-2 leading-7 text-gray-900 hover:bg-gray-50"
+            >
+              <Fragment set:html={IconBook} />
+              <span>Docs</span>
             </a>
             <a
               href="/integrations"
