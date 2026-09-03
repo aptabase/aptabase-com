@@ -171,7 +171,7 @@ _Note: personal data relating to the Customer itself (account name, e-mail addre
 **Categories of personal data processed:**
 
 - **IP address and User-Agent string** of the end user's device — processed transiently, in memory, at the moment of event ingestion, solely to (a) derive coarse geolocation (country and region) and (b) compute a pseudonymous daily user identifier. The IP address and User-Agent are **not stored** with the analytics data.
-- **Pseudonymous daily user identifier** — a salted hash computed as `SHA(IP address + User-Agent + daily rotating salt)`. Salts are unique per application, rotated every 24 hours and permanently deleted, making it impossible to correlate the identifier across days or across applications, or to reverse it to an IP address after salt deletion.
+- **Pseudonymous daily user identifier** — a salted hash of the end user's IP address and User-Agent string, computed with a keyed hash function (currently SipHash) using a daily rotating salt as the key. Salts are unique per application, rotated every 24 hours, and permanently deleted within 48 hours of their creation (i.e., no later than 24 hours after they cease to be used), making it impossible to correlate the identifier across days or across applications, or to reverse it to an IP address after salt deletion.
 - **Telemetry event data** — event name, timestamp, session identifier, application version, SDK version, operating system name and version, device locale, coarse geolocation (country/region), and custom event properties defined by the Customer. The Agreement prohibits the Customer from including personal data in event names or custom properties.
 
 **Sensitive data processed:** none. The processing of special categories of personal data (Article 9 GDPR) and of data relating to criminal convictions and offences (Article 10 GDPR) is not intended and is prohibited under the Agreement (see Clause 6.5).
@@ -180,7 +180,7 @@ _Note: personal data relating to the Customer itself (account name, e-mail addre
 
 **Purpose(s) for which the personal data is processed on behalf of the controller:** providing the Customer with privacy-first, aggregate usage analytics for its applications, as described in the Agreement.
 
-**Duration of the processing:** for the duration of the Agreement. Telemetry event data is retained for a maximum of five (5) years from collection, or until deletion of the corresponding app or Customer account, whichever occurs first. IP addresses and User-Agent strings are processed only transiently at ingestion and are not retained. Daily salts are deleted after 24 hours.
+**Duration of the processing:** for the duration of the Agreement. Telemetry event data is retained for a maximum of five (5) years from collection, or until deletion of the corresponding app or Customer account, whichever occurs first. IP addresses and User-Agent strings are processed only transiently at ingestion and are not retained. Daily salts are rotated every 24 hours and permanently deleted within 48 hours of their creation.
 
 **For processing by sub-processors:** subject matter, nature and duration as set out above and in Annex IV (infrastructure hosting, analytics data storage and querying, transactional e-mail delivery), each for the duration of the Agreement.
 
@@ -192,7 +192,7 @@ The Processor implements and maintains, as a minimum, the following technical an
 
 - No device identifiers, advertising identifiers, hardware identifiers or persistent user identifiers are collected by the Aptabase SDKs.
 - End-user IP addresses and User-Agent strings are processed transiently in memory at ingestion and are not written to the analytics store.
-- Daily user identifiers are derived by strong salted hashing; salts are unique per application, rotated every 24 hours and permanently purged by an automated job, after which re-identification by the Processor is not possible.
+- Daily user identifiers are derived by strong keyed (salted) hashing; salts are unique per application, rotated every 24 hours, and permanently purged by an automated job within 48 hours of their creation, after which re-identification by the Processor is not possible.
 - Geolocation is reduced to country/region granularity before storage.
 
 **Encryption**
