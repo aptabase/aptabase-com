@@ -16,11 +16,11 @@ This privacy notice explains how we, Technov Solutions SRL, process personal dat
 
 Your privacy is the most important thing to us. We are committed to protecting your privacy and we will never let application developers track you.
 
-Aptabase SDK does not collect any device specific identifier such as Device ID, Hostname or Hardware Identifier. Instead, Aptabase generates a unique user identifier on the server based on a strong hash of client's IP Address and a strong salt, which differs for each app and is thrown away every 24 hours.
+Aptabase SDK does not collect any device specific identifier such as Device ID, Hostname or Hardware Identifier. Instead, Aptabase generates a pseudonymous daily user identifier on the server using a keyed hash (SipHash) of the client's IP Address and User-Agent. The key is a random salt that is unique for each app, rotated every 24 hours and permanently deleted within 48 hours of its creation. The IP Address and User-Agent are only processed in memory and are never stored.
 
-> User ID = SHA(Client IP + User Agent + Daily Rotated Salt)
+> User ID = SipHash(key: Daily Rotated Salt, Client IP + User Agent)
 
-This is a common privacy-friendly strategy that makes it impossible for application developers to correlate sessions that happens throughout different days or apps. Application developers can only Aptabase to discover insights into how their apps are being used without identifying the user being each action.
+This is a common privacy-friendly strategy that makes it impossible for application developers to correlate sessions that happen throughout different days or apps, and impossible for anyone to recover the IP Address once the salt is deleted. Application developers can only use Aptabase to discover insights into how their apps are being used without identifying the user behind each action.
 
 All analytics data collected by apps are stored in Aptabase for up to 5 years. You cannot request us to delete your data, simply because it's impossible to know what data relates to you.
 
@@ -51,4 +51,4 @@ CUI: 37597235
 
 Owner contact email: [office@technov.ro](mailto:office@technov.ro)
 
-_Last updated: July 24, 2026_
+_Last updated: October 12, 2026_

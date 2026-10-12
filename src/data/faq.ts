@@ -17,7 +17,7 @@ export const faqs: Faq[] = [
     category: "privacy",
     question: "What does “Data not linked to anyone” really mean?",
     answers: [
-      "It means all data points sent by an App instrumented by Aptabase are disconnected in a way that prevents them from being associated with a specific individual. We do not apply any pseudonymisation, every datapoint 100% anonymised for that extra peace of mind and compliance.",
+      "It means all data points sent by an App instrumented by Aptabase are disconnected in a way that prevents them from being associated with a specific individual. No device identifiers, accounts or persistent IDs are collected. The only link between events is a pseudonymous daily identifier derived on the server from a keyed hash of the IP address and User-Agent, using a per-app salt that is rotated every 24 hours and then deleted. Once the salt is gone, the identifier cannot be reversed or correlated across days or apps.",
     ],
   },
   {
