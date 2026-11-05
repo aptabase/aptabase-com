@@ -1,6 +1,6 @@
 ---
 title: "Step-by-Step Guide: Setting Up Aptabase in Docusaurus"
-description: "In this guide, we'll show you how to set up Aptabase analytics in your Docusaurus project using React hooks, covering app key configuration, global page view tracking, and custom event tracking"
+description: "In this guide, we'll show you how to set up Aptabase analytics in your Docusaurus project using a client module, covering app key configuration, global page view tracking, and custom event tracking"
 slug: step-by-step-guide-setting-up-aptabase-docusaurus
 publishedDate: "2025-08-31T00:00:00.000Z"
 layout: ../../layouts/BlogPostLayout.astro
@@ -64,7 +64,7 @@ module.exports = {
 };
 ```
 
-### Step 4: Create the `useAptabase` React Hook
+### Step 4: Create an Aptabase client module
 
 - Install the [@aptabase/web](https://www.npmjs.com/package/@aptabase/web) package:
 
@@ -72,27 +72,32 @@ module.exports = {
 npm install @aptabase/web
 ```
 
-- Create a custom hook to initialize **Aptabase** using the app key from the **Docusaurus** configuration. Use the `useDocusaurusContext` hook to access `customFields`.
+- Create a [client module](https://docusaurus.io/docs/advanced/client#client-modules) that initializes **Aptabase** with the app key from the **Docusaurus** configuration. Client modules run once when the site loads in the browser, so `init` isn't tied to React rendering. `siteConfig` (including `customFields`) can be imported from `@generated/docusaurus.config`.
 
 ```javascript
-// src/hooks/useAptabase.js
-import { useEffect } from 'react';
+// src/clientModules/aptabase.js
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
+import siteConfig from '@generated/docusaurus.config';
 import { init } from '@aptabase/web';
-import { useDocusaurusContext } from '@docusaurus/useDocusaurusContext';
 
-export const useAptabase = () => {
-  const { siteConfig } = useDocusaurusContext();
-  const { aptabaseAppKey, aptabaseHost } = siteConfig.customFields;
+const { aptabaseAppKey, aptabaseHost } = siteConfig.customFields;
 
-  useEffect(() => {
-    // Only initialize on the client side
-    if (typeof window !== 'undefined' && aptabaseAppKey) {
-      init(aptabaseAppKey, {
-        host: aptabaseHost,
-        isDebug: process.env.NODE_ENV !== 'production', // Enable debug logs in development
-      });
-    }
-  }, [aptabaseAppKey, aptabaseHost]); // Re-run if key or host changes
+// Only initialize in the browser, not during the static build
+if (ExecutionEnvironment.canUseDOM && aptabaseAppKey) {
+  init(aptabaseAppKey, {
+    host: aptabaseHost,
+    isDebug: process.env.NODE_ENV !== 'production', // Send events as Debug in development
+  });
+}
+```
+
+- Register the client module in `docusaurus.config.js`:
+
+```javascript
+// docusaurus.config.js
+module.exports = {
+  // Other Docusaurus configurations...
+  clientModules: ['./src/clientModules/aptabase.js'],
 };
 ```
 
@@ -113,10 +118,8 @@ my-docusaurus-project/
 ├─ docusaurus.config.js
 ├─ .env
 ├─ src/
-│  ├─ hooks/
-│  │  └─ useAptabase.js       # Custom hook for Aptabase
-│  ├─ theme/
-│  │  └─ Root.js              # Wraps all pages, sets up global tracking
+│  ├─ clientModules/
+│  │  └─ aptabase.js          # Initializes Aptabase and tracks page views
 │  ├─ components/
 │  │  ├─ SearchBar.js         # Custom search tracking component
 │  │  └─ FeedbackForm.js      # Custom feedback tracking component
@@ -126,41 +129,46 @@ my-docusaurus-project/
 
 ## Tracking Screen Views Globally
 
-To track page views across your **Docusaurus** site, use the `Root.js` component, which wraps all pages and is perfect for global analytics setup.
+To track page views across your **Docusaurus** site, use the `onRouteDidUpdate` lifecycle that **Docusaurus** calls on client modules after every navigation (and on the first page load).
 
-By combining the `useAptabase` hook with **Docusaurus**’s `useLocation` hook, you can log a `screen_view` event whenever a user navigates to a new page.
+This ties each `screen_view` event to an actual navigation instead of to React rendering. Tracking from a component body or a `useEffect` can fire more often than the user navigates (re-renders, React Strict Mode in development), which would inflate your page views.
 
-### Setting Up the Root Wrapper
+### Tracking Page Views on Navigation
 
-Create or edit `src/theme/Root.js`:
+Add an `onRouteDidUpdate` export to `src/clientModules/aptabase.js`:
 
 ```javascript
-// src/theme/Root.js
-import React, { useEffect } from 'react';
-import { useAptabase } from '../hooks/useAptabase';
-import { trackEvent } from '@aptabase/web';
-import { useLocation } from '@docusaurus/router';
+// src/clientModules/aptabase.js
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
+import siteConfig from '@generated/docusaurus.config';
+import { init, trackEvent } from '@aptabase/web';
 
-export default function Root({ children }) {
-  useAptabase(); // Initialize Aptabase
-  const location = useLocation();
+const { aptabaseAppKey, aptabaseHost } = siteConfig.customFields;
 
-  useEffect(() => {
-    // Track page views
-    trackEvent('screen_view', {
-      screen: location.pathname,
-    });
-  }, [location]); // Re-run when location changes
+if (ExecutionEnvironment.canUseDOM && aptabaseAppKey) {
+  init(aptabaseAppKey, {
+    host: aptabaseHost,
+    isDebug: process.env.NODE_ENV !== 'production',
+  });
+}
 
-  return <>{children}</>;
+export function onRouteDidUpdate({ location, previousLocation }) {
+  // Ignore hash or query string changes on the same page
+  if (previousLocation && location.pathname === previousLocation.pathname) {
+    return;
+  }
+
+  trackEvent('screen_view', {
+    screen: location.pathname,
+  });
 }
 ```
 
 ### How It Works
 
-- **Initialization**: The `useAptabase` hook initializes **Aptabase** with the app key from `docusaurus.config.js`.
-- **Page View Tracking**: The `useLocation` hook provides the current URL path. The `useEffect` hook triggers a `trackEvent` call for each navigation, logging a `screen_view` event with the page path.
-- **Efficiency**: The `[location]` dependency ensures the effect runs only when the path changes.
+- **Initialization**: The client module runs once in the browser and initializes **Aptabase** with the app key from `docusaurus.config.js`.
+- **Page View Tracking**: **Docusaurus** calls `onRouteDidUpdate` after each navigation, logging a `screen_view` event with the page path.
+- **No duplicates**: The event is tied to a route change, not to React renders, and in-page anchor changes are ignored.
 
 This setup provides a nice view of page navigation across your site in the **Aptabase** dashboard:
 
@@ -290,7 +298,7 @@ export default function FeedbackPage() {
 - **Event Naming**: Use consistent names (e.g., `screen_view`, `search`, `feedback`) for clarity in the dashboard.
 - **Properties**: Include relevant properties like `query`, `rating`, or `page` to contextualize events.
 - **Privacy**: Avoid sending sensitive data in event properties and ensure compliance with privacy laws.
-- **Performance**: Prefer component-level tracking for specific events to keep `Root.js` lightweight.
+- **Track actions, not renders**: Call `trackEvent` from event handlers (like `onSubmit` or `onClick`) or navigation callbacks, never directly in a component body or `useEffect`.
 
 ## References
 - https://github.com/aptabase/aptabase/issues/133

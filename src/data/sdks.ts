@@ -317,11 +317,19 @@ export default function App() {
       },
       {
         title: "Track events",
-        lang: "js",
+        intro:
+          "Call `trackEvent` from event handlers (user actions), not in the component body or `useEffect`, so re-renders aren't counted as activity:",
+        lang: "jsx",
         code: `import { trackEvent } from "@aptabase/react-native";
+import { Button } from "react-native";
 
-trackEvent("app_started");
-trackEvent("screen_view", { name: "Settings" });`,
+export function SaveButton() {
+  function handlePress() {
+    trackEvent("settings_saved", { theme: "dark" });
+  }
+
+  return <Button title="Save" onPress={handlePress} />;
+}`,
       },
     ],
     notes: [
@@ -629,11 +637,11 @@ trackEvent("screen_view", { name: "Settings" });`,
 
 export default function RootLayout({ children }) {
   return (
-    <AptabaseProvider appKey="${KEY}">
-      <html lang="en">
-        <body>{children}</body>
-      </html>
-    </AptabaseProvider>
+    <html lang="en">
+      <body>
+        <AptabaseProvider appKey="${KEY}">{children}</AptabaseProvider>
+      </body>
+    </html>
   );
 }`,
       },
@@ -652,19 +660,30 @@ export default function App({ Component, pageProps }) {
 }`,
       },
       {
-        title: "Track events",
-        intro: "Use the `useAptabase` hook in any component:",
+        title: "Send a test event",
+        intro:
+          "Create a client component that calls `trackEvent` from a button handler. Track user actions from event handlers, never in the component body or `useEffect`: React re-renders components for many reasons, and each re-render would be counted as user activity.",
         lang: "jsx",
-        code: `import { useAptabase } from "@aptabase/react";
+        code: `"use client";
 
-function MyComponent() {
+import { useAptabase } from "@aptabase/react";
+
+export function TestEventButton() {
   const { trackEvent } = useAptabase();
 
-  trackEvent("app_started");
-  trackEvent("screen_view", { name: "Settings" });
+  function handleClick() {
+    trackEvent("test_event", { source: "quickstart" });
+  }
+
+  return <button onClick={handleClick}>Send test event</button>;
 }`,
         outro:
-          "Also works with Remix, CRA and Vite — wrap the root with `<AptabaseProvider>`.",
+          "Render `<TestEventButton />` anywhere inside `<AptabaseProvider>`, start the app locally (`npm run dev`) and click the button. Also works with Remix, CRA and Vite — wrap the root with `<AptabaseProvider>`.",
+      },
+      {
+        title: "Confirm it in the dashboard",
+        intro:
+          "Open your app in the Aptabase dashboard and select the Debug build mode with the Bug/Rocket icon at the top right, next to the date picker. Events sent from `localhost` or with `NODE_ENV=development` are recorded as Debug; production builds are recorded as Release. Then open Live View from the left menu: your `test_event` shows up within a few seconds. More on build modes: https://aptabase.com/docs/build-modes",
       },
     ],
     page: {
