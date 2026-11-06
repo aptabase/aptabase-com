@@ -3,6 +3,7 @@ import SignUpOrDashboard from "./SignUpOrDashboard.astro";
 import WorksWith from "./WorksWith.astro";
 import { Image } from "astro:assets";
 import heroImage from "../assets/hero.png";
+import { freeTier, pricingNotes, formatEvents } from "../data/pricing";
 ---
 
 <div class="pt-12 pb-24 lg:pb-40">
@@ -37,6 +38,11 @@ import heroImage from "../assets/hero.png";
           Learn more
         </a>
       </div>
+      <p class="mt-4 text-sm text-gray-500">
+        Free up to {formatEvents(freeTier.events)} events a month. {
+          pricingNotes.noCreditCard
+        }
+      </p>
       <WorksWith />
     </div>
     <div class="mt-16 flow-root sm:mt-24">

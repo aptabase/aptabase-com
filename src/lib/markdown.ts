@@ -44,6 +44,7 @@ export const pricingTableMd = () =>
       (t) => `| ${formatEvents(t.events)} | ${formatPricePerMonth(t.price)} |`,
     ),
   ].join("\n") +
+  `\n\n${pricingNotes.nextTier}` +
   `\n\nNeed more than ${formatEvents(contactThreshold)} events per month? Email ${product.links.email} for a custom plan.`;
 
 export const planFeaturesMd = () => bullets(planFeatures);
@@ -152,7 +153,8 @@ export const sdkReferenceMd = (sdk: Sdk) =>
 export const pricingMarkdown = () =>
   join(
     `# ${product.name} Pricing`,
-    "Start free and pay when you grow. " +
+    pricingNotes.tagline +
+      " " +
       pricingNotes.noCreditCard +
       " " +
       pricingNotes.billing,

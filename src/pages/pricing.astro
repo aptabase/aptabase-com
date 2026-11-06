@@ -15,7 +15,7 @@ import { faqsByCategory } from "../data/faq";
 import { product } from "../data/product";
 import { softwareApplication, breadcrumbs } from "../lib/jsonld";
 
-const description = `Free up to ${formatEvents(freeTier.events)} events per month, then from ${formatPricePerMonth(firstPaidTier.price)}. No overage fees.`;
+const description = pricingNotes.tagline;
 const cardStyle =
   "flex flex-col rounded-xl bg-gray-400/5 ring-1 ring-inset ring-gray-200 p-6 sm:p-8";
 ---
@@ -38,7 +38,7 @@ const cardStyle =
         Pricing
       </h1>
       <p class="mt-2 text-lg leading-8 text-gray-600">
-        Start free and pay when you grow. {pricingNotes.noCreditCard}
+        {pricingNotes.tagline} {pricingNotes.noCreditCard}
       </p>
     </div>
 
@@ -80,6 +80,10 @@ const cardStyle =
         <PricingTable class="mt-6" />
       </section>
     </div>
+
+    <p class="mx-auto mt-8 max-w-2xl text-center text-sm text-gray-600">
+      {pricingNotes.overage}
+    </p>
   </div>
 
   <div class="mt-24">

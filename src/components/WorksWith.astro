@@ -7,12 +7,18 @@ import { sdkPages, sdkHref } from "../data/sdks";
     <span>Works with the framework of your choice!</span>
   </p>
   <div
-    class="grid grid-cols-3 md:grid-cols-6 mx-4 md:mx-20 lg:mx-0 lg:flex lg:flex-wrap lg:justify-center items-center mt-8 gap-8"
+    class="grid grid-cols-3 md:grid-cols-6 mx-4 md:mx-20 lg:mx-0 lg:flex lg:flex-wrap lg:justify-center items-start mt-8 gap-x-6 gap-y-8"
   >
     {
       sdkPages.map((sdk) => (
-        <a href={sdkHref(sdk)} class="shrink-0">
-          <img class="mx-auto h-14 w-14" src={sdk.page.image} alt={sdk.name} />
+        <a
+          href={sdkHref(sdk)}
+          class="group flex w-full flex-col items-center gap-2 lg:w-28"
+        >
+          <img class="h-14 w-14" src={sdk.page.image} alt="" />
+          <span class="text-center text-xs leading-tight text-gray-600 group-hover:text-gray-900">
+            {sdk.name}
+          </span>
         </a>
       ))
     }

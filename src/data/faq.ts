@@ -30,7 +30,7 @@ export const faqs: Faq[] = [
   },
   {
     category: "privacy",
-    question: "This seems to good to be true. What's the catch?",
+    question: "This seems too good to be true. What's the catch?",
     answers: [
       "Anonymous analytics have a huge benefit in terms of end-user data privacy and significantly reduced compliance burden. However, it does come with a few limitations for app developers.",
       "Because data points collected by Aptabase do not have a unique user identifier, it's not possible to perform user-level analytics such as Monthly Active Users or User Retention.",
@@ -49,7 +49,7 @@ export const faqs: Faq[] = [
     category: "pricing",
     question: "What happens if I go over my plan's monthly limit?",
     answers: [
-      "You will not be charged any overage fees. We will send you an email notification when you're close to reaching your plan's monthly limit. If you exceed your plan's monthly limit, we will temporarily disable your analytics until the start of the next month.",
+      "You will not be charged any overage fees. We will send you an email notification when you're close to reaching your plan's monthly limit. If you exceed your plan's monthly limit, we pause your analytics until you upgrade or the next month starts.",
     ],
   },
   {

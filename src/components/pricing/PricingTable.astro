@@ -3,6 +3,7 @@
 import {
   tiers,
   contactThreshold,
+  pricingNotes,
   formatEvents,
   formatPrice,
 } from "../../data/pricing";
@@ -40,7 +41,8 @@ const { class: className = "" } = Astro.props;
     }
   </tbody>
 </table>
-<p class="mt-4 text-sm text-gray-600">
+<p class="mt-4 text-sm text-gray-600">{pricingNotes.nextTier}</p>
+<p class="mt-2 text-sm text-gray-600">
   Need more than {formatEvents(contactThreshold)} events per month?
   <a
     href={`mailto:${product.links.email}`}
