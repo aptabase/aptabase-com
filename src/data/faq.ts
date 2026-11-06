@@ -30,7 +30,7 @@ export const faqs: Faq[] = [
   },
   {
     category: "privacy",
-    question: "This seems to good to be true. What's the catch?",
+    question: "This seems too good to be true. What's the catch?",
     answers: [
       "Anonymous analytics have a huge benefit in terms of end-user data privacy and significantly reduced compliance burden. However, it does come with a few limitations for app developers.",
       "Because data points collected by Aptabase do not have a unique user identifier, it's not possible to perform user-level analytics such as Monthly Active Users or User Retention.",
