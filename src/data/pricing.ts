@@ -43,15 +43,20 @@ export const planFeatures = [
   "100% Data Ownership",
 ];
 
-export const pricingNotes = {
-  billing: "Billed monthly in USD. Cancel any time.",
-  noCreditCard: "No credit card required for the free plan.",
-  overage:
-    "There are no overage fees. We email you when you're close to your plan's monthly limit; if you exceed it, analytics are temporarily paused until the start of the next month.",
-};
-
 export const formatEvents = (n: number) => n.toLocaleString("en-US");
 export const formatPrice = (price: number) =>
   price === 0 ? "Free" : `$${price}`;
 export const formatPricePerMonth = (price: number) =>
   price === 0 ? "Free" : `$${price}/month`;
+
+export const pricingNotes = {
+  /** One-line answer to "what does it cost?", shown under the pricing headings. */
+  tagline: `Free up to ${formatEvents(freeTier.events)} events a month, then from ${formatPricePerMonth(firstPaidTier.price)}. No overage fees.`,
+  billing: "Billed monthly in USD. Cancel any time.",
+  noCreditCard: "No credit card required for the free plan.",
+  overage:
+    "There are no overage fees. We email you when you're close to your plan's monthly limit; if you exceed it, analytics pause until you upgrade or the next month starts.",
+  /** What happens when you outgrow a tier. Rendered directly under the tier table. */
+  nextTier:
+    "Plans don't change automatically. Upgrade to the next tier whenever you need to. Exceed your tier's limit and analytics pause until you upgrade or the next month starts.",
+};

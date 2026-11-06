@@ -49,7 +49,7 @@ export const faqs: Faq[] = [
     category: "pricing",
     question: "What happens if I go over my plan's monthly limit?",
     answers: [
-      "You will not be charged any overage fees. We will send you an email notification when you're close to reaching your plan's monthly limit. If you exceed your plan's monthly limit, we will temporarily disable your analytics until the start of the next month.",
+      "You will not be charged any overage fees. We will send you an email notification when you're close to reaching your plan's monthly limit. If you exceed your plan's monthly limit, we pause your analytics until you upgrade or the next month starts.",
     ],
   },
   {
